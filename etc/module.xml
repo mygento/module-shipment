@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * @author Mygento
+ * @copyright 2016-2018 Mygento (https://www.mygento.ru)
+ * @package Mygento_Shipment
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+    <module name="Mygento_Shipment" setup_version="2.2.100"></module>
+</config>

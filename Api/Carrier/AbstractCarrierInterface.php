@@ -10,4 +10,10 @@ namespace Mygento\Shipment\Api\Carrier;
 
 interface AbstractCarrierInterface extends \Magento\Shipping\Model\Carrier\AbstractCarrierInterface
 {
+    /**
+     *
+     * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
+     * @return mixed
+     */
+    public function convertWeight(\Magento\Quote\Model\Quote\Address\RateRequest $request);
 }

@@ -86,7 +86,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
      * @return mixed
      */
-    protected function convertWeight(RateRequest $request)
+    public function convertWeight(RateRequest $request)
     {
         return $request->getPackageWeight() * $this->getConfigData('weightunit');
     }

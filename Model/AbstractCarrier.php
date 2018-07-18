@@ -53,7 +53,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
         }
         $this->helper->debug('Weight: ' . $request->getPackageWeight());
         if (0 >= $request->getPackageWeight()) {
-            return $this->carrier->returnError('Zero weight');
+            return $this->returnError('Zero weight');
         }
         return true;
     }
@@ -110,7 +110,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     protected function returnError($message)
     {
         if ($this->getConfigData('debug')) {
-            $error = $this->rateErrorFactory->create();
+            $error = $this->_rateErrorFactory->create();
             $error->setCarrier($this->_code);
             $error->setCarrierTitle($this->getConfigData('title'));
             $error->setErrorMessage(__($message));

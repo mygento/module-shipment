@@ -51,6 +51,10 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
             $this->helper->info('City strlen <= 2, aborting ...');
             return false;
         }
+        if ($this->helper->getConfig('defaultweight')) {
+            $request->setPackageWeight($this->helper->getConfig('defaultweight'));
+            $this->helper->debug('Set default weight: ' . $request->getPackageWeight());
+        }
         $this->helper->debug('Weight: ' . $request->getPackageWeight());
         if (0 >= $request->getPackageWeight()) {
             return $this->returnError('Zero weight');

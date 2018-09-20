@@ -1,4 +1,9 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-    
+  <type name="Magento\Quote\Model\Quote\Address\Rate">
+      <plugin name="mygento_shipment_get_rates" type="Mygento\Shipment\Plugin\ExtRate" />
+  </type>
+  <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+      <plugin name="mygento_shipment_shipping_method_converter" type="Mygento\Shipment\Plugin\ExtShippingMethodManagement" />
+  </type>
 </config>

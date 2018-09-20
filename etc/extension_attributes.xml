@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config>
+    <extension_attributes for="Magento\Quote\Api\Data\ShippingMethodInterface">
+        <attribute code="estimate" type="string" />
+        <attribute code="latitude" type="string" />
+        <attribute code="longitude" type="string" />
+    </extension_attributes>
+</config>

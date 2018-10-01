@@ -147,6 +147,13 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
             ));
         }
 
+        if (isset($method['estimate_dates']) && is_array($method['estimate_dates'])) {
+            foreach ($method['estimate_dates'] as $key => $value) {
+                $method['estimate_dates'][$key] = date('Y-m-d', strtotime($value));
+            }
+            $rate->setEstimateDates(json_encode($method['estimate_dates']));
+        }
+
         if (isset($method['latitude'])) {
             $rate->setLatitude($method['latitude']);
         }

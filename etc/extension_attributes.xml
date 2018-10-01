@@ -2,6 +2,7 @@
 <config>
     <extension_attributes for="Magento\Quote\Api\Data\ShippingMethodInterface">
         <attribute code="estimate" type="string" />
+        <attribute code="estimate_dates" type="string" />
         <attribute code="latitude" type="string" />
         <attribute code="longitude" type="string" />
     </extension_attributes>

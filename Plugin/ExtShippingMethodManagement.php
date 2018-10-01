@@ -31,6 +31,7 @@ class ExtShippingMethodManagement
             $result->getExtensionAttributes()
             ?? $this->shippingExtAttr->create();
         $extensionAttributes->setEstimate($rateModel->getEstimate());
+        $extensionAttributes->setEstimateDates($rateModel->getEstimateDates());
         $extensionAttributes->setLatitude($rateModel->getLatitude());
         $extensionAttributes->setLongitude($rateModel->getLongitude());
         $result->setExtensionAttributes($extensionAttributes);

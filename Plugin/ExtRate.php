@@ -20,6 +20,7 @@ class ExtRate
         \Magento\Quote\Model\Quote\Address\RateResult\AbstractResult $rate
     ) {
         $result->setEstimate($rate->getEstimate());
+        $result->setEstimateDates($rate->getEstimateDates());
         $result->setLatitude($rate->getLatitude());
         $result->setLongitude($rate->getLongitude());
 

@@ -51,7 +51,16 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 'length' => 255,
                 'nullable' => true,
-                'comment' => 'Delivery estimate date'
+                'comment' => 'Delivery estimate min days'
+            ]
+        );
+        $connection->addColumn(
+            $installer->getTable(self::QUOTE_SHIPPING_RATE_TABLE_NAME),
+            'estimate_dates',
+            [
+                'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+                'nullable' => true,
+                'comment' => 'Delivery dates'
             ]
         );
         $connection->addColumn(

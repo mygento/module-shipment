@@ -16,4 +16,10 @@ interface AbstractCarrierInterface extends \Magento\Shipping\Model\Carrier\Abstr
      * @return mixed
      */
     public function convertWeight(\Magento\Quote\Model\Quote\Address\RateRequest $request);
+
+    /**
+     * @param array $method
+     * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
+     */
+    public function createRateMethod(array $method);
 }

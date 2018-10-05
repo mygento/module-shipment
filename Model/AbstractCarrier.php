@@ -129,7 +129,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      * @param array $method
      * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
      */
-    protected function createRateMethod(array $method)
+    public function createRateMethod(array $method)
     {
         $rate = $this->getRateMethod();
 

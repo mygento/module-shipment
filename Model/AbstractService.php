@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2018 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2019 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -13,8 +13,14 @@ use Mygento\Shipment\Api\Service\OrderInterface;
 
 abstract class AbstractService implements CalculateInterface, OrderInterface
 {
+    /**
+     * @var \Mygento\Shipment\Model\Service $service
+     */
     protected $service;
 
+    /**
+     * @param \Mygento\Shipment\Model\Service $service
+     */
     public function __construct(
         \Mygento\Shipment\Model\Service $service
     ) {

@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2018 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2019 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -10,8 +10,14 @@ namespace Mygento\Shipment\Plugin;
 
 class ExtShippingMethodManagement
 {
-    protected $shippingExtAttr;
+    /**
+     * @var \Magento\Quote\Api\Data\ShippingMethodExtensionFactory
+     */
+    private $shippingExtAttr;
 
+    /**
+     * @param \Magento\Quote\Api\Data\ShippingMethodExtensionFactory $shippingExtAttr
+     */
     public function __construct(
         \Magento\Quote\Api\Data\ShippingMethodExtensionFactory $shippingExtAttr
     ) {
@@ -19,8 +25,12 @@ class ExtShippingMethodManagement
     }
 
     /**
+     *
+     * @param  \Magento\Quote\Model\Cart\ShippingMethodConverter $subject
+     * @param  mixed $result
+     * @param  \Magento\Quote\Model\Quote\Address\Rate $rateModel
+     * @return mixed
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
-     * @param mixed $result
      */
     public function afterModelToDataObject(
         \Magento\Quote\Model\Cart\ShippingMethodConverter $subject,

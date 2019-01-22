@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2018 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2019 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -10,8 +10,14 @@ namespace Mygento\Shipment\Model;
 
 class Client implements \Mygento\Shipment\Api\Client\AbstractClientInterface
 {
+    /**
+     * @var \Magento\Framework\HTTP\Client\Curl
+     */
     private $curl;
 
+    /**
+     * @param \Magento\Framework\HTTP\Client\Curl $curl
+     */
     public function __construct(
         \Magento\Framework\HTTP\Client\Curl $curl
     ) {

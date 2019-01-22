@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2018 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2019 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -17,8 +17,8 @@ class UpgradeSchema implements UpgradeSchemaInterface
     const QUOTE_SHIPPING_RATE_TABLE_NAME = 'quote_shipping_rate';
 
     /**
-     * @param object $installer
-     * @param object $installer
+     * @param SchemaSetupInterface $setup
+     * @param ModuleContextInterface $context
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */

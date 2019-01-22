@@ -8,16 +8,16 @@
 
 namespace Mygento\Shipment\Model\Source;
 
-class Weightunits implements \Magento\Framework\Option\ArrayInterface
+class Dimensionunits implements \Magento\Framework\Option\ArrayInterface
 {
     /**
      * @return array
      */
-    public function toOptionArray(): array
+    public function toOptionArray()
     {
         return [
-            ['value' => 1, 'label' => __('gram')],
-            ['value' => 1000, 'label' => __('kilogram')]
+            ['value' => 1, 'label' => __('centimeter')],
+            ['value' => 100, 'label' => __('meter')]
         ];
     }
 }

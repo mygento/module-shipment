@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2018 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2019 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -14,9 +14,24 @@ use Mygento\Shipment\Api\Carrier\AbstractCarrierInterface;
 
 abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInterface
 {
+    /**
+     * @var \Mygento\Shipment\Model\Carrier $carrier
+     */
     protected $carrier;
+
+    /**
+     * @var \Mygento\Shipment\Helper\Data $helper
+     */
     protected $helper;
 
+    /**
+     * @param \Mygento\Shipment\Helper\Data $helper
+     * @param \Mygento\Shipment\Model\Carrier $carrier
+     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+     * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
+     * @param \Psr\Log\LoggerInterface $logger
+     * @param array $data
+     */
     public function __construct(
         \Mygento\Shipment\Helper\Data $helper,
         \Mygento\Shipment\Model\Carrier $carrier,
@@ -39,9 +54,9 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     /**
      * Validate shipping request before processing
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
-     * @return boolean
+     * @return bool
      */
-    protected function validateRequest(RateRequest $request)
+    protected function validateRequest(RateRequest $request): bool
     {
         if (!$this->getConfigData('active')) {
             return false;
@@ -63,14 +78,16 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     }
 
     /**
-     *
-     * @return number
+     * @return float
      */
     protected function getCartTotal()
     {
         return $this->carrier->getCartTotal();
     }
 
+    /**
+     * @return mixed
+     */
     protected function getResult()
     {
         return $this->carrier->getResult();
@@ -98,7 +115,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     /**
      *
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
-     * @param string $mode
+     * @param int $mode
      * @return string
      */
     public function convertCity(RateRequest $request, $mode = MB_CASE_TITLE): string
@@ -190,5 +207,22 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     public function isCityRequired(): bool
     {
         return true;
+    }
+
+    /**
+     *
+     * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
+     * @return null|string
+     */
+    protected function getPostCode(RateRequest $request)
+    {
+        $postcode = $request->getDestPostcode();
+        if ($postcode && $postcode != '') {
+            $digitsOnlyPostcode = preg_replace('/[^0-9]/', '', $postcode);
+            if ($digitsOnlyPostcode && $digitsOnlyPostcode != '') {
+                return $digitsOnlyPostcode;
+            }
+        }
+        return null;
     }
 }

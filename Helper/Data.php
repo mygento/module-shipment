@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2018 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2019 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -13,25 +13,26 @@ class Data extends \Mygento\Base\Helper\Data
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;
 
-    /* @var string */
-    protected $_code = 'shipment';
+    /** @var string */
+    protected $code = 'shipment';
 
+    /**
+     *
+     * @param \Magento\Checkout\Model\Session $checkoutSession
+     * @param \Mygento\Base\Model\LogManager $logManager
+     * @param \Magento\Framework\Encryption\Encryptor $encryptor
+     * @param \Magento\Framework\App\Helper\Context $context
+     */
     public function __construct(
         \Magento\Checkout\Model\Session $checkoutSession,
-        \Magento\Framework\App\Helper\Context $context,
-        \Mygento\Base\Model\Logger\LoggerFactory $loggerFactory,
-        \Mygento\Base\Model\Logger\HandlerFactory $handlerFactory,
+        \Mygento\Base\Model\LogManager $logManager,
         \Magento\Framework\Encryption\Encryptor $encryptor,
-        \Magento\Framework\HTTP\Client\Curl $curl,
-        \Magento\Catalog\Model\ProductRepository $productRepository
+        \Magento\Framework\App\Helper\Context $context
     ) {
         parent::__construct(
-            $context,
-            $loggerFactory,
-            $handlerFactory,
+            $logManager,
             $encryptor,
-            $curl,
-            $productRepository
+            $context
         );
         $this->checkoutSession = $checkoutSession;
     }
@@ -47,12 +48,12 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      *
-     * @param type $path
-     * @return type
+     * @param string $path
+     * @return string
      */
     public function getConfig($path)
     {
-        return parent::getConfig('carriers/' . $this->_code . '/' . $path);
+        return parent::getConfig('carriers/' . $this->code . '/' . $path);
     }
 
     /**
@@ -62,90 +63,5 @@ class Data extends \Mygento\Base\Helper\Data
     protected function getDebugConfigPath(): string
     {
         return 'debug';
-    }
-
-    /**
-     *
-     * @param string $message
-     * @param array $context
-     */
-    public function emergency($message, array $context = [])
-    {
-        $this->log(\Psr\Log\LogLevel::EMERGENCY, $message, $context);
-    }
-
-    /**
-     *
-     * @param string $message
-     * @param array $context
-     */
-    public function alert($message, array $context = [])
-    {
-        $this->log(\Psr\Log\LogLevel::ALERT, $message, $context);
-    }
-
-    /**
-     *
-     * @param string $message
-     * @param array $context
-     */
-    public function critical($message, array $context = [])
-    {
-        $this->log(\Psr\Log\LogLevel::CRITICAL, $message, $context);
-    }
-
-    /**
-     *
-     * @param string $message
-     * @param array $context
-     */
-    public function error($message, array $context = [])
-    {
-        $this->log(\Psr\Log\LogLevel::ERROR, $message, $context);
-    }
-
-    /**
-     *
-     * @param string $message
-     * @param array $context
-     */
-    public function warning($message, array $context = [])
-    {
-        $this->log(\Psr\Log\LogLevel::WARNING, $message, $context);
-    }
-
-    /**
-     *
-     * @param string $message
-     * @param array $context
-     */
-    public function notice($message, array $context = [])
-    {
-        $this->log(\Psr\Log\LogLevel::NOTICE, $message, $context);
-    }
-
-    /**
-     *
-     * @param string $message
-     * @param array $context
-     */
-    public function info($message, array $context = [])
-    {
-        $this->log(\Psr\Log\LogLevel::INFO, $message, $context);
-    }
-
-    /**
-     *
-     * @param string $message
-     * @param array $context
-     */
-    public function debug($message, array $context = [])
-    {
-        $this->log(\Psr\Log\LogLevel::DEBUG, $message, $context);
-    }
-
-    public function log($level, $message, array $context = [])
-    {
-        $this->addLog($message);
     }
 }

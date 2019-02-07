@@ -159,7 +159,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
         }
 
         if (isset($method['longitude'])) {
-            $rate->setLatitude($method['longitude']);
+            $rate->setLongitude($method['longitude']);
         }
 
         return $rate;

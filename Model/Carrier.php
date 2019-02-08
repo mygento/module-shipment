@@ -49,7 +49,7 @@ class Carrier
     }
 
     /**
-     * @return \Magento\Quote\Model\Quote\Address\RateResult
+     * @return \Magento\Shipping\Model\Rate\Result
      */
     public function getResult()
     {

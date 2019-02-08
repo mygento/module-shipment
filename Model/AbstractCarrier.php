@@ -54,9 +54,9 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     /**
      * Validate shipping request before processing
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
-     * @return bool
+     * @return bool|\Magento\Quote\Model\Quote\Address\RateResult\Error
      */
-    protected function validateRequest(RateRequest $request): bool
+    protected function validateRequest(RateRequest $request)
     {
         if (!$this->getConfigData('active')) {
             return false;
@@ -67,7 +67,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
             return false;
         }
         if ($this->helper->getConfig('defaultweight')) {
-            $request->setPackageWeight($this->helper->getConfig('defaultweight'));
+            $request->setPackageWeight((float) $this->helper->getConfig('defaultweight'));
             $this->helper->debug('Set default weight: ' . $request->getPackageWeight());
         }
         $this->helper->debug('Weight: ' . $request->getPackageWeight());
@@ -109,7 +109,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     public function convertWeight(RateRequest $request)
     {
-        return $request->getPackageWeight() * $this->getConfigData('weightunit');
+        return $request->getPackageWeight() * (float) $this->getConfigData('weightunit');
     }
 
     /**
@@ -126,7 +126,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     /**
      *
      * @param string $message
-     * @return boolean | \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $error
+     * @return bool|\Magento\Quote\Model\Quote\Address\RateResult\Error
      */
     protected function returnError($message)
     {

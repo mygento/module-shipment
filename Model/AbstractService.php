@@ -14,7 +14,7 @@ use Mygento\Shipment\Api\Service\OrderInterface;
 abstract class AbstractService implements CalculateInterface, OrderInterface
 {
     /**
-     * @var \Mygento\Shipment\Model\Service $service
+     * @var \Mygento\Shipment\Model\Service
      */
     protected $service;
 

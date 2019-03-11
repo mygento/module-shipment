@@ -11,7 +11,7 @@ namespace Mygento\Shipment\Model;
 class Carrier
 {
     /**
-     * @var \Mygento\Shipment\Helper\Data $helper
+     * @var \Mygento\Shipment\Helper\Data
      */
     private $helper;
 
@@ -57,7 +57,6 @@ class Carrier
     }
 
     /**
-     *
      * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
      */
     public function getRateMethod()
@@ -76,6 +75,7 @@ class Carrier
         if (isset($totals['discount'])) {
             $subtotal = $subtotal + $totals['discount']->getValue();
         }
+
         return $subtotal;
     }
 }

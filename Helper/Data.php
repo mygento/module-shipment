@@ -17,7 +17,6 @@ class Data extends \Mygento\Base\Helper\Data
     protected $code = 'shipment';
 
     /**
-     *
      * @param \Magento\Checkout\Model\Session $checkoutSession
      * @param \Mygento\Base\Model\LogManager $logManager
      * @param \Magento\Framework\Encryption\Encryptor $encryptor
@@ -38,7 +37,6 @@ class Data extends \Mygento\Base\Helper\Data
     }
 
     /**
-     *
      * @return \Magento\Quote\Model\Quote
      */
     public function getCurrentQuote()
@@ -47,7 +45,6 @@ class Data extends \Mygento\Base\Helper\Data
     }
 
     /**
-     *
      * @param string $path
      * @return string
      */
@@ -57,7 +54,6 @@ class Data extends \Mygento\Base\Helper\Data
     }
 
     /**
-     *
      * @return string
      */
     protected function getDebugConfigPath(): string

@@ -11,7 +11,6 @@ namespace Mygento\Shipment\Api\Client;
 interface AbstractClientInterface
 {
     /**
-     *
      * @param array $options
      * @return \Magento\Framework\HTTP\Client\Curl
      */

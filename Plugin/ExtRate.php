@@ -11,10 +11,9 @@ namespace Mygento\Shipment\Plugin;
 class ExtRate
 {
     /**
-     *
-     * @param  \Magento\Quote\Model\Quote\Address\Rate $subject
-     * @param  mixed $result
-     * @param  \Magento\Quote\Model\Quote\Address\RateResult\AbstractResult $rate
+     * @param \Magento\Quote\Model\Quote\Address\Rate $subject
+     * @param mixed $result
+     * @param \Magento\Quote\Model\Quote\Address\RateResult\AbstractResult $rate
      * @return mixed
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */

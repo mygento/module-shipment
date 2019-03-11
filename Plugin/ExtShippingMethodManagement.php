@@ -25,10 +25,9 @@ class ExtShippingMethodManagement
     }
 
     /**
-     *
-     * @param  \Magento\Quote\Model\Cart\ShippingMethodConverter $subject
-     * @param  mixed $result
-     * @param  \Magento\Quote\Model\Quote\Address\Rate $rateModel
+     * @param \Magento\Quote\Model\Cart\ShippingMethodConverter $subject
+     * @param mixed $result
+     * @param \Magento\Quote\Model\Quote\Address\Rate $rateModel
      * @return mixed
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */

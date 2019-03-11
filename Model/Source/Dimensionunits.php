@@ -17,7 +17,7 @@ class Dimensionunits implements \Magento\Framework\Option\ArrayInterface
     {
         return [
             ['value' => 1, 'label' => __('centimeter')],
-            ['value' => 100, 'label' => __('meter')]
+            ['value' => 100, 'label' => __('meter')],
         ];
     }
 }

@@ -11,7 +11,7 @@ namespace Mygento\Shipment\Model;
 abstract class AbstractClient implements \Mygento\Shipment\Api\Client\AbstractClientInterface
 {
     /**
-     * @var \Mygento\Shipment\Model\Client $client
+     * @var \Mygento\Shipment\Model\Client
      */
     protected $client;
 
@@ -25,7 +25,6 @@ abstract class AbstractClient implements \Mygento\Shipment\Api\Client\AbstractCl
     }
 
     /**
-     *
      * @param array $options
      * @return \Magento\Framework\HTTP\Client\Curl
      */

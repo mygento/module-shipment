@@ -51,7 +51,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 'length' => 255,
                 'nullable' => true,
-                'comment' => 'Delivery estimate min days'
+                'comment' => 'Delivery estimate min days',
             ]
         );
         $connection->addColumn(
@@ -60,7 +60,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
             [
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 'nullable' => true,
-                'comment' => 'Delivery dates'
+                'comment' => 'Delivery dates',
             ]
         );
         $connection->addColumn(
@@ -70,7 +70,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 'length' => 100,
                 'nullable' => true,
-                'comment' => 'Delivery pickpoint latitude'
+                'comment' => 'Delivery pickpoint latitude',
             ]
         );
         $connection->addColumn(
@@ -80,7 +80,7 @@ class UpgradeSchema implements UpgradeSchemaInterface
                 'type' => \Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
                 'length' => 100,
                 'nullable' => true,
-                'comment' => 'Delivery pickpoint longitude'
+                'comment' => 'Delivery pickpoint longitude',
             ]
         );
     }

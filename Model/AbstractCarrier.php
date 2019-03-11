@@ -15,12 +15,12 @@ use Mygento\Shipment\Api\Carrier\AbstractCarrierInterface;
 abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInterface
 {
     /**
-     * @var \Mygento\Shipment\Model\Carrier $carrier
+     * @var \Mygento\Shipment\Model\Carrier
      */
     protected $carrier;
 
     /**
-     * @var \Mygento\Shipment\Helper\Data $helper
+     * @var \Mygento\Shipment\Helper\Data
      */
     protected $helper;
 
@@ -52,58 +52,6 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     }
 
     /**
-     * Validate shipping request before processing
-     * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
-     * @return bool|\Magento\Quote\Model\Quote\Address\RateResult\Error
-     */
-    protected function validateRequest(RateRequest $request)
-    {
-        if (!$this->getConfigData('active')) {
-            return false;
-        }
-        $this->helper->info('Started calculating to: ' . $request->getDestCity());
-        if (strlen($request->getDestCity()) <= 2) {
-            $this->helper->info('City strlen <= 2, aborting ...');
-            return false;
-        }
-        if ($this->helper->getConfig('defaultweight')) {
-            $request->setPackageWeight((float) $this->helper->getConfig('defaultweight'));
-            $this->helper->debug('Set default weight: ' . $request->getPackageWeight());
-        }
-        $this->helper->debug('Weight: ' . $request->getPackageWeight());
-        if (0 >= $request->getPackageWeight()) {
-            return $this->returnError('Zero weight');
-        }
-        return true;
-    }
-
-    /**
-     * @return float
-     */
-    protected function getCartTotal()
-    {
-        return $this->carrier->getCartTotal();
-    }
-
-    /**
-     * @return mixed
-     */
-    protected function getResult()
-    {
-        return $this->carrier->getResult();
-    }
-
-    /**
-     *
-     * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
-     */
-    protected function getRateMethod()
-    {
-        return $this->carrier->getRateMethod();
-    }
-
-    /**
-     *
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
      * @return mixed
      */
@@ -113,7 +61,6 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     }
 
     /**
-     *
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
      * @param int $mode
      * @return string
@@ -121,23 +68,6 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     public function convertCity(RateRequest $request, $mode = MB_CASE_TITLE): string
     {
         return mb_convert_case(trim($request->getDestCity()), $mode, 'UTF-8');
-    }
-
-    /**
-     *
-     * @param string $message
-     * @return bool|\Magento\Quote\Model\Quote\Address\RateResult\Error
-     */
-    protected function returnError($message)
-    {
-        if ($this->getConfigData('debug')) {
-            $error = $this->_rateErrorFactory->create();
-            $error->setCarrier($this->_code);
-            $error->setCarrierTitle($this->getConfigData('title'));
-            $error->setErrorMessage(__($message));
-            return $error;
-        }
-        return false;
     }
 
     /**
@@ -183,8 +113,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     }
 
     /**
-     *
-     * @return boolean
+     * @return bool
      */
     public function isTrackingAvailable(): bool
     {
@@ -192,7 +121,6 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     }
 
     /**
-     *
      * @return array
      */
     public function getAllowedMethods(): array
@@ -201,8 +129,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     }
 
     /**
-     *
-     * @return boolean
+     * @return bool
      */
     public function isCityRequired(): bool
     {
@@ -210,9 +137,78 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     }
 
     /**
-     *
+     * Validate shipping request before processing
      * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
-     * @return null|string
+     * @return bool|\Magento\Quote\Model\Quote\Address\RateResult\Error
+     */
+    protected function validateRequest(RateRequest $request)
+    {
+        if (!$this->getConfigData('active')) {
+            return false;
+        }
+        $this->helper->info('Started calculating to: ' . $request->getDestCity());
+        if (strlen($request->getDestCity()) <= 2) {
+            $this->helper->info('City strlen <= 2, aborting ...');
+
+            return false;
+        }
+        if ($this->helper->getConfig('defaultweight')) {
+            $request->setPackageWeight((float) $this->helper->getConfig('defaultweight'));
+            $this->helper->debug('Set default weight: ' . $request->getPackageWeight());
+        }
+        $this->helper->debug('Weight: ' . $request->getPackageWeight());
+        if (0 >= $request->getPackageWeight()) {
+            return $this->returnError('Zero weight');
+        }
+
+        return true;
+    }
+
+    /**
+     * @return float
+     */
+    protected function getCartTotal()
+    {
+        return $this->carrier->getCartTotal();
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getResult()
+    {
+        return $this->carrier->getResult();
+    }
+
+    /**
+     * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
+     */
+    protected function getRateMethod()
+    {
+        return $this->carrier->getRateMethod();
+    }
+
+    /**
+     * @param string $message
+     * @return bool|\Magento\Quote\Model\Quote\Address\RateResult\Error
+     */
+    protected function returnError($message)
+    {
+        if ($this->getConfigData('debug')) {
+            $error = $this->_rateErrorFactory->create();
+            $error->setCarrier($this->_code);
+            $error->setCarrierTitle($this->getConfigData('title'));
+            $error->setErrorMessage(__($message));
+
+            return $error;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param \Magento\Quote\Model\Quote\Address\RateRequest $request
+     * @return string|null
      */
     protected function getPostCode(RateRequest $request)
     {
@@ -223,6 +219,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
                 return $digitsOnlyPostcode;
             }
         }
+
         return null;
     }
 }

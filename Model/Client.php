@@ -25,13 +25,13 @@ class Client implements \Mygento\Shipment\Api\Client\AbstractClientInterface
     }
 
     /**
-     *
      * @param array $options
      * @return \Magento\Framework\HTTP\Client\Curl
      */
     public function getHttpClient(array $options = [])
     {
         $this->curl->setOptions($options);
+
         return $this->curl;
     }
 }

@@ -46,11 +46,12 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param string $path
+     * @param string|null $scopeCode
      * @return string
      */
-    public function getConfig($path)
+    public function getConfig($path, $scopeCode = null)
     {
-        return parent::getConfig('carriers/' . $this->code . '/' . $path);
+        return parent::getConfig('carriers/' . $this->code . '/' . $path, $scopeCode);
     }
 
     /**

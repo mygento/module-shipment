@@ -13,7 +13,7 @@ Every extension should have three classes:
 
 - Client inherits \Mygento\Shipment\Model\AbstractClient
 
-  Class is used for communication with API
+  Class is used for communication with API. Exchanges with others through Service.
 
 - Carrier inherits \Mygento\Shipment\Model\AbstractCarrier
 

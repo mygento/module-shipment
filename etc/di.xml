@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+  <preference for="Mygento\Shipment\Api\Data\CalculateRequestInterface" type="Mygento\Shipment\Model\Service\CalculateRequest" />
+
   <type name="Magento\Quote\Model\Quote\Address\Rate">
       <plugin name="mygento_shipment_get_rates" type="Mygento\Shipment\Plugin\ExtRate" />
   </type>

@@ -11,6 +11,11 @@ namespace Mygento\Shipment\Model;
 class Carrier
 {
     /**
+     * @var \Mygento\Shipment\Api\Service\CalculateRequestInterfaceFactory
+     */
+    private $calculateFactory;
+
+    /**
      * @var \Mygento\Shipment\Helper\Data
      */
     private $helper;
@@ -33,12 +38,14 @@ class Carrier
     /**
      * @param \Mygento\Shipment\Helper\Data $helper
      * @param \Magento\Checkout\Model\Session $checkoutSession
+     * @param \Mygento\Shipment\Api\Data\CalculateRequestInterfaceFactory $calculateFactory
      * @param \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory
      * @param \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory
      */
     public function __construct(
         \Mygento\Shipment\Helper\Data $helper,
         \Magento\Checkout\Model\Session $checkoutSession,
+        \Mygento\Shipment\Api\Data\CalculateRequestInterfaceFactory $calculateFactory,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory
     ) {
@@ -46,6 +53,7 @@ class Carrier
         $this->rateResultFactory = $rateResultFactory;
         $this->rateMethodFactory = $rateMethodFactory;
         $this->checkoutSession = $checkoutSession;
+        $this->calculateFactory = $calculateFactory;
     }
 
     /**
@@ -62,6 +70,14 @@ class Carrier
     public function getRateMethod()
     {
         return $this->rateMethodFactory->create();
+    }
+
+    /**
+     * @return \Mygento\Shipment\Api\Data\CalculateRequestInterface
+     */
+    public function getCalculateRequest()
+    {
+        return $this->calculateFactory->create();
     }
 
     /**

@@ -1,0 +1,16 @@
+Mygento:
+  Shipment:
+    CalculateRequest:
+      gui: false
+      readonly: true
+      columns:
+        city:
+          type: varchar
+        index:
+          type: varchar
+        weight:
+          type: float
+        order_sum:
+          type: float
+        raw_request:
+          type: varchar

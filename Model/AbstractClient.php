@@ -13,7 +13,7 @@ abstract class AbstractClient implements \Mygento\Shipment\Api\Client\AbstractCl
     /**
      * @var \Mygento\Shipment\Model\Client
      */
-    protected $client;
+    protected $baseClient;
 
     /**
      * @param \Mygento\Shipment\Model\Client $client
@@ -21,7 +21,7 @@ abstract class AbstractClient implements \Mygento\Shipment\Api\Client\AbstractCl
     public function __construct(
         \Mygento\Shipment\Model\Client $client
     ) {
-        $this->client = $client;
+        $this->baseClient = $client;
     }
 
     /**
@@ -30,6 +30,6 @@ abstract class AbstractClient implements \Mygento\Shipment\Api\Client\AbstractCl
      */
     public function getHttpClient(array $options = [])
     {
-        return $this->client->getHttpClient($options);
+        return $this->baseClient->getHttpClient($options);
     }
 }

@@ -16,7 +16,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     /**
      * @var \Mygento\Shipment\Model\Service
      */
-    protected $service;
+    protected $baseService;
 
     /**
      * @param \Mygento\Shipment\Model\Service $service
@@ -24,6 +24,6 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     public function __construct(
         \Mygento\Shipment\Model\Service $service
     ) {
-        $this->service = $service;
+        $this->baseService = $service;
     }
 }

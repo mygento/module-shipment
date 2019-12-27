@@ -17,7 +17,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     /**
      * @var \Mygento\Shipment\Model\Carrier
      */
-    protected $carrier;
+    protected $baseCarrier;
 
     /**
      * @var \Mygento\Shipment\Helper\Data
@@ -25,23 +25,23 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     protected $helper;
 
     /**
-     * @param \Mygento\Shipment\Helper\Data $helper
      * @param \Mygento\Shipment\Model\Carrier $carrier
+     * @param \Mygento\Shipment\Helper\Data $helper
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
      * @param \Psr\Log\LoggerInterface $logger
      * @param array $data
      */
     public function __construct(
-        \Mygento\Shipment\Helper\Data $helper,
         \Mygento\Shipment\Model\Carrier $carrier,
+        \Mygento\Shipment\Helper\Data $helper,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
         \Psr\Log\LoggerInterface $logger,
         array $data = []
     ) {
         $this->helper = $helper;
-        $this->carrier = $carrier;
+        $this->baseCarrier = $carrier;
 
         parent::__construct(
             $scopeConfig,
@@ -169,7 +169,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     protected function getCartTotal()
     {
-        return $this->carrier->getCartTotal();
+        return $this->baseCarrier->getCartTotal();
     }
 
     /**
@@ -177,7 +177,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     protected function getResult()
     {
-        return $this->carrier->getResult();
+        return $this->baseCarrier->getResult();
     }
 
     /**
@@ -185,7 +185,12 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     protected function getRateMethod()
     {
-        return $this->carrier->getRateMethod();
+        return $this->baseCarrier->getRateMethod();
+    }
+
+    protected function getCalculateRequest()
+    {
+        return $this->baseCarrier->getCalculateRequest();
     }
 
     /**

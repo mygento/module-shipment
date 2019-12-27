@@ -8,16 +8,17 @@
 
 namespace Mygento\Shipment\Model;
 
+use Mygento\Shipment\Api\Data\CalculateRequestInterface;
 use Mygento\Shipment\Api\Service\CalculateInterface;
 use Mygento\Shipment\Api\Service\OrderInterface;
 
 class Service implements CalculateInterface, OrderInterface
 {
     /**
-     * @param array $params
+     * @param CalculateRequestInterface $request
      * @return array
      */
-    public function calculateDeliveryCost(array $params): array
+    public function calculateDeliveryCost(CalculateRequestInterface $request): array
     {
         return [];
     }

@@ -7,9 +7,22 @@
 ## Installation with composer
 * Include the repository: `composer require mygento/module-shipment`
 
-## Configuration
-* Enable in store configuration
-* Add connection string to text field
+## Usage
+
+Every extension should have three classes:
+
+- Client inherits \Mygento\Shipment\Model\AbstractClient
+
+  Class is used for communication with API
+
+- Carrier inherits \Mygento\Shipment\Model\AbstractCarrier
+
+  Class is used to work with Magento Shipping Rates
+
+- Service inherits \Mygento\Shipment\Model\AbstractService
+
+  Class is responsible for working with Magento and DB
 
 ## Compability
+
 The module is tested on magento version 2.3.x

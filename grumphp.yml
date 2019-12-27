@@ -16,5 +16,5 @@ parameters:
             ruleset: ['vendor/mygento/coding-standard/Mygento-Mage2/phpmd.xml']
         phpcs:
             warning_severity: null
-        psalm:
+#        psalm:
         xmllint:

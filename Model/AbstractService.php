@@ -8,6 +8,7 @@
 
 namespace Mygento\Shipment\Model;
 
+use Mygento\Shipment\Api\DimensionInterface;
 use Mygento\Shipment\Api\Service\CalculateInterface;
 use Mygento\Shipment\Api\Service\OrderInterface;
 
@@ -46,7 +47,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
      */
     public function getSizeRatio(): float
     {
-        return (float) $this->helper->getConfig('size');
+        return (float) $this->helper->getConfig(DimensionInterface::SIZE);
     }
 
     /**
@@ -54,7 +55,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
      */
     public function getWeightRatio(): float
     {
-        return (float) $this->helper->getConfig('weightunit');
+        return (float) $this->helper->getConfig(DimensionInterface::WEIGHT);
     }
 
     /**

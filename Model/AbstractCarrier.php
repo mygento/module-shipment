@@ -12,6 +12,7 @@ use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrier as BaseCarrier;
 use Mygento\Shipment\Api\Carrier\AbstractCarrierInterface;
 use Mygento\Shipment\Api\Data\CalculateResultInterface;
+use Mygento\Shipment\Api\DimensionInterface;
 
 abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInterface
 {
@@ -58,7 +59,8 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     public function convertWeight(RateRequest $request)
     {
-        return $request->getPackageWeight() * (float) $this->getConfigData('weight_unit');
+        return $request->getPackageWeight()
+            * (float) $this->getConfigData(DimensionInterface::WEIGHT);
     }
 
     /**

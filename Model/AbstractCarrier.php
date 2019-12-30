@@ -11,6 +11,7 @@ namespace Mygento\Shipment\Model;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Shipping\Model\Carrier\AbstractCarrier as BaseCarrier;
 use Mygento\Shipment\Api\Carrier\AbstractCarrierInterface;
+use Mygento\Shipment\Api\Data\CalculateResultInterface;
 
 abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInterface
 {
@@ -73,41 +74,44 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     /**
      * Создание метода доставки
      *
-     * @param array $method
+     * @param \Mygento\Shipment\Api\Data\CalculateResultInterface $method
      * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
      */
-    public function createRateMethod(array $method)
+    public function createRateMethod(CalculateResultInterface $method)
     {
         $rate = $this->getRateMethod();
 
-        $rate->setCarrier($method['code']);
-        $rate->setCarrierTitle($method['title']);
-        $rate->setMethod($method['method']);
-        $rate->setMethodTitle($method['name']);
-        $rate->setPrice($method['price']);
-        $rate->setCost($method['cost']);
+        $rate->setCarrier($method->getCarrier());
+        $rate->setCarrierTitle($method->getCarrierTitle());
+        $rate->setMethod($method->getMethod());
+        $rate->setMethodTitle($method->getMethodTitle());
+        $rate->setPrice($method->getPrice());
+        $rate->setCost($method->getCost());
 
-        if (isset($method['estimate'])) {
+        if ($method->getEstimate()) {
             $rate->setEstimate(date(
                 'Y-m-d',
-                strtotime('+' . $method['estimate'] . ' days')
+                strtotime('+' . $method->getEstimate() . ' days')
             ));
         }
 
-        if (isset($method['estimate_dates']) && is_array($method['estimate_dates'])) {
-            foreach ($method['estimate_dates'] as $key => $value) {
-                $method['estimate_dates'][$key] = date('Y-m-d', strtotime($value));
-            }
-            $rate->setEstimateDates(json_encode($method['estimate_dates']));
-        }
+        // TODO
+//        if (!empty($method->getEstimateDates())) {
+//            foreach ($method->getEstimateDates() as $key => $value) {
+//                $method['estimate_dates'][$key] = date('Y-m-d', strtotime($value));
+//            }
+//            $rate->setEstimateDates(json_encode($method['estimate_dates']));
+//        }
 
-        if (isset($method['latitude'])) {
-            $rate->setLatitude($method['latitude']);
-        }
+//        if (isset($method['estimate_dates']) && is_array($method['estimate_dates'])) {
+//            foreach ($method['estimate_dates'] as $key => $value) {
+//                $method['estimate_dates'][$key] = date('Y-m-d', strtotime($value));
+//            }
+//            $rate->setEstimateDates(json_encode($method['estimate_dates']));
+//        }
 
-        if (isset($method['longitude'])) {
-            $rate->setLongitude($method['longitude']);
-        }
+        $rate->setLatitude($method->getLatitude());
+        $rate->setLongitude($method->getLongitude());
 
         return $rate;
     }

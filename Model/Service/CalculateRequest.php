@@ -105,6 +105,6 @@ class CalculateRequest extends DataObject implements CalculateRequestInterface
      */
     public function setRawRequest($rawRequest)
     {
-        $this->setData(self::RAW_REQUEST, $rawRequest);
+        return $this->setData(self::RAW_REQUEST, $rawRequest);
     }
 }

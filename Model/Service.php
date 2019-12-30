@@ -15,6 +15,25 @@ use Mygento\Shipment\Api\Service\OrderInterface;
 class Service implements CalculateInterface, OrderInterface
 {
     /**
+     * @var \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory
+     */
+    private $resultFactory;
+
+    public function __construct(
+        \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
+    ) {
+        $this->resultFactory = $resultFactory;
+    }
+
+    /**
+     * @return \Mygento\Shipment\Api\Data\CalculateResultInterface
+     */
+    public function getCalculateResultInstance()
+    {
+        return $this->resultFactory->create();
+    }
+
+    /**
      * @param CalculateRequestInterface $request
      * @return array
      */
@@ -36,5 +55,21 @@ class Service implements CalculateInterface, OrderInterface
      */
     public function orderCreate(\Magento\Sales\Model\Order $order, $data = [])
     {
+    }
+
+    /**
+     * @return float
+     */
+    public function getWeightRatio(): float
+    {
+        return 1;
+    }
+
+    /**
+     * @return float
+     */
+    public function getSizeRatio(): float
+    {
+        return 1;
     }
 }

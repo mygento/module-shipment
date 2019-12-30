@@ -14,7 +14,22 @@ interface CalculateInterface
 {
     /**
      * @param \Mygento\Shipment\Api\Data\CalculateRequestInterface $request
-     * @return array
+     * @return \Mygento\Shipment\Api\Data\CalculateResultInterface[]
      */
     public function calculateDeliveryCost(CalculateRequestInterface $request): array;
+
+    /**
+     * @return \Mygento\Shipment\Api\Data\CalculateResultInterface
+     */
+    public function getCalculateResultInstance();
+
+    /**
+     * @return float
+     */
+    public function getWeightRatio(): float;
+
+    /**
+     * @return float
+     */
+    public function getSizeRatio(): float;
 }

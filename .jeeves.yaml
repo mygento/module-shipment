@@ -14,3 +14,27 @@ Mygento:
           type: float
         raw_request:
           type: varchar
+    CalculateResult:
+      gui: false
+      readonly: true
+      columns:
+        carrier:
+          type: varchar
+        carrier_title:
+          type: varchar
+        method:
+          type: varchar
+        method_title:
+          type: varchar
+        price:
+          type: float
+        cost:
+          type: float
+        estimate:
+          type: varchar
+        estimate_dates:
+          type: varchar
+        latitude:
+          type: varchar
+        longitude:
+          type: varchar

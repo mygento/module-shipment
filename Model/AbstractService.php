@@ -14,16 +14,56 @@ use Mygento\Shipment\Api\Service\OrderInterface;
 abstract class AbstractService implements CalculateInterface, OrderInterface
 {
     /**
+     * @var \Mygento\Shipment\Helper\Data
+     */
+    protected $helper;
+
+    /**
      * @var \Mygento\Shipment\Model\Service
      */
     protected $baseService;
 
     /**
+     * @var \Magento\Framework\Api\SearchCriteriaBuilder
+     */
+    protected $searchBuilder;
+
+    /**
      * @param \Mygento\Shipment\Model\Service $service
      */
     public function __construct(
-        \Mygento\Shipment\Model\Service $service
+        \Mygento\Shipment\Model\Service $service,
+        \Mygento\Shipment\Helper\Data $helper,
+        \Magento\Framework\Api\SearchCriteriaBuilder $searchBuilder
     ) {
         $this->baseService = $service;
+        $this->searchBuilder = $searchBuilder;
+        $this->helper = $helper;
+    }
+
+    /**
+     *
+     * @return float
+     */
+    public function getSizeRatio(): float
+    {
+        return (float) $this->helper->getConfig('size');
+    }
+
+    /**
+     *
+     * @return float
+     */
+    public function getWeightRatio(): float
+    {
+        return (float) $this->helper->getConfig('weightunit');
+    }
+
+    /**
+     * @return \Mygento\Shipment\Api\Data\CalculateResultInterface
+     */
+    public function getCalculateResultInstance()
+    {
+        return $this->baseService->getCalculateResultInstance();
     }
 }

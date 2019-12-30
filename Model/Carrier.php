@@ -11,7 +11,7 @@ namespace Mygento\Shipment\Model;
 class Carrier
 {
     /**
-     * @var \Mygento\Shipment\Api\Service\CalculateRequestInterfaceFactory
+     * @var \Mygento\Shipment\Api\Data\CalculateRequestInterfaceFactory
      */
     private $calculateFactory;
 

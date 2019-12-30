@@ -17,8 +17,8 @@ interface AbstractCarrierInterface extends \Magento\Shipping\Model\Carrier\Abstr
     public function convertWeight(\Magento\Quote\Model\Quote\Address\RateRequest $request);
 
     /**
-     * @param array $method
+     * @param \Mygento\Shipment\Api\Data\CalculateResultInterface $method
      * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
      */
-    public function createRateMethod(array $method);
+    public function createRateMethod(\Mygento\Shipment\Api\Data\CalculateResultInterface $method);
 }

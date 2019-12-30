@@ -15,4 +15,9 @@ interface AbstractClientInterface
      * @return \Magento\Framework\HTTP\Client\Curl
      */
     public function getHttpClient(array $options = []);
+
+    /**
+     * @return \Magento\Framework\Event\Manager
+     */
+    public function getEventManager();
 }

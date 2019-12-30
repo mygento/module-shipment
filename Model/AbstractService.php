@@ -42,7 +42,6 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     }
 
     /**
-     *
      * @return float
      */
     public function getSizeRatio(): float
@@ -51,7 +50,6 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     }
 
     /**
-     *
      * @return float
      */
     public function getWeightRatio(): float

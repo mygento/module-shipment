@@ -58,7 +58,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     public function convertWeight(RateRequest $request)
     {
-        return $request->getPackageWeight() * (float) $this->getConfigData('weightunit');
+        return $request->getPackageWeight() * (float) $this->getConfigData('weight_unit');
     }
 
     /**

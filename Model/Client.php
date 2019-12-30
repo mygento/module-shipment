@@ -11,6 +11,11 @@ namespace Mygento\Shipment\Model;
 class Client implements \Mygento\Shipment\Api\Client\AbstractClientInterface
 {
     /**
+     * @var \Magento\Framework\Event\Manager
+     */
+    private $eventManager;
+
+    /**
      * @var \Magento\Framework\HTTP\Client\Curl
      */
     private $curl;
@@ -19,9 +24,11 @@ class Client implements \Mygento\Shipment\Api\Client\AbstractClientInterface
      * @param \Magento\Framework\HTTP\Client\Curl $curl
      */
     public function __construct(
-        \Magento\Framework\HTTP\Client\Curl $curl
+        \Magento\Framework\HTTP\Client\Curl $curl,
+        \Magento\Framework\Event\Manager $eventManager
     ) {
         $this->curl = $curl;
+        $this->eventManager = $eventManager;
     }
 
     /**
@@ -33,5 +40,13 @@ class Client implements \Mygento\Shipment\Api\Client\AbstractClientInterface
         $this->curl->setOptions($options);
 
         return $this->curl;
+    }
+
+    /**
+     * @return \Magento\Framework\Event\Manager
+     */
+    public function getEventManager()
+    {
+        return $this->eventManager;
     }
 }

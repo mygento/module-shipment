@@ -8,17 +8,16 @@
 
 namespace Mygento\Shipment\Model;
 
-use Mygento\Shipment\Api\Data\CalculateRequestInterface;
-use Mygento\Shipment\Api\Service\CalculateInterface;
-use Mygento\Shipment\Api\Service\OrderInterface;
-
-class Service implements CalculateInterface, OrderInterface
+class Service implements \Mygento\Shipment\Api\Service\BaseInterface
 {
     /**
      * @var \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory
      */
     private $resultFactory;
 
+    /**
+     * @param \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
+     */
     public function __construct(
         \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
     ) {
@@ -31,45 +30,5 @@ class Service implements CalculateInterface, OrderInterface
     public function getCalculateResultInstance()
     {
         return $this->resultFactory->create();
-    }
-
-    /**
-     * @param CalculateRequestInterface $request
-     * @return array
-     */
-    public function calculateDeliveryCost(CalculateRequestInterface $request): array
-    {
-        return [];
-    }
-
-    /**
-     * @param int|string $orderId
-     */
-    public function orderCancel($orderId)
-    {
-    }
-
-    /**
-     * @param \Magento\Sales\Model\Order $order
-     * @param array $data
-     */
-    public function orderCreate(\Magento\Sales\Model\Order $order, $data = [])
-    {
-    }
-
-    /**
-     * @return float
-     */
-    public function getWeightRatio(): float
-    {
-        return 1;
-    }
-
-    /**
-     * @return float
-     */
-    public function getSizeRatio(): float
-    {
-        return 1;
     }
 }

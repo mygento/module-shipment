@@ -30,14 +30,16 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     protected $searchBuilder;
 
     /**
-     * @param \Mygento\Shipment\Model\Service $service
+     * @param \Mygento\Shipment\Model\Service $baseService
+     * @param \Mygento\Shipment\Helper\Data $helper
+     * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchBuilder
      */
     public function __construct(
-        \Mygento\Shipment\Model\Service $service,
+        \Mygento\Shipment\Model\Service $baseService,
         \Mygento\Shipment\Helper\Data $helper,
         \Magento\Framework\Api\SearchCriteriaBuilder $searchBuilder
     ) {
-        $this->baseService = $service;
+        $this->baseService = $baseService;
         $this->searchBuilder = $searchBuilder;
         $this->helper = $helper;
     }

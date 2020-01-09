@@ -8,7 +8,7 @@
 
 namespace Mygento\Shipment\Model;
 
-class Client implements \Mygento\Shipment\Api\Client\AbstractClientInterface
+class Client implements \Mygento\Shipment\Api\Client\BaseInterface
 {
     /**
      * @var \Magento\Framework\Event\Manager

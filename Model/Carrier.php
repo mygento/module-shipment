@@ -8,7 +8,7 @@
 
 namespace Mygento\Shipment\Model;
 
-class Carrier
+class Carrier implements \Mygento\Shipment\Api\Carrier\BaseInterface
 {
     /**
      * @var \Mygento\Shipment\Api\Data\CalculateRequestInterfaceFactory

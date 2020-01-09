@@ -8,22 +8,19 @@
 
 namespace Mygento\Shipment\Api\Client;
 
-interface AbstractClientInterface
+interface AbstractClientInterface extends BaseInterface
 {
-    /**
-     * @param array $options
-     * @return \Magento\Framework\HTTP\Client\Curl
-     */
-    public function getHttpClient(array $options = []);
-
-    /**
-     * @return \Magento\Framework\Event\Manager
-     */
-    public function getEventManager();
-
     /**
      * @param string $method
      * @param array $data
      */
     public function sendApiRequest(string $method, $data);
+
+    /**
+     * Создание события
+     *
+     * @param string $event
+     * @param array $data
+     */
+    public function createEvent($event, $data = []);
 }

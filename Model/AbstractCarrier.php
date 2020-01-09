@@ -27,7 +27,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     protected $helper;
 
     /**
-     * @param \Mygento\Shipment\Model\Carrier $carrier
+     * @param \Mygento\Shipment\Model\Carrier $baseCarrier
      * @param \Mygento\Shipment\Helper\Data $helper
      * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
      * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
@@ -35,7 +35,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      * @param array $data
      */
     public function __construct(
-        \Mygento\Shipment\Model\Carrier $carrier,
+        \Mygento\Shipment\Model\Carrier $baseCarrier,
         \Mygento\Shipment\Helper\Data $helper,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
@@ -43,7 +43,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
         array $data = []
     ) {
         $this->helper = $helper;
-        $this->baseCarrier = $carrier;
+        $this->baseCarrier = $baseCarrier;
 
         parent::__construct(
             $scopeConfig,

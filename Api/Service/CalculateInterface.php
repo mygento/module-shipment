@@ -10,18 +10,13 @@ namespace Mygento\Shipment\Api\Service;
 
 use Mygento\Shipment\Api\Data\CalculateRequestInterface;
 
-interface CalculateInterface
+interface CalculateInterface extends BaseInterface
 {
     /**
      * @param \Mygento\Shipment\Api\Data\CalculateRequestInterface $request
      * @return \Mygento\Shipment\Api\Data\CalculateResultInterface[]
      */
     public function calculateDeliveryCost(CalculateRequestInterface $request): array;
-
-    /**
-     * @return \Mygento\Shipment\Api\Data\CalculateResultInterface
-     */
-    public function getCalculateResultInstance();
 
     /**
      * @return float

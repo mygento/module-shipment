@@ -20,4 +20,10 @@ interface AbstractClientInterface
      * @return \Magento\Framework\Event\Manager
      */
     public function getEventManager();
+
+    /**
+     * @param string $method
+     * @param array $data
+     */
+    public function sendApiRequest(string $method, $data);
 }

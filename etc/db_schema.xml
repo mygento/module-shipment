@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote_shipping_rate" resource="checkout" engine="innodb" comment="Sales Flat Quote Shipping Rate">
+        <column xsi:type="varchar" name="estimate" nullable="true" length="255" comment="Delivery estimate min days"/>
+        <column xsi:type="varchar" name="estimate_dates" nullable="true" comment="Delivery dates"/>
+        <column xsi:type="varchar" name="latitude" nullable="true" length="100" comment="Delivery pickpoint latitude"/>
+        <column xsi:type="varchar" name="longitude" nullable="true" length="100" comment="Delivery pickpoint longitude"/>
+    </table>
+
+    <table name="mygento_shipment_point" resource="default" engine="innodb" comment="mygento_shipment_point Table">
+        <column xsi:type="int" name="id" nullable="false" identity="true" unsigned="true" padding="10" comment="ID"/>
+        <column xsi:type="boolean" name="is_active" nullable="false" default="0" comment="Is Active"/>
+        <column xsi:type="varchar" name="provider" nullable="false" length="255" comment="Provider"/>
+        <column xsi:type="varchar" name="provider_uid" nullable="false" length="255" comment="Provider Uid"/>
+        <column xsi:type="smallint" name="priority" nullable="false" identity="false" unsigned="true" padding="6" default="0" comment="Point Priority"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
+        <column xsi:type="varchar" name="country_id" nullable="false" length="2" comment="Country Id in ISO-2"/>
+        <column xsi:type="int" name="city_id" nullable="true" identity="false" unsigned="true" padding="10" comment="City ID"/>
+        <column xsi:type="varchar" name="city" nullable="false" length="255" comment="City"/>
+        <column xsi:type="varchar" name="street" nullable="false" length="255" comment="Street"/>
+        <column xsi:type="varchar" name="name" nullable="false" length="255" comment="Name"/>
+        <column xsi:type="varchar" name="address" nullable="false" length="255" comment="Address"/>
+        <column xsi:type="text" name="address_description" nullable="true" comment="Address Description"/>
+        <column xsi:type="text" name="description" nullable="true" comment="Description"/>
+        <column xsi:type="varchar" name="postcode" nullable="true" length="255" comment="Postcode"/>
+        <column xsi:type="varchar" name="phone_number" nullable="true" length="255" comment="Phone number"/>
+        <column xsi:type="text" name="schedule" nullable="true" comment="Schedule"/>
+        <column xsi:type="varchar" name="working_hours" nullable="true" length="255" comment="Working Hours"/>
+        <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Image"/>
+        <column xsi:type="smallint" name="sort_order" nullable="false" identity="false" unsigned="true" padding="6" default="0" comment="Sort Order"/>
+        <column xsi:type="decimal" name="latitude" nullable="false" precision="10" scale="7" comment="Latitude"/>
+        <column xsi:type="decimal" name="longitude" nullable="false" precision="10" scale="7" comment="Longitude"/>
+        <column xsi:type="boolean" name="cash_delivery" nullable="false" default="1" comment="Cash delivery"/>
+        <column xsi:type="boolean" name="card_delivery" nullable="false" default="1" comment="Card delivery"/>
+        <column xsi:type="boolean" name="online_prepaid" nullable="false" default="1" comment="Online prepaid"/>
+        <column xsi:type="boolean" name="twenty_four_hours" nullable="false" default="0" comment="Twenty-four Hours"/>
+        <column xsi:type="boolean" name="testing_available" nullable="false" default="0" comment="Testing Available"/>
+        <column xsi:type="varchar" name="icon" nullable="true" length="255" comment="Icon"/>
+        <column xsi:type="decimal" name="price" nullable="true" precision="12" scale="4" comment="Price"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="MYG_SHIP_POINT_PROVIDER_PROVIDER_UID">
+            <column name="provider"/>
+            <column name="provider_uid"/>
+        </constraint>
+        <index referenceId="MYG_SHIP_POINT_ACTIVE" indexType="btree">
+            <column name="is_active"/>
+        </index>
+    </table>
+</schema>

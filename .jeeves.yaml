@@ -1,5 +1,157 @@
 Mygento:
   Shipment:
+    Point:
+      gui: true
+      readonly: true
+      columns:
+        id:
+          type: int
+          pk: true
+          identity: true
+          unsigned: true
+          comment: 'ID'
+          padding: 10
+        is_active:
+          type: boolean
+          nullable: false
+          comment: 'Is Active'
+          default: 0
+        provider:
+          type: varchar
+          nullable: false
+          comment: 'Provider'
+        provider_uid:
+          type: varchar
+          nullable: false
+          comment: 'Provider Uid'
+        priority:
+          type: smallint
+          unsigned: true
+          nullable: false
+          comment: 'Point Priority'
+          padding: 6
+          default: 0
+        type:
+          type: varchar
+          nullable: false
+          comment: 'Type'
+        country_id:
+          type: varchar
+          nullable: false
+          comment: 'Country Id in ISO-2'
+          length: 2
+        city_id:
+          type: int
+          unsigned: true
+          nullable: true
+          comment: 'City ID'
+          padding: 10
+        city:
+          type: varchar
+          nullable: false
+          comment: 'City'
+        street:
+          type: varchar
+          nullable: false
+          comment: 'Street'
+        name:
+          type: varchar
+          nullable: false
+          comment: 'Name'
+        address:
+          type: varchar
+          nullable: false
+          comment: 'Address'
+        address_description:
+          type: text
+          nullable: true
+          comment: 'Address Description'
+        description:
+          type: text
+          nullable: true
+          comment: 'Description'
+        postcode:
+          type: varchar
+          nullable: true
+          comment: 'Postcode'
+        phone_number:
+          type: varchar
+          nullable: true
+          comment: 'Phone number'
+        schedule:
+          type: text
+          nullable: true
+          comment: 'Schedule'
+        working_hours:
+          type: varchar
+          nullable: true
+          comment: 'Working Hours'
+        image:
+          type: varchar
+          nullable: true
+          comment: 'Image'
+        sort_order:
+          type: smallint
+          unsigned: true
+          nullable: false
+          comment: 'Sort Order'
+          padding: 6
+          default: 0
+        latitude:
+          type: decimal
+          nullable: false
+          comment: 'Latitude'
+          precision: 10
+          scale: 7
+        longitude:
+          type: decimal
+          nullable: false
+          comment: 'Longitude'
+          precision: 10
+          scale: 7
+        cash_delivery:
+          type: boolean
+          nullable: false
+          comment: 'Cash delivery'
+          default: 1
+        card_delivery:
+          type: boolean
+          nullable: false
+          comment: 'Card delivery'
+          default: 1
+        online_prepaid:
+          type: boolean
+          nullable: false
+          comment: 'Online prepaid'
+          default: 1
+        twenty_four_hours:
+          type: boolean
+          nullable: false
+          comment: 'Twenty-four Hours'
+          default: 0
+        testing_available:
+          type: boolean
+          nullable: false
+          comment: 'Testing Available'
+          default: 0
+        icon:
+          type: varchar
+          nullable: true
+          comment: 'Icon'
+          virtual: true
+        price:
+          type: decimal
+          unsigned: true
+          nullable: true
+          comment: 'Price'
+          precision: 12
+          scale: 4
+      indexes:
+        MYG_SHIP_POINT_PROVIDER_PROVIDER_UID:
+            type: 'unique'
+            columns: ['provider', 'provider_uid']
+        MYG_SHIP_POINT_ACTIVE:
+            columns: ['is_active']
     CalculateRequest:
       gui: false
       readonly: true

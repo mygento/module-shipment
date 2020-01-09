@@ -14,4 +14,9 @@ interface BaseInterface
      * @return \Mygento\Shipment\Api\Data\CalculateResultInterface
      */
     public function getCalculateResultInstance();
+
+    /**
+     * @return \Mygento\Shipment\Api\PointManagerInterface
+     */
+    public function getPointManager();
 }

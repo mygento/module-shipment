@@ -22,6 +22,7 @@ class Client implements \Mygento\Shipment\Api\Client\BaseInterface
 
     /**
      * @param \Magento\Framework\HTTP\Client\Curl $curl
+     * @param \Magento\Framework\Event\Manager $eventManager
      */
     public function __construct(
         \Magento\Framework\HTTP\Client\Curl $curl,

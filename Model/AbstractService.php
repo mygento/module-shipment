@@ -67,4 +67,12 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     {
         return $this->baseService->getCalculateResultInstance();
     }
+
+    /**
+     * @return \Mygento\Shipment\Api\PointManagerInterface
+     */
+    public function getPointManager()
+    {
+        return $this->baseService->getPointManager();
+    }
 }

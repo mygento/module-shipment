@@ -194,6 +194,9 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
         return $this->baseCarrier->getRateMethod();
     }
 
+    /**
+     * @return \Mygento\Shipment\Api\Data\CalculateRequestInterface
+     */
     protected function getCalculateRequest()
     {
         return $this->baseCarrier->getCalculateRequest();

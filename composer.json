@@ -24,7 +24,7 @@
     ],
     "require": {
         "magento/module-shipping": "100.*",
-        "mygento/module-base": "~2.3.1"
+        "mygento/module-base": "~2.3.7"
     },
     "require-dev": {
         "mygento/coding-standard": "v2.3.x-dev",

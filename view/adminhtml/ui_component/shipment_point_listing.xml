@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">shipment_point_listing.shipment_point_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <buttons/>
+        <spinner>shipment_point_columns</spinner>
+        <deps>
+            <dep>shipment_point_listing.shipment_point_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="shipment_point_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">id</param>
+            </storageConfig>
+            <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Mygento_Shipment::point</aclResource>
+        <dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="shipment_point_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>1</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="shipment_point_columns">
+        <column name="id">
+            <settings>
+                <filter>textRange</filter>
+                <dataType>text</dataType>
+                <label translate="true">Id</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="is_active" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <label translate="true">Is Active</label>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+            </settings>
+        </column>
+        <column name="provider">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Provider</label>
+            </settings>
+        </column>
+        <column name="provider_uid">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Provider Uid</label>
+            </settings>
+        </column>
+        <column name="priority">
+            <settings>
+                <filter>textRange</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Priority</label>
+            </settings>
+        </column>
+        <column name="type">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Type</label>
+            </settings>
+        </column>
+        <column name="country_id">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Country Id</label>
+            </settings>
+        </column>
+        <column name="city_id">
+            <settings>
+                <filter>textRange</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">City Id</label>
+            </settings>
+        </column>
+        <column name="city">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">City</label>
+            </settings>
+        </column>
+        <column name="street">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Street</label>
+            </settings>
+        </column>
+        <column name="name">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Name</label>
+            </settings>
+        </column>
+        <column name="address">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Address</label>
+            </settings>
+        </column>
+        <column name="address_description">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Address Description</label>
+            </settings>
+        </column>
+        <column name="description">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Description</label>
+            </settings>
+        </column>
+        <column name="postcode">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Postcode</label>
+            </settings>
+        </column>
+        <column name="phone_number">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Phone Number</label>
+            </settings>
+        </column>
+        <column name="schedule">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Schedule</label>
+            </settings>
+        </column>
+        <column name="working_hours">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Working Hours</label>
+            </settings>
+        </column>
+        <column name="image">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Image</label>
+            </settings>
+        </column>
+        <column name="sort_order">
+            <settings>
+                <filter>textRange</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Sort Order</label>
+            </settings>
+        </column>
+        <column name="latitude">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Latitude</label>
+            </settings>
+        </column>
+        <column name="longitude">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Longitude</label>
+            </settings>
+        </column>
+        <column name="cash_delivery" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <label translate="true">Cash Delivery</label>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+            </settings>
+        </column>
+        <column name="card_delivery" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <label translate="true">Card Delivery</label>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+            </settings>
+        </column>
+        <column name="online_prepaid" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <label translate="true">Online Prepaid</label>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+            </settings>
+        </column>
+        <column name="twenty_four_hours" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <label translate="true">Twenty Four Hours</label>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+            </settings>
+        </column>
+        <column name="testing_available" component="Magento_Ui/js/grid/columns/select">
+            <settings>
+                <filter>select</filter>
+                <dataType>select</dataType>
+                <editor>
+                    <editorType>select</editorType>
+                </editor>
+                <label translate="true">Testing Available</label>
+                <options class="Magento\Config\Model\Config\Source\Yesno"/>
+            </settings>
+        </column>
+        <column name="icon">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Icon</label>
+            </settings>
+        </column>
+        <column name="price">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Price</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

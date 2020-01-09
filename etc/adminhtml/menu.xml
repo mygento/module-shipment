@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Mygento_Shipment::root" title="Shipment" translate="title" module="Mygento_Shipment" sortOrder="90" parent="Magento_Backend::stores" resource="Mygento_Shipment::root"/>
+        <add id="Mygento_Shipment::point" title="Point" translate="title" module="Mygento_Shipment" sortOrder="90" parent="Mygento_Shipment::root" action="shipment/point" resource="Mygento_Shipment::point"/>
+    </menu>
+</config>

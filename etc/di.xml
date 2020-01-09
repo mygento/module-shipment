@@ -1,12 +1,40 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
-  <preference for="Mygento\Shipment\Api\Data\CalculateRequestInterface" type="Mygento\Shipment\Model\Service\CalculateRequest" />
-  <preference for="Mygento\Shipment\Api\Data\CalculateResultInterface" type="Mygento\Shipment\Model\Service\CalculateResult" />
+    <preference for="Mygento\Shipment\Api\Data\CalculateRequestInterface" type="Mygento\Shipment\Model\Service\CalculateRequest" />
+    <preference for="Mygento\Shipment\Api\Data\CalculateResultInterface" type="Mygento\Shipment\Model\Service\CalculateResult" />
+    <preference for="Mygento\Shipment\Api\PointManagerInterface" type="Mygento\Shipment\Model\PointManager"/>
 
-  <type name="Magento\Quote\Model\Quote\Address\Rate">
-      <plugin name="mygento_shipment_get_rates" type="Mygento\Shipment\Plugin\ExtRate" />
-  </type>
-  <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
-      <plugin name="mygento_shipment_shipping_method_converter" type="Mygento\Shipment\Plugin\ExtShippingMethodManagement" />
-  </type>
+    <type name="Magento\Quote\Model\Quote\Address\Rate">
+        <plugin name="mygento_shipment_get_rates" type="Mygento\Shipment\Plugin\ExtRate" />
+    </type>
+    <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
+        <plugin name="mygento_shipment_shipping_method_converter" type="Mygento\Shipment\Plugin\ExtShippingMethodManagement" />
+    </type>
+
+    <preference for="Mygento\Shipment\Api\PointRepositoryInterface" type="Mygento\Shipment\Model\PointRepository"/>
+    <preference for="Mygento\Shipment\Api\Data\PointInterface" type="Mygento\Shipment\Model\Point"/>
+    <preference for="Mygento\Shipment\Api\Data\PointSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Mygento\Shipment\Api\Data\PointInterface" xsi:type="string">Mygento\Shipment\Api\PointRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="shipment_point_listing_data_source" xsi:type="string">Mygento\Shipment\Model\ResourceModel\Point\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Mygento\Shipment\Model\ResourceModel\Point\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">mygento_shipment_point</argument>
+            <argument name="eventPrefix" xsi:type="string">shipment_point_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">point_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Mygento\Shipment\Model\ResourceModel\Point</argument>
+        </arguments>
+    </type>
 </config>

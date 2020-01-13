@@ -26,6 +26,7 @@ class ExtRate
         $result->setEstimateDates($rate->getEstimateDates());
         $result->setLatitude($rate->getLatitude());
         $result->setLongitude($rate->getLongitude());
+        $result->setPickupPoints($rate->getPickupPoints());
 
         return $result;
     }

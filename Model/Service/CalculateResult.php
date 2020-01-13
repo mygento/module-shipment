@@ -201,4 +201,23 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     {
         return $this->setData(self::LONGITUDE, $longitude);
     }
+
+    /**
+     * Get longitude
+     * @return \Mygento\Shipment\Api\Data\PointInterface[]|null
+     */
+    public function getPickupPoints()
+    {
+        return $this->getData(self::PICKUP_POINTS);
+    }
+
+    /**
+     * Set pickup points
+     * @param Mygento\Shipment\Api\Data\PointInterface[] $pickupPoints
+     * @return $this
+     */
+    public function setPickupPoints($pickupPoints)
+    {
+        return $this->setData(self::PICKUP_POINTS, $pickupPoints);
+    }
 }

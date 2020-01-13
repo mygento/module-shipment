@@ -20,6 +20,7 @@ interface CalculateResultInterface
     const ESTIMATE_DATES = 'estimate_dates';
     const LATITUDE = 'latitude';
     const LONGITUDE = 'longitude';
+    const PICKUP_POINTS = 'pickup_points';
 
     /**
      * Get carrier
@@ -150,4 +151,17 @@ interface CalculateResultInterface
      * @return $this
      */
     public function setLongitude($longitude);
+
+    /**
+     * Get pickup points
+     * @return \Mygento\Shipment\Api\Data\PointInterface[]|null
+     */
+    public function getPickupPoints();
+
+    /**
+     * Set pickup points
+     * @param Mygento\Shipment\Api\Data\PointInterface[] $pickupPoints
+     * @return $this
+     */
+    public function setPickupPoints($pickupPoints);
 }

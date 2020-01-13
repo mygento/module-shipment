@@ -5,5 +5,6 @@
         <attribute code="estimate_dates" type="string" />
         <attribute code="latitude" type="string" />
         <attribute code="longitude" type="string" />
+        <attribute code="pickup_points" type="Mygento\Shipment\Api\Data\PointInterface[]" />
     </extension_attributes>
 </config>

@@ -190,3 +190,5 @@ Mygento:
           type: varchar
         longitude:
           type: varchar
+        pickup_points:
+          type: varchar

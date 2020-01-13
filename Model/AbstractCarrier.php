@@ -114,6 +114,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
 
         $rate->setLatitude($method->getLatitude());
         $rate->setLongitude($method->getLongitude());
+        $rate->setPickupPoints($method->getPickupPoints());
 
         return $rate;
     }

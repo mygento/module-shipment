@@ -43,6 +43,7 @@ class ExtShippingMethodManagement
         $extensionAttributes->setEstimateDates($rateModel->getEstimateDates());
         $extensionAttributes->setLatitude($rateModel->getLatitude());
         $extensionAttributes->setLongitude($rateModel->getLongitude());
+        $extensionAttributes->setPickupPoints($rateModel->getPickupPoints());
         $result->setExtensionAttributes($extensionAttributes);
 
         return $result;

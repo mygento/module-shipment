@@ -7,4 +7,9 @@
         <attribute code="longitude" type="string" />
         <attribute code="pickup_points" type="Mygento\Shipment\Api\Data\PointInterface[]" />
     </extension_attributes>
+
+    <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
+        <attribute code="pickup_point" type="Mygento\Shipment\Api\Data\PointInterface" />
+        <attribute code="delivery_date" type="string" />
+    </extension_attributes>
 </config>

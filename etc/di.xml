@@ -11,6 +11,10 @@
         <plugin name="mygento_shipment_shipping_method_converter" type="Mygento\Shipment\Plugin\ExtShippingMethodManagement" />
     </type>
 
+    <type name="Magento\Quote\Model\ShippingAddressManagement">
+        <plugin name="mygento_shipment_shipping_address_management" type="Mygento\Shipment\Plugin\ShippingAddressManagement"/>
+    </type>
+
     <preference for="Mygento\Shipment\Api\PointRepositoryInterface" type="Mygento\Shipment\Model\PointRepository"/>
     <preference for="Mygento\Shipment\Api\Data\PointInterface" type="Mygento\Shipment\Model\Point"/>
     <preference for="Mygento\Shipment\Api\Data\PointSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>

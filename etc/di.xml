@@ -4,13 +4,16 @@
     <preference for="Mygento\Shipment\Api\Data\CalculateResultInterface" type="Mygento\Shipment\Model\Service\CalculateResult" />
     <preference for="Mygento\Shipment\Api\PointManagerInterface" type="Mygento\Shipment\Model\PointManager"/>
 
+    <!-- extenstion attributes -->
     <type name="Magento\Quote\Model\Quote\Address\Rate">
         <plugin name="mygento_shipment_get_rates" type="Mygento\Shipment\Plugin\ExtRate" />
     </type>
     <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
         <plugin name="mygento_shipment_shipping_method_converter" type="Mygento\Shipment\Plugin\ExtShippingMethodManagement" />
     </type>
-
+    <type name="Magento\Quote\Model\Quote\Address\ToOrderAddress">
+        <plugin name="mygento_shipment_to_order_address" type="Mygento\Shipment\Plugin\ToOrderAddress" />
+    </type>
     <type name="Magento\Quote\Model\ShippingAddressManagement">
         <plugin name="mygento_shipment_shipping_address_management" type="Mygento\Shipment\Plugin\ShippingAddressManagement"/>
     </type>

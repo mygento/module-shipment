@@ -1,15 +1,31 @@
 <?xml version="1.0"?>
-<config>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Api/etc/extension_attributes.xsd">
     <extension_attributes for="Magento\Quote\Api\Data\ShippingMethodInterface">
-        <attribute code="estimate" type="string" />
-        <attribute code="estimate_dates" type="string" />
+        <attribute code="estimate_date" type="string" />
+        <attribute code="estimate_time" type="Mygento\Shipment\Api\Data\EstimateTimeInterface[]" />
+        <attribute code="estimate" type="int" />
+        <attribute code="pickup_points" type="Mygento\Shipment\Api\Data\PointInterface[]" />
+
+        <!-- deprecated -->
         <attribute code="latitude" type="string" />
         <attribute code="longitude" type="string" />
-        <attribute code="pickup_points" type="Mygento\Shipment\Api\Data\PointInterface[]" />
     </extension_attributes>
 
     <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
         <attribute code="pickup_point" type="Mygento\Shipment\Api\Data\PointInterface" />
+
         <attribute code="delivery_date" type="string" />
+        <attribute code="delivery_time_from" type="string" />
+        <attribute code="delivery_time_to" type="string" />
+        <attribute code="delivery_estimate" type="int" />
+    </extension_attributes>
+
+    <extension_attributes for="Magento\Sales\Api\Data\OrderAddressInterface">
+        <attribute code="pickup_point" type="string" />
+
+        <attribute code="delivery_date" type="string" />
+        <attribute code="delivery_time_from" type="string" />
+        <attribute code="delivery_time_to" type="string" />
+        <attribute code="delivery_estimate" type="int" />
     </extension_attributes>
 </config>

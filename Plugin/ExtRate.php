@@ -22,11 +22,15 @@ class ExtRate
         $result,
         \Magento\Quote\Model\Quote\Address\RateResult\AbstractResult $rate
     ) {
+        $result->setEstimateDate($rate->getEstimateDate());
+        $result->setEstimateTime($rate->getEstimateTime());
         $result->setEstimate($rate->getEstimate());
-        $result->setEstimateDates($rate->getEstimateDates());
+
+        $result->setPickupPoints($rate->getPickupPoints());
+
+        // deprecated
         $result->setLatitude($rate->getLatitude());
         $result->setLongitude($rate->getLongitude());
-        $result->setPickupPoints($rate->getPickupPoints());
 
         return $result;
     }

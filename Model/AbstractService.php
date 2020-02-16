@@ -75,4 +75,14 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     {
         return $this->baseService->getPointManager();
     }
+
+    /**
+     * @param string $code
+     * @param int $estimate
+     * @return string
+     */
+    public function convertEstimateToDate(string $code, int $estimate): string
+    {
+        return $this->baseService->convertEstimateToDate($code, $estimate);
+    }
 }

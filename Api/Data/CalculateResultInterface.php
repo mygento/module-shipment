@@ -16,11 +16,12 @@ interface CalculateResultInterface
     const METHOD_TITLE = 'method_title';
     const PRICE = 'price';
     const COST = 'cost';
+    const ESTIMATE_DATE = 'estimate_date';
+    const ESTIMATE_TIME = 'estimate_time';
     const ESTIMATE = 'estimate';
-    const ESTIMATE_DATES = 'estimate_dates';
+    const PICKUP_POINTS = 'pickup_points';
     const LATITUDE = 'latitude';
     const LONGITUDE = 'longitude';
-    const PICKUP_POINTS = 'pickup_points';
 
     /**
      * Get carrier
@@ -101,30 +102,56 @@ interface CalculateResultInterface
     public function setCost($cost);
 
     /**
+     * Get estimate date
+     * @return string[]|null
+     */
+    public function getEstimateDate();
+
+    /**
+     * Set estimate date
+     * @param string[] $estimateDate
+     * @return $this
+     */
+    public function setEstimateDate($estimateDate);
+
+    /**
+     * Get estimate time
+     * @return string[]|null
+     */
+    public function getEstimateTime();
+
+    /**
+     * Set estimate time
+     * @param string[] $estimateTime
+     * @return $this
+     */
+    public function setEstimateTime($estimateTime);
+
+    /**
      * Get estimate
-     * @return string|null
+     * @return int|null
      */
     public function getEstimate();
 
     /**
      * Set estimate
-     * @param string $estimate
+     * @param int $estimate
      * @return $this
      */
     public function setEstimate($estimate);
 
     /**
-     * Get estimate dates
-     * @return array|null
+     * Get pickup points
+     * @return \Mygento\Shipment\Api\Data\PointInterface[]|null
      */
-    public function getEstimateDates();
+    public function getPickupPoints();
 
     /**
-     * Set estimate dates
-     * @param array $estimateDates
+     * Set pickup points
+     * @param \Mygento\Shipment\Api\Data\PointInterface[] $pickupPoints
      * @return $this
      */
-    public function setEstimateDates($estimateDates);
+    public function setPickupPoints($pickupPoints);
 
     /**
      * Get latitude
@@ -151,17 +178,4 @@ interface CalculateResultInterface
      * @return $this
      */
     public function setLongitude($longitude);
-
-    /**
-     * Get pickup points
-     * @return \Mygento\Shipment\Api\Data\PointInterface[]|null
-     */
-    public function getPickupPoints();
-
-    /**
-     * Set pickup points
-     * @param Mygento\Shipment\Api\Data\PointInterface[] $pickupPoints
-     * @return $this
-     */
-    public function setPickupPoints($pickupPoints);
 }

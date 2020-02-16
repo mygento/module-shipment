@@ -19,4 +19,11 @@ interface BaseInterface
      * @return \Mygento\Shipment\Api\PointManagerInterface
      */
     public function getPointManager();
+
+    /**
+     * @param string $code
+     * @param int $estimate
+     * @return string
+     */
+    public function convertEstimateToDate(string $code, int $estimate): string;
 }

@@ -182,13 +182,15 @@ Mygento:
           type: float
         cost:
           type: float
-        estimate:
+        estimate_date:
           type: varchar
-        estimate_dates:
+        estimate_time:
+          type: varchar
+        estimate:
+          type: int
+        pickup_points:
           type: varchar
         latitude:
           type: varchar
         longitude:
-          type: varchar
-        pickup_points:
           type: varchar

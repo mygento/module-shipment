@@ -47,4 +47,14 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
     {
         return $this->pointManager;
     }
+
+    /**
+     * @param string $code
+     * @param int $estimate
+     * @return string
+     */
+    public function convertEstimateToDate(string $code, int $estimate = 0): string
+    {
+        return date('Y-m-d', strtotime('+' . $estimate . ' day'));
+    }
 }

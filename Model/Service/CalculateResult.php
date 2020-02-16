@@ -127,8 +127,46 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     }
 
     /**
+     * Get estimate date
+     * @return string[]|null
+     */
+    public function getEstimateDate()
+    {
+        return $this->getData(self::ESTIMATE_DATE);
+    }
+
+    /**
+     * Set estimate date
+     * @param string[] $estimateDate
+     * @return $this
+     */
+    public function setEstimateDate($estimateDate)
+    {
+        return $this->setData(self::ESTIMATE_DATE, $estimateDate);
+    }
+
+    /**
+     * Get estimate time
+     * @return string[]|null
+     */
+    public function getEstimateTime()
+    {
+        return $this->getData(self::ESTIMATE_TIME);
+    }
+
+    /**
+     * Set estimate time
+     * @param string[] $estimateTime
+     * @return $this
+     */
+    public function setEstimateTime($estimateTime)
+    {
+        return $this->setData(self::ESTIMATE_TIME, $estimateTime);
+    }
+
+    /**
      * Get estimate
-     * @return string|null
+     * @return int|null
      */
     public function getEstimate()
     {
@@ -137,7 +175,7 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
 
     /**
      * Set estimate
-     * @param string $estimate
+     * @param int $estimate
      * @return $this
      */
     public function setEstimate($estimate)
@@ -146,22 +184,22 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     }
 
     /**
-     * Get estimate dates
-     * @return array|null
+     * Get pickup points
+     * @return \Mygento\Shipment\Api\Data\PointInterface[]|null
      */
-    public function getEstimateDates()
+    public function getPickupPoints()
     {
-        return $this->getData(self::ESTIMATE_DATES);
+        return $this->getData(self::PICKUP_POINTS);
     }
 
     /**
-     * Set estimate dates
-     * @param array $estimateDates
+     * Set pickup points
+     * @param \Mygento\Shipment\Api\Data\PointInterface[] $pickupPoints
      * @return $this
      */
-    public function setEstimateDates($estimateDates)
+    public function setPickupPoints($pickupPoints)
     {
-        return $this->setData(self::ESTIMATE_DATES, $estimateDates);
+        return $this->setData(self::PICKUP_POINTS, $pickupPoints);
     }
 
     /**
@@ -200,24 +238,5 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     public function setLongitude($longitude)
     {
         return $this->setData(self::LONGITUDE, $longitude);
-    }
-
-    /**
-     * Get longitude
-     * @return \Mygento\Shipment\Api\Data\PointInterface[]|null
-     */
-    public function getPickupPoints()
-    {
-        return $this->getData(self::PICKUP_POINTS);
-    }
-
-    /**
-     * Set pickup points
-     * @param Mygento\Shipment\Api\Data\PointInterface[] $pickupPoints
-     * @return $this
-     */
-    public function setPickupPoints($pickupPoints)
-    {
-        return $this->setData(self::PICKUP_POINTS, $pickupPoints);
     }
 }

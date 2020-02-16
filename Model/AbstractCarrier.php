@@ -90,31 +90,15 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
         $rate->setPrice($method->getPrice());
         $rate->setCost($method->getCost());
 
-        if ($method->getEstimate()) {
-            $rate->setEstimate(date(
-                'Y-m-d',
-                strtotime('+' . $method->getEstimate() . ' days')
-            ));
-        }
+        $rate->setEstimateDate($method->getEstimateDate());
+        $rate->setEstimateTime($method->getEstimateTime());
+        $rate->setEstimate($method->getEstimate());
 
-        // TODO
-//        if (!empty($method->getEstimateDates())) {
-//            foreach ($method->getEstimateDates() as $key => $value) {
-//                $method['estimate_dates'][$key] = date('Y-m-d', strtotime($value));
-//            }
-//            $rate->setEstimateDates(json_encode($method['estimate_dates']));
-//        }
+        $rate->setPickupPoints($method->getPickupPoints());
 
-//        if (isset($method['estimate_dates']) && is_array($method['estimate_dates'])) {
-//            foreach ($method['estimate_dates'] as $key => $value) {
-//                $method['estimate_dates'][$key] = date('Y-m-d', strtotime($value));
-//            }
-//            $rate->setEstimateDates(json_encode($method['estimate_dates']));
-//        }
-
+        // deprecated
         $rate->setLatitude($method->getLatitude());
         $rate->setLongitude($method->getLongitude());
-        $rate->setPickupPoints($method->getPickupPoints());
 
         return $rate;
     }

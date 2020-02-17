@@ -6,7 +6,7 @@
 
     <!-- extenstion attributes -->
     <type name="Magento\Quote\Model\Quote\Address\Rate">
-        <plugin name="mygento_shipment_get_rates" type="Mygento\Shipment\Plugin\ExtRate" />
+        <plugin name="mygento_shipment_get_rates" type="Mygento\Shipment\Plugin\QuoteRate" />
     </type>
     <type name="Magento\Quote\Model\Cart\ShippingMethodConverter">
         <plugin name="mygento_shipment_shipping_method_converter" type="Mygento\Shipment\Plugin\ExtShippingMethodManagement" />

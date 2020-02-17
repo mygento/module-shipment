@@ -2,7 +2,7 @@
 <schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
     <table name="quote_shipping_rate" resource="checkout" engine="innodb" comment="Sales Flat Quote Shipping Rate">
         <column xsi:type="varchar" name="estimate_date" nullable="true" comment="Delivery dates"/>
-        <column xsi:type="varchar" name="estimate_time" nullable="true" comment="Delivery dates"/>
+        <column xsi:type="varchar" name="estimate_time" nullable="true" comment="Delivery time list"/>
         <column xsi:type="int" name="estimate" nullable="true" comment="Delivery estimate in days"/>
         <!-- deprecated -->
         <column xsi:type="varchar" name="latitude" nullable="true" length="100" comment="Delivery pickpoint latitude"/>

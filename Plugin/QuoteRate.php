@@ -8,8 +8,34 @@
 
 namespace Mygento\Shipment\Plugin;
 
-class ExtRate
+class QuoteRate
 {
+    /**
+     * @var \Magento\Framework\Serialize\SerializerInterface
+     */
+    private $serializer;
+
+    /**
+     * @param \Magento\Framework\Serialize\SerializerInterface $serializer
+     */
+    public function __construct(\Magento\Framework\Serialize\SerializerInterface $serializer)
+    {
+        $this->serializer = $serializer;
+    }
+
+    /**
+     * @param \Magento\Quote\Model\Quote\Address\Rate $subject
+     */
+    public function beforeBeforeSave(\Magento\Quote\Model\Quote\Address\Rate $subject)
+    {
+        if ($subject->getEstimateDate()) {
+            $subject->setEstimateDate($this->serializer->serialize($subject->getEstimateDate()));
+        }
+        if ($subject->getEstimateTime()) {
+            $subject->setEstimateTime($this->serializer->serialize($subject->getEstimateTime()));
+        }
+    }
+
     /**
      * @param \Magento\Quote\Model\Quote\Address\Rate $subject
      * @param mixed $result

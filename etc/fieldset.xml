@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:DataObject/etc/fieldset.xsd">
+    <scope id="global">
+        <fieldset id="sales_convert_quote_address">
+            <field name="delivery_date">
+                <aspect name="to_order_address" />
+            </field>
+            <field name="delivery_time_from">
+                <aspect name="to_order_address" />
+            </field>
+            <field name="delivery_time_to">
+                <aspect name="to_order_address" />
+            </field>
+            <field name="delivery_estimate">
+                <aspect name="to_order_address" />
+            </field>
+            <field name="shipping_pickup">
+                <aspect name="to_order_address" />
+            </field>
+        </fieldset>
+    </scope>
+</config>

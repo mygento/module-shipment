@@ -12,6 +12,8 @@ interface CalculateRequestInterface
 {
     const CITY = 'city';
     const INDEX = 'index';
+    const REGION_NAME = 'region_name';
+    const REGION_CODE = 'region_code';
     const WEIGHT = 'weight';
     const ORDER_SUM = 'order_sum';
     const RAW_REQUEST = 'raw_request';
@@ -41,6 +43,32 @@ interface CalculateRequestInterface
      * @return $this
      */
     public function setIndex($index);
+
+    /**
+     * Get region name
+     * @return string|null
+     */
+    public function getRegionName();
+
+    /**
+     * Set region name
+     * @param string $regionName
+     * @return $this
+     */
+    public function setRegionName($regionName);
+
+    /**
+     * Get region code
+     * @return string|null
+     */
+    public function getRegionCode();
+
+    /**
+     * Set region code
+     * @param string $regionCode
+     * @return $this
+     */
+    public function setRegionCode($regionCode);
 
     /**
      * Get weight

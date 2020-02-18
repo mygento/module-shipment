@@ -52,6 +52,44 @@ class CalculateRequest extends DataObject implements CalculateRequestInterface
     }
 
     /**
+     * Get region name
+     * @return string|null
+     */
+    public function getRegionName()
+    {
+        return $this->getData(self::REGION_NAME);
+    }
+
+    /**
+     * Set region name
+     * @param string $regionName
+     * @return $this
+     */
+    public function setRegionName($regionName)
+    {
+        return $this->setData(self::REGION_NAME, $regionName);
+    }
+
+    /**
+     * Get region code
+     * @return string|null
+     */
+    public function getRegionCode()
+    {
+        return $this->getData(self::REGION_CODE);
+    }
+
+    /**
+     * Set region code
+     * @param string $regionCode
+     * @return $this
+     */
+    public function setRegionCode($regionCode)
+    {
+        return $this->setData(self::REGION_CODE, $regionCode);
+    }
+
+    /**
      * Get weight
      * @return float|null
      */

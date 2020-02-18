@@ -160,6 +160,10 @@ Mygento:
           type: varchar
         index:
           type: varchar
+        region_name:
+          type: varchar
+        region_code:
+          type: varchar
         weight:
           type: float
         order_sum:

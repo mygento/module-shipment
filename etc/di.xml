@@ -3,6 +3,7 @@
     <preference for="Mygento\Shipment\Api\Data\CalculateRequestInterface" type="Mygento\Shipment\Model\Service\CalculateRequest" />
     <preference for="Mygento\Shipment\Api\Data\CalculateResultInterface" type="Mygento\Shipment\Model\Service\CalculateResult" />
     <preference for="Mygento\Shipment\Api\PointManagerInterface" type="Mygento\Shipment\Model\PointManager"/>
+    <preference for="Mygento\Shipment\Api\Service\AutoshipInterface" type="Mygento\Shipment\Model\Cron\Autoship"/>
 
     <!-- extenstion attributes -->
     <type name="Magento\Quote\Model\Quote\Address\Rate">

@@ -85,4 +85,23 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     {
         return $this->baseService->convertEstimateToDate($code, $estimate);
     }
+
+    /**
+     * @return \Mygento\Base\Helper\Discount
+     */
+    public function getTaxHelper()
+    {
+        return $this->baseService->getTaxHelper();
+    }
+
+    /**
+     * @param \Magento\Sales\Api\Data\OrderInterface $order
+     * @param \Mygento\Shipment\Helper\Data $helper
+     */
+    public function getTaxInfoForItems(
+        \Magento\Sales\Api\Data\OrderInterface $order,
+        \Mygento\Shipment\Helper\Data $helper
+    ) {
+        return $this->baseService->getTaxInfoForItems($order, $helper);
+    }
 }

@@ -21,6 +21,20 @@ interface BaseInterface
     public function getPointManager();
 
     /**
+     * @return \Mygento\Base\Helper\Discount
+     */
+    public function getTaxHelper();
+
+    /**
+     * @param \Magento\Sales\Api\Data\OrderInterface $order
+     * @param \Mygento\Shipment\Helper\Data $helper
+     */
+    public function getTaxInfoForItems(
+        \Magento\Sales\Api\Data\OrderInterface $order,
+        \Mygento\Shipment\Helper\Data $helper
+    );
+
+    /**
      * @param string $code
      * @param int $estimate
      * @return string

@@ -13,6 +13,11 @@ use Magento\Sales\Api\Data\OrderInterface;
 class Service implements \Mygento\Shipment\Api\Service\BaseInterface
 {
     /**
+     * @var \Mygento\Shipment\Helper\Dimensions
+     */
+    private $dimensionHelper;
+
+    /**
      * @var \Mygento\Shipment\Api\PointManagerInterface
      */
     private $pointManager;
@@ -30,16 +35,19 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
     /**
      * @param \Mygento\Shipment\Api\PointManagerInterface $pointManager
      * @param \Mygento\Base\Helper\Discount $taxHelper
+     * @param \Mygento\Shipment\Helper\Dimensions $dimensionHelper
      * @param \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
      */
     public function __construct(
         \Mygento\Shipment\Api\PointManagerInterface $pointManager,
         \Mygento\Base\Helper\Discount $taxHelper,
+        \Mygento\Shipment\Helper\Dimensions $dimensionHelper,
         \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
     ) {
         $this->pointManager = $pointManager;
         $this->taxHelper = $taxHelper;
         $this->resultFactory = $resultFactory;
+        $this->dimensionHelper = $dimensionHelper;
     }
 
     /**
@@ -91,5 +99,13 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
             $helper->getConfig('tax_product_attr'),
             $helper->getConfig('tax_options/tax_shipping')
         );
+    }
+
+    /**
+     * @return \Mygento\Shipment\Helper\Dimensions
+     */
+    public function getDimensionHelper()
+    {
+        return $this->dimensionHelper;
     }
 }

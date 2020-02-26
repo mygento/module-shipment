@@ -104,4 +104,12 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     ) {
         return $this->baseService->getTaxInfoForItems($order, $helper);
     }
+
+    /**
+     * @return \Mygento\Shipment\Helper\Dimensions
+     */
+    public function getDimensionHelper()
+    {
+        return $this->baseService->getDimensionHelper();
+    }
 }

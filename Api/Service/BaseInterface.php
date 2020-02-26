@@ -26,6 +26,11 @@ interface BaseInterface
     public function getTaxHelper();
 
     /**
+     * @return \Mygento\Shipment\Helper\Dimensions
+     */
+    public function getDimensionHelper();
+
+    /**
      * @param \Magento\Sales\Api\Data\OrderInterface $order
      * @param \Mygento\Shipment\Helper\Data $helper
      */

@@ -174,10 +174,9 @@ class Dimensions
     }
 
     /**
-     * @param string $attrCode
+     * @param string $configPath
      * @param int|string $productId
      * @param float $coefficient
-     * @param mixed $configPath
      */
     private function getAttrValueByParam($configPath, $productId, $coefficient = 1): float
     {

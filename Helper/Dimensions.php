@@ -11,32 +11,32 @@ namespace Mygento\Shipment\Helper;
 class Dimensions
 {
     /**
-     * @var \Mygento\Base\Helper\Data
+     * @var \Mygento\Base\Api\ProductAttributeHelperInterface
      */
-    private $helper;
+    private $attrHelper;
 
     /**
-     * @param \Mygento\Base\Helper\Data $helper
+     * @param \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper
      */
     public function __construct(
-        \Mygento\Base\Helper\Data $helper
+        \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper
     ) {
-        $this->helper = $helper;
+        $this->attrHelper = $attrHelper;
     }
 
     /**
      * Get items sizes
-     * @param mixed $sizeCoefficient
-     * @param mixed $weightCoefficient
+     * @param float $sizeCoefficient
+     * @param float $weightCoefficient
      * @param mixed $object
-     * @param mixed $prefix
+     * @param string $prefix
      * @return array
      */
     public function getItemsSizes($sizeCoefficient, $weightCoefficient, $object, $prefix = '')
     {
         $resultArray = [];
 
-        if (!$object->getAllItems()) {
+        if (empty($object->getAllItems())) {
             return $resultArray;
         }
 
@@ -54,33 +54,28 @@ class Dimensions
             for ($i = 1; $i <= $qty; $i++) {
                 $productId = $item->getProductId();
 
-                $itemArray = [];
-
-                $itemArray['length'] = $this->helper->getAttrValueByParam(
-                    $prefix . 'length',
-                    $productId
-                );
-                $itemArray['length'] = $this->helper->formatToNumber($itemArray['length']);
-                $itemArray['length'] = round($itemArray['length'] * $sizeCoefficient, 2);
-
-                $itemArray['height'] = $this->helper->getAttrValueByParam(
-                    $prefix . 'height',
-                    $productId
-                );
-                $itemArray['height'] = $this->helper->formatToNumber($itemArray['height']);
-                $itemArray['height'] = round($itemArray['height'] * $sizeCoefficient, 2);
-
-                $itemArray['width'] = $this->helper->getAttrValueByParam(
-                    $prefix . 'width',
-                    $productId
-                );
-                $itemArray['width'] = $this->helper->formatToNumber($itemArray['width']);
-                $itemArray['width'] = round($itemArray['width'] * $sizeCoefficient, 2);
+                $itemArray = [
+                    'length' => $this->getAttrValueByParam(
+                        $prefix . 'length',
+                        $productId,
+                        $sizeCoefficient
+                    ),
+                    'height' => $this->getAttrValueByParam(
+                        $prefix . 'height',
+                        $productId,
+                        $sizeCoefficient
+                    ),
+                    'width' => $this->getAttrValueByParam(
+                        $prefix . 'width',
+                        $productId,
+                        $sizeCoefficient
+                    ),
+                    'weight' => round($item->getWeight() * $weightCoefficient, 2),
+                ];
 
                 $itemArray['volume'] = $itemArray['length']
                     * $itemArray['height']
                     * $itemArray['width'];
-                $itemArray['weight'] = round($item->getWeight() * $weightCoefficient, 2);
 
                 $resultArray[] = $itemArray;
             }
@@ -139,5 +134,55 @@ class Dimensions
         }
 
         return true;
+    }
+
+    /**
+     * @param type $attributeCode
+     * @param type $productId
+     * @return type
+     */
+    public function getProductAttrValue($attributeCode, $productId)
+    {
+        $attribute = $this->productResource->getAttribute($attributeCode);
+        $store = $this->storeManager->getStore();
+
+        $value = $this->productResource->getAttributeRawValue($productId, $attributeCode, $store);
+        if (!$attribute->usesSource()) {
+            if (!empty($value)) {
+                return $value;
+            }
+
+            return $value;
+        }
+
+        return $attribute->getSource()->getOptionText($value);
+    }
+
+    /**
+     * Force convert to float
+     *
+     * @param mixed $value
+     * @return float
+     */
+    public function formatToNumber($value)
+    {
+        return (float) str_replace(
+            [' ', ','],
+            ['', '.'],
+            $value
+        );
+    }
+
+    /**
+     * @param string $attrCode
+     * @param int|string $productId
+     * @param float $coefficient
+     * @param mixed $configPath
+     */
+    private function getAttrValueByParam($configPath, $productId, $coefficient = 1): float
+    {
+        $value = $this->attrHelper->getValueByConfigPathOrDefault($configPath, $productId);
+
+        return round($this->formatToNumber($value) * $coefficient, 2);
     }
 }

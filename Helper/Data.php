@@ -8,6 +8,8 @@
 
 namespace Mygento\Shipment\Helper;
 
+use Mygento\Base\Api\ProductAttributeHelperInterface;
+
 class Data extends \Mygento\Base\Helper\Data
 {
     /** @var \Magento\Checkout\Model\Session */
@@ -52,6 +54,18 @@ class Data extends \Mygento\Base\Helper\Data
     public function getConfig($path, $scopeCode = null)
     {
         return parent::getConfig('carriers/' . $this->code . '/' . $path, $scopeCode);
+    }
+
+    /**
+     * @param string $path
+     * @param string|null $scopeCode
+     * @return string
+     */
+    public function getDefaultConfig($path, $scopeCode = null)
+    {
+        $postfix = ProductAttributeHelperInterface::CONFIG_PATH_DEFAULT_SUFFIX;
+
+        return $this->getConfig($path . $postfix, $scopeCode);
     }
 
     /**

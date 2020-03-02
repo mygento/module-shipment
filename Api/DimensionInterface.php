@@ -11,5 +11,5 @@ namespace Mygento\Shipment\Api;
 interface DimensionInterface
 {
     const WEIGHT = 'weight_unit';
-    const SIZE = 'size';
+    const SIZE = 'dimension_unit';
 }

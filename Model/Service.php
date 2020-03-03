@@ -10,8 +10,31 @@ namespace Mygento\Shipment\Model;
 
 use Magento\Sales\Api\Data\OrderInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class Service implements \Mygento\Shipment\Api\Service\BaseInterface
 {
+    /**
+     * @var \Magento\Sales\Model\Order\Email\Sender\ShipmentSender
+     */
+    private $shipmentSender;
+
+    /**
+     * @var \Magento\Framework\DB\TransactionFactory
+     */
+    private $transactionFactory;
+
+    /**
+     * @var \Magento\Sales\Model\Order\ShipmentFactory
+     */
+    private $shipmentFactory;
+
+    /**
+     * @var \Magento\Sales\Model\Order\Shipment\TrackFactory
+     */
+    private $trackFactory;
+
     /**
      * @var \Mygento\Shipment\Helper\Dimensions
      */
@@ -36,18 +59,30 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      * @param \Mygento\Shipment\Api\PointManagerInterface $pointManager
      * @param \Mygento\Base\Helper\Discount $taxHelper
      * @param \Mygento\Shipment\Helper\Dimensions $dimensionHelper
+     * @param \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender
      * @param \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
+     * @param \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory
+     * @param \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory
+     * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      */
     public function __construct(
         \Mygento\Shipment\Api\PointManagerInterface $pointManager,
         \Mygento\Base\Helper\Discount $taxHelper,
         \Mygento\Shipment\Helper\Dimensions $dimensionHelper,
-        \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
+        \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender,
+        \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory,
+        \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory,
+        \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory,
+        \Magento\Framework\DB\TransactionFactory $transactionFactory
     ) {
         $this->pointManager = $pointManager;
         $this->taxHelper = $taxHelper;
         $this->resultFactory = $resultFactory;
         $this->dimensionHelper = $dimensionHelper;
+        $this->trackFactory = $trackFactory;
+        $this->shipmentFactory = $shipmentFactory;
+        $this->transactionFactory = $transactionFactory;
+        $this->shipmentSender = $shipmentSender;
     }
 
     /**
@@ -70,6 +105,8 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      * @param string $code
      * @param int $estimate
      * @return string
+     *
+     * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
     public function convertEstimateToDate(string $code, int $estimate = 0): string
     {
@@ -107,5 +144,77 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
     public function getDimensionHelper()
     {
         return $this->dimensionHelper;
+    }
+
+    /**
+     * Добавление кода отслеживания
+     *
+     * @param \Magento\Sales\Model\Order $order
+     * @param string $trackingCode
+     * @param bool $notify
+     *
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     */
+    public function setTracking(
+        \Magento\Sales\Model\Order $order,
+        string $trackingCode,
+        bool $notify = false
+    ) {
+        $shipping = $order->getShippingMethod(true);
+
+        $data = [
+            'carrier_code' => $shipping->getCarrierCode(),
+            'title' => $order->getShippingDescription(),
+            'number' => $trackingCode,
+        ];
+
+        // Создание новой доставки
+        if (!$order->canShip()) {
+            throw \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
+        }
+
+        // Сохранение кода для созданной доставки
+        if ($order->getShipmentsCollection()->count() > 0) {
+            $shipment = $order->getShipmentsCollection()->getFirstItem();
+
+            if (count($shipment->getAllTracks()) !== 0) {
+                throw \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
+            }
+
+            $shipment->addTrack($this->trackFactory->create()->addData($data));
+            $transation = $this->transactionFactory->create();
+            $transation->addObject($shipment);
+            $transation->addObject($shipment->getOrder());
+            $transation->save();
+
+            return;
+        }
+
+        $items = [];
+        foreach ($order->getAllItems() as $item) {
+            if (!$item->getQtyToShip() || $item->getIsVirtual()) {
+                continue;
+            }
+            $items[$item->getId()] = [
+                'order_item_id' => $item->getId(),
+                'qty' => $item->getQtyToShip(),
+            ];
+        }
+
+        $shipment = $this->shipmentFactory->create($order, $items, [$data]);
+        if ($shipment) {
+            $shipment->register();
+            $shipment->getOrder()->setCustomerNoteNotify($notify);
+            $shipment->addComment(__('Order shipped by %1', $shipping->getCarrierCode()));
+            $shipment->getOrder()->setIsInProcess(true);
+            $transation = $this->transactionFactory->create();
+            $transation->addObject($shipment);
+            $transation->addObject($shipment->getOrder());
+            $transation->save();
+
+            if ($notify) {
+                $this->shipmentSender->send($shipment);
+            }
+        }
     }
 }

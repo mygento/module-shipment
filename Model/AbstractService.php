@@ -112,4 +112,21 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     {
         return $this->baseService->getDimensionHelper();
     }
+
+    /**
+     * Добавление кода отслеживания
+     *
+     * @param \Magento\Sales\Model\Order $order
+     * @param string $trackingCode
+     * @param bool $notify
+     *
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     */
+    public function setTracking(
+        \Magento\Sales\Model\Order $order,
+        string $trackingCode,
+        bool $notify = false
+    ) {
+        return $this->baseService->setTracking($order, $trackingCode, $notify);
+    }
 }

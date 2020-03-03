@@ -20,4 +20,19 @@ interface OrderInterface
      * @param int|string $orderId
      */
     public function orderCancel($orderId);
+
+    /**
+     * Добавление кода отслеживания
+     *
+     * @param \Magento\Sales\Model\Order $order
+     * @param string $trackingCode
+     * @param bool $notify
+     *
+     * @throws \Magento\Framework\Exception\CouldNotSaveException
+     */
+    public function setTracking(
+        \Magento\Sales\Model\Order $order,
+        string $trackingCode,
+        bool $notify = false
+    );
 }

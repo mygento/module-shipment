@@ -81,6 +81,10 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     public function createRateMethod(CalculateResultInterface $method)
     {
+        if ($method->getError()) {
+            return $this->returnError($method->getErrorMessage());
+        }
+
         $rate = $this->getRateMethod();
 
         $rate->setCarrier($method->getCarrier());

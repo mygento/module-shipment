@@ -196,5 +196,9 @@ Mygento:
           type: varchar
         latitude:
           type: varchar
+        error:
+          type: boolean
+        error_message:
+          type: varchar
         longitude:
           type: varchar

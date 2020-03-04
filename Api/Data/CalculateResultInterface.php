@@ -21,6 +21,8 @@ interface CalculateResultInterface
     const ESTIMATE = 'estimate';
     const PICKUP_POINTS = 'pickup_points';
     const LATITUDE = 'latitude';
+    const ERROR = 'error';
+    const ERROR_MESSAGE = 'error_message';
     const LONGITUDE = 'longitude';
 
     /**
@@ -165,6 +167,32 @@ interface CalculateResultInterface
      * @return $this
      */
     public function setLatitude($latitude);
+
+    /**
+     * Get error
+     * @return bool|null
+     */
+    public function getError();
+
+    /**
+     * Set error
+     * @param bool $error
+     * @return $this
+     */
+    public function setError($error);
+
+    /**
+     * Get error message
+     * @return string|null
+     */
+    public function getErrorMessage();
+
+    /**
+     * Set error message
+     * @param string $errorMessage
+     * @return $this
+     */
+    public function setErrorMessage($errorMessage);
 
     /**
      * Get longitude

@@ -222,6 +222,44 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     }
 
     /**
+     * Get error
+     * @return bool|null
+     */
+    public function getError()
+    {
+        return $this->getData(self::ERROR);
+    }
+
+    /**
+     * Set error
+     * @param bool $error
+     * @return $this
+     */
+    public function setError($error)
+    {
+        return $this->setData(self::ERROR, $error);
+    }
+
+    /**
+     * Get error message
+     * @return string|null
+     */
+    public function getErrorMessage()
+    {
+        return $this->getData(self::ERROR_MESSAGE);
+    }
+
+    /**
+     * Set error message
+     * @param string $errorMessage
+     * @return $this
+     */
+    public function setErrorMessage($errorMessage)
+    {
+        return $this->setData(self::ERROR_MESSAGE, $errorMessage);
+    }
+
+    /**
      * Get longitude
      * @return string|null
      */

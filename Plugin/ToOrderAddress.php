@@ -39,6 +39,10 @@ class ToOrderAddress
         OrderAddressInterface $result,
         Address $address
     ) {
+        if ($address->getAddressType() !== Address::ADDRESS_TYPE_SHIPPING) {
+            return $result;
+        }
+
         $extensionAttributes = $result->getExtensionAttributes() ?: $this->addressExtensionFactory->create();
         $extensionAttributes->setDeliveryDate($address->getDeliveryDate());
         $extensionAttributes->setDeliveryTimeFrom($address->getDeliveryTimeFrom());

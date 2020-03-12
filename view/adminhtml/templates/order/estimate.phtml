@@ -1,0 +1,33 @@
+<?php
+/** @var \Mygento\Shipment\Block\Adminhtml\Order\Estimate $block */
+?>
+<?php
+$estimates = $block->getEstimates();
+?>
+<dl class="admin__order-shipment-methods">
+    <dl class="admin__order-shipment-methods">
+        <dt class="admin__order-shipment-methods-title"><?= $block->escapeHtml(__('Delivery Dates')) ?>:</dt>
+        <dd class="admin__order-shipment-methods-options">
+            <?php foreach ($estimates as $date): ?>
+            <?php
+            $checked = $block->isMethodActive($date) ? 'checked="checked"' : '';
+            $radioProperty = 'name="order[estimate_date]" type="radio"'; // onclick="order.setShippingMethod(this.value)"'
+            ?>
+            <ul class="admin__order-shipment-methods-options-list">
+                <li class="admin__field-option">
+                    <input <?= /* @noEscape */ $radioProperty ?>
+                        value="<?= $block->escapeHtmlAttr($date) ?>"
+                        id="s_method_<?= $block->escapeHtmlAttr($date) ?>" <?= /* @noEscape */ $checked ?>
+                        class="admin__control-radio required-entry"
+                    />
+                    <label class="admin__field-label" for="s_method_<?= $block->escapeHtmlAttr($date) ?>">
+                        <strong><?= $date ?></strong>
+                    </label>
+                </li>
+            </ul>
+            <?php endforeach; ?>
+        </dd>
+    </dl>
+</dl>
+<script>
+</script>

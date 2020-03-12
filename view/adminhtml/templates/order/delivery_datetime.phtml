@@ -1,0 +1,30 @@
+<?php
+/** @var \Mygento\Shipment\Block\Adminhtml\Order\DeliveryDatetime $block */
+$order = $block->getOrder();
+$address = $order->getShippingAddress();
+?>
+<section class="admin__page-section order-gift-options">
+    <div class="admin__page-section-title">
+        <strong class="title">
+            <?= $block->escapeHtml(__('Delivery Timing')) ?>
+        </strong>
+    </div>
+    <div class="admin__page-section-content">
+        <table class="admin__table-secondary col-xs-4">
+            <tbody>
+                <tr>
+                    <th><?= $block->escapeHtml(__('Delivery Date')) ?></th>
+                    <td><?= $block->escapeHtml($address->getExtensionAttributes()->getDeliveryDate());?></td>
+                </tr>
+                <tr>
+                    <th><?= $block->escapeHtml(__('Delivery Time From')) ?></th>
+                    <td><?= $block->escapeHtml($address->getExtensionAttributes()->getDeliveryTimeFrom());?></td>
+                </tr>
+                <tr>
+                    <th><?= $block->escapeHtml(__('Delivery Time To')) ?></th>
+                    <td><?= $block->escapeHtml($address->getExtensionAttributes()->getDeliveryTimeTo());?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>

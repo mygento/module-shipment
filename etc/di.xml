@@ -18,6 +18,9 @@
     <type name="Magento\Quote\Model\ShippingAddressManagement">
         <plugin name="mygento_shipment_shipping_address_management" type="Mygento\Shipment\Plugin\ShippingAddressManagement"/>
     </type>
+    <type name="Magento\Sales\Api\OrderRepositoryInterface">
+        <plugin name="mygento_shipment" type="Mygento\Shipment\Plugin\OrderGet"/>
+    </type>
 
     <preference for="Mygento\Shipment\Api\PointRepositoryInterface" type="Mygento\Shipment\Model\PointRepository"/>
     <preference for="Mygento\Shipment\Api\Data\PointInterface" type="Mygento\Shipment\Model\Point"/>

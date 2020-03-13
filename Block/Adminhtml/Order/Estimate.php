@@ -43,7 +43,7 @@ class Estimate extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Meth
      */
     public function isDateActive(string $date): bool
     {
-        return false;
+        return $this->getAddress()->getExtensionAttributes()->getDeliveryDate() === $date;
     }
 
     /**

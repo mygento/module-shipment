@@ -16,6 +16,11 @@ use Magento\Sales\Api\Data\OrderInterface;
 class Service implements \Mygento\Shipment\Api\Service\BaseInterface
 {
     /**
+     * @var \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory
+     */
+    private $timeFactory;
+
+    /**
      * @var \Magento\Sales\Model\Order\Email\Sender\ShipmentSender
      */
     private $shipmentSender;
@@ -61,6 +66,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      * @param \Mygento\Shipment\Helper\Dimensions $dimensionHelper
      * @param \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender
      * @param \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
+     * @param \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory
      * @param \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory
      * @param \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
@@ -71,6 +77,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         \Mygento\Shipment\Helper\Dimensions $dimensionHelper,
         \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender,
         \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory,
+        \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory,
         \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory,
         \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory
@@ -83,6 +90,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         $this->shipmentFactory = $shipmentFactory;
         $this->transactionFactory = $transactionFactory;
         $this->shipmentSender = $shipmentSender;
+        $this->timeFactory = $timeFactory;
     }
 
     /**
@@ -91,6 +99,21 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
     public function getCalculateResultInstance()
     {
         return $this->resultFactory->create();
+    }
+
+    /**
+     * @param string $from
+     * @param string $to
+     * @return \Mygento\Shipment\Api\Data\EstimateTimeInterface
+     */
+    public function getEstimateTimeInstance(string $from, string $to)
+    {
+        /** @var \Mygento\Shipment\Api\Data\EstimateTimeInterface $model */
+        $model = $this->timeFactory->create();
+        $model->setFrom($from);
+        $model->setTo($to);
+
+        return $model;
     }
 
     /**

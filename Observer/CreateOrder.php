@@ -32,6 +32,7 @@ class CreateOrder implements \Magento\Framework\Event\ObserverInterface
         }
 
         if (isset($request['order']['shipping_method']) || isset($request['collect_shipping_rates'])) {
+            $extensionAttributes = $quote->getShippingAddress()->getExtensionAttributes();
             $extensionAttributes->setDeliveryDate(null);
             $quote->getShippingAddress()->setDeliveryDate(null);
 

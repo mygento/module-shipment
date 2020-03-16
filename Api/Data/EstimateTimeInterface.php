@@ -14,26 +14,26 @@ interface EstimateTimeInterface
     const TO = 'to';
 
     /**
-     * Get id
+     * Get from
      * @return string|null
      */
     public function getFrom();
 
     /**
-     * Set id
+     * Set from
      * @param string $time
      * @return $this
      */
     public function setFrom(string $time);
 
     /**
-     * Get id
+     * Get to
      * @return string|null
      */
     public function getTo();
 
     /**
-     * Set id
+     * Set to
      * @param string $time
      * @return $this
      */

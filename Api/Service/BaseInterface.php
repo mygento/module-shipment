@@ -16,6 +16,13 @@ interface BaseInterface
     public function getCalculateResultInstance();
 
     /**
+     * @param string $from
+     * @param string $to
+     * @return \Mygento\Shipment\Api\Data\EstimateTimeInterface
+     */
+    public function getEstimateTimeInstance(string $from, string $to);
+
+    /**
      * @return \Mygento\Shipment\Api\PointManagerInterface
      */
     public function getPointManager();

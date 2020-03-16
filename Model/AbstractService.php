@@ -129,4 +129,14 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     ) {
         return $this->baseService->setTracking($order, $trackingCode, $notify);
     }
+
+    /**
+     * @param string $from
+     * @param string $to
+     * @return \Mygento\Shipment\Api\Data\EstimateTimeInterface
+     */
+    public function getEstimateTimeInstance(string $from, string $to)
+    {
+        return $this->baseService->getEstimateTimeInstance($from, $to);
+    }
 }

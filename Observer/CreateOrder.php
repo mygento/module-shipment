@@ -25,16 +25,22 @@ class CreateOrder implements \Magento\Framework\Event\ObserverInterface
             return;
         }
 
-        $extensionAttributes = $quote->getShippingAddress()->getExtensionAttributes();
+        if (isset($request['order']['estimate'])) {
+            $this->setValue($quote, $request['order']['estimate']);
+
+            return;
+        }
+
         if (isset($request['order']['shipping_method']) || isset($request['collect_shipping_rates'])) {
             $extensionAttributes->setDeliveryDate(null);
             $quote->getShippingAddress()->setDeliveryDate(null);
+
             $extensionAttributes->setDeliveryTimeFrom(null);
-
             $quote->getShippingAddress()->setDeliveryTimeFrom(null);
-            $extensionAttributes->setDeliveryTimeTo(null);
 
+            $extensionAttributes->setDeliveryTimeTo(null);
             $quote->getShippingAddress()->setDeliveryTimeTo(null);
+
             $quote->getShippingAddress()->setExtensionAttributes($extensionAttributes);
 
             return;
@@ -43,8 +49,17 @@ class CreateOrder implements \Magento\Framework\Event\ObserverInterface
         if (!isset($request['estimate'])) {
             return;
         }
-        $data = $request['estimate'];
 
+        $this->setValue($quote, $request['estimate']);
+    }
+
+    /**
+     * @param \Magento\Quote\Model\Quote $quote
+     * @param array $data
+     */
+    private function setValue($quote, array $data)
+    {
+        $extensionAttributes = $quote->getShippingAddress()->getExtensionAttributes();
         $extensionAttributes->setDeliveryDate($data['date'] ?? null);
         $quote->getShippingAddress()->setDeliveryDate($data['date'] ?? null);
 

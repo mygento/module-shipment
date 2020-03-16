@@ -11,7 +11,7 @@ $estimates = $block->getEstimates();
             <?php foreach ($estimates as $date): ?>
                 <?php
                 $checked = $block->isDateActive($date) ? 'checked="checked"' : '';
-                $radioProperty = 'name="order[estimate_date]" type="radio" onclick="order.setEstimate(this.value)"'
+                $radioProperty = 'name="order[estimate][date]" type="radio" onclick="order.setEstimate(this.value)"'
                 ?>
                 <ul class="admin__order-shipment-methods-options-list">
                     <li class="admin__field-option">

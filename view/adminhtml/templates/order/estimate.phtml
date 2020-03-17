@@ -3,6 +3,7 @@
 ?>
 <?php
 $estimates = $block->getEstimates();
+$time = $block->getEstimatesTime();
 ?>
 <dl class="admin__order-shipment-methods">
     <dl class="admin__order-shipment-methods">
@@ -28,12 +29,51 @@ $estimates = $block->getEstimates();
             <?php endforeach; ?>
         </dd>
     </dl>
+    <?php if (!empty($time)): ?>
+        <dl class="admin__order-shipment-methods">
+            <dt class="admin__order-shipment-methods-title"><?= $block->escapeHtml(__('Delivery Time')) ?>:</dt>
+            <dd class="admin__order-shipment-methods-options">
+                <?php foreach ($time as $interval): ?>
+                    <?php
+                    $text = $interval['from'] . ' - ' . $interval['to'];
+                    $code = str_replace(':', '', $interval['from'] . $interval['to']);
+                    $checked = $block->isTimeActive($interval['from'], $interval['to']) ? 'checked="checked"' : '';
+                    $radioProperty = 'name="order[estimate][time]" type="radio" onclick="order.setEstimateTime(this.value)"'
+                    ?>
+                    <ul class="admin__order-shipment-methods-options-list">
+                        <li class="admin__field-option">
+                            <input <?= /* @noEscape */ $radioProperty ?>
+                                value="<?= $block->escapeHtmlAttr($interval['from'] . '-' . $interval['to']) ?>"
+                                id="s_method_<?= $block->escapeHtmlAttr($code) ?>" <?= /* @noEscape */ $checked ?>
+                                class="admin__control-radio required-entry"
+                                />
+                            <label class="admin__field-label" for="s_method_<?= $block->escapeHtmlAttr($code) ?>">
+                                <strong><?= $text ?></strong>
+                            </label>
+                        </li>
+                    </ul>
+                <?php endforeach; ?>
+            </dd>
+        </dl>
+    <?php endif; ?>
 </dl>
 <script>
     order.setEstimate = function (date) {
         var data = {};
 
         data['estimate[date]'] = date;
+        this.loadArea([
+            'shipping_method',
+            'totals',
+            'billing_method'
+        ], true, data);
+    };
+    order.setEstimateTime = function (time) {
+        var data = {};
+        var split = time.split('-');
+        data['estimate[time_from]'] = split[0];
+        data['estimate[time_to]'] = split[1];
+        data['estimate[date]'] = '<?= $block->escapeJs($block->getActiveDate() ?? ''); ?>';
         this.loadArea([
             'shipping_method',
             'totals',

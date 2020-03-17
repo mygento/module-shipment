@@ -8,7 +8,7 @@
 
 namespace Mygento\Shipment\Api\Data;
 
-interface EstimateTimeInterface
+interface EstimateTimeInterface extends \JsonSerializable
 {
     const FROM = 'from';
     const TO = 'to';

@@ -17,6 +17,7 @@ class CreateOrder implements \Magento\Framework\Event\ObserverInterface
     {
         /** @var \Magento\Framework\App\RequestInterface $request */
         $request = $observer->getEvent()->getRequest();
+
         /** @var \Magento\Sales\Model\AdminOrder\Create $model */
         $model = $observer->getEvent()->getOrderCreateModel();
         $quote = $model->getQuote();
@@ -26,6 +27,9 @@ class CreateOrder implements \Magento\Framework\Event\ObserverInterface
         }
 
         if (isset($request['order']['estimate'])) {
+            $split = explode('-', $request['order']['estimate']['time'] ?? '');
+            $request['order']['estimate']['time_from'] = $split[0] ?? null;
+            $request['order']['estimate']['time_to'] = $split[1] ?? null;
             $this->setValue($quote, $request['order']['estimate']);
 
             return;

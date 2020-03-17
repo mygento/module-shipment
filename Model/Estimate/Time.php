@@ -50,4 +50,12 @@ class Time extends DataObject implements EstimateTimeInterface
     {
         return $this->setData(self::TO, $time);
     }
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize()
+    {
+        return $this->getData();
+    }
 }

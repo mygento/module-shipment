@@ -14,8 +14,8 @@
         <column xsi:type="varchar" name="shipping_pickup" nullable="true" comment="Shipping Pickup Point"/>
 
         <column xsi:type="varchar" name="delivery_date" nullable="true" length="10" comment="Shipping Delivery Date"/>
-        <column xsi:type="varchar" name="delivery_time_from" nullable="true" length="4" comment="Shipping Delivery Time From"/>
-        <column xsi:type="varchar" name="delivery_time_to" nullable="true" length="4" comment="Shipping Delivery Time To"/>
+        <column xsi:type="varchar" name="delivery_time_from" nullable="true" length="5" comment="Shipping Delivery Time From"/>
+        <column xsi:type="varchar" name="delivery_time_to" nullable="true" length="5" comment="Shipping Delivery Time To"/>
         <column xsi:type="int"     name="delivery_estimate" nullable="true" comment="Shipping Delivery Estimate"/>
     </table>
 

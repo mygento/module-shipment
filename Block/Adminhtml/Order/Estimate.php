@@ -47,6 +47,29 @@ class Estimate extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Meth
     }
 
     /**
+     * @return string|null
+     */
+    public function getActiveDate()
+    {
+        return $this->getAddress()->getExtensionAttributes()->getDeliveryDate();
+    }
+
+    /**
+     * @param string $from
+     * @param string $to
+     * @return bool
+     */
+    public function isTimeActive(string $from, string $to): bool
+    {
+        $actual = implode('-', [
+            $this->getAddress()->getExtensionAttributes()->getDeliveryTimeFrom(),
+            $this->getAddress()->getExtensionAttributes()->getDeliveryTimeTo(),
+        ]);
+
+        return $actual === implode('-', [$from, $to]);
+    }
+
+    /**
      * @return array
      */
     public function getEstimates(): array
@@ -62,6 +85,32 @@ class Estimate extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Meth
         try {
             return $this->serializer->unserialize($rate->getEstimateDate());
         } catch (Exception $e) {
+            unset($e);
+
+            return [];
+        }
+    }
+
+    /**
+     * @return array
+     */
+    public function getEstimatesTime(): array
+    {
+        $rate = $this->getActiveMethodRate();
+        if (!$rate) {
+            return [];
+        }
+        if (!$rate->getEstimateDate()) {
+            return [];
+        }
+
+        if (!$rate->getEstimateTime()) {
+            return [];
+        }
+
+        try {
+            return $this->serializer->unserialize($rate->getEstimateTime());
+        } catch (\Exception $e) {
             unset($e);
 
             return [];

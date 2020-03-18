@@ -38,4 +38,9 @@ interface EstimateTimeInterface extends \JsonSerializable
      * @return $this
      */
     public function setTo(string $time);
+
+    /**
+     * @return array
+     */
+    public function jsonSerialize();
 }

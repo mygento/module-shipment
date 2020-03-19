@@ -177,6 +177,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      * @param bool $notify
      *
      * @throws \Magento\Framework\Exception\CouldNotSaveException
+     * @return \Magento\Sales\Api\Data\ShipmentInterface
      */
     public function setTracking(
         \Magento\Sales\Model\Order $order,
@@ -205,12 +206,12 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
             }
 
             $shipment->addTrack($this->trackFactory->create()->addData($data));
-            $transation = $this->transactionFactory->create();
-            $transation->addObject($shipment);
-            $transation->addObject($shipment->getOrder());
-            $transation->save();
+            $transaction = $this->transactionFactory->create();
+            $transaction->addObject($shipment);
+            $transaction->addObject($shipment->getOrder());
+            $transaction->save();
 
-            return;
+            return $shipment;
         }
 
         $items = [];
@@ -225,19 +226,20 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         }
 
         $shipment = $this->shipmentFactory->create($order, $items, [$data]);
-        if ($shipment) {
-            $shipment->register();
-            $shipment->getOrder()->setCustomerNoteNotify($notify);
-            $shipment->addComment(__('Order shipped by %1', $shipping->getCarrierCode()));
-            $shipment->getOrder()->setIsInProcess(true);
-            $transation = $this->transactionFactory->create();
-            $transation->addObject($shipment);
-            $transation->addObject($shipment->getOrder());
-            $transation->save();
 
-            if ($notify) {
-                $this->shipmentSender->send($shipment);
-            }
+        $shipment->register();
+        $shipment->getOrder()->setCustomerNoteNotify($notify);
+        $shipment->addComment(__('Order shipped by %1', $shipping->getCarrierCode()));
+        $shipment->getOrder()->setIsInProcess(true);
+        $transaction = $this->transactionFactory->create();
+        $transaction->addObject($shipment);
+        $transaction->addObject($shipment->getOrder());
+        $transaction->save();
+
+        if ($notify) {
+            $this->shipmentSender->send($shipment);
         }
+
+        return $shipment;
     }
 }

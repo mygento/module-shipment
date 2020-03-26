@@ -48,6 +48,7 @@ class ToOrderAddress
         $extensionAttributes->setDeliveryTimeFrom($address->getDeliveryTimeFrom());
         $extensionAttributes->setDeliveryTimeTo($address->getDeliveryTimeTo());
         $extensionAttributes->setDeliveryEstimate($address->getDeliveryEstimate());
+        $extensionAttributes->setShipmentDate($address->getShipmentDate());
         $result->setExtensionAttributes($extensionAttributes);
 
         return $result;

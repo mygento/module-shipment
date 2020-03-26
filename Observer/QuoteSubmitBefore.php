@@ -28,6 +28,9 @@ class QuoteSubmitBefore implements \Magento\Framework\Event\ObserverInterface
         $observer->getEvent()->getOrder()->getShippingAddress()->setDeliveryTimeTo(
             $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryTimeTo()
         );
+        $observer->getEvent()->getOrder()->getShippingAddress()->setShipmentDate(
+            $observer->getEvent()->getQuote()->getShippingAddress()->getShipmentDate()
+        );
 
         return $this;
     }

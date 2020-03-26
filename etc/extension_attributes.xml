@@ -14,6 +14,7 @@
     <extension_attributes for="Magento\Quote\Api\Data\AddressInterface">
         <attribute code="pickup_point" type="Mygento\Shipment\Api\Data\PointInterface" />
 
+        <attribute code="shipment_date" type="string" />
         <attribute code="delivery_date" type="string" />
         <attribute code="delivery_time_from" type="string" />
         <attribute code="delivery_time_to" type="string" />
@@ -23,6 +24,7 @@
     <extension_attributes for="Magento\Sales\Api\Data\OrderAddressInterface">
         <attribute code="pickup_point" type="string" />
 
+        <attribute code="shipment_date" type="string" />
         <attribute code="delivery_date" type="string" />
         <attribute code="delivery_time_from" type="string" />
         <attribute code="delivery_time_to" type="string" />

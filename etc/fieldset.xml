@@ -14,6 +14,9 @@
             <field name="delivery_estimate">
                 <aspect name="to_order_address" />
             </field>
+            <field name="shipment_date">
+                <aspect name="to_order_address" />
+            </field>
             <field name="shipping_pickup">
                 <aspect name="to_order_address" />
             </field>

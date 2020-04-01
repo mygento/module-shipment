@@ -14,6 +14,12 @@ use Mygento\Shipment\Api\Service\OrderInterface;
 
 abstract class AbstractService implements CalculateInterface, OrderInterface
 {
+    /** @var float */
+    protected $weightCoefficient = 1.0;
+
+    /** @var float */
+    protected $sizeCoefficient = 1.0;
+
     /**
      * @var \Mygento\Shipment\Helper\Data
      */
@@ -49,7 +55,8 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
      */
     public function getSizeRatio(): float
     {
-        return (float) $this->helper->getConfig(DimensionInterface::SIZE);
+        return (float) $this->helper->getConfig(DimensionInterface::SIZE)
+            * $this->sizeCoefficient;
     }
 
     /**
@@ -57,7 +64,8 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
      */
     public function getWeightRatio(): float
     {
-        return (float) $this->helper->getConfig(DimensionInterface::WEIGHT);
+        return (float) $this->helper->getConfig(DimensionInterface::WEIGHT)
+            * $this->weightCoefficient;
     }
 
     /**

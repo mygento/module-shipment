@@ -48,6 +48,15 @@ class Tracking
      */
     private $orderRepo;
 
+    /**
+     * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepo
+     * @param \Magento\Sales\Api\ShipmentTrackRepositoryInterface $trackRepo
+     * @param \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender
+     * @param \Magento\Framework\Api\SearchCriteriaBuilder $builder
+     * @param \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory
+     * @param \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory
+     * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
+     */
     public function __construct(
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepo,
         \Magento\Sales\Api\ShipmentTrackRepositoryInterface $trackRepo,

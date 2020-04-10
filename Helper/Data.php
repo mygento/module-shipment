@@ -69,6 +69,15 @@ class Data extends \Mygento\Base\Helper\Data
     }
 
     /**
+     * @param \Magento\Sales\Model\Order $order
+     * @return bool
+     */
+    public function isShippedBy(\Magento\Sales\Model\Order $order)
+    {
+        return strpos($order->getShippingMethod(), $this->getCode() . '_') !== false;
+    }
+
+    /**
      * @return string
      */
     protected function getDebugConfigPath(): string

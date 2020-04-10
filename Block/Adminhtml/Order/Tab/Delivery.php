@@ -38,6 +38,26 @@ class Delivery extends \Magento\Backend\Block\Widget\Tab
     }
 
     /**
+     * Return Tab label
+     *
+     * @return string
+     */
+    public function getTabLabel()
+    {
+        return $this->getTabTitle();
+    }
+
+    /**
+     * Return Tab title
+     *
+     * @return string
+     */
+    public function getTabTitle()
+    {
+        return strtoupper($this->helper->getCode());
+    }
+
+    /**
      * @return bool
      */
     public function canShowTab()
@@ -61,5 +81,44 @@ class Delivery extends \Magento\Backend\Block\Widget\Tab
     public function isHidden()
     {
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTabClass()
+    {
+        return 'ajax only';
+    }
+
+    /**
+     * @return string
+     */
+    public function getClass()
+    {
+        return $this->getTabClass();
+    }
+
+    /**
+     * @return string
+     */
+    public function getTabUrl()
+    {
+        return $this->getUrl(
+            'mygento_' . $this->helper->getCode() . '/*/deliverytab',
+            ['_current' => true]
+        );
+    }
+
+    /**
+     * @param string $action
+     * @return string
+     */
+    public function getLink($action)
+    {
+        return $this->_urlBuilder->getUrl(
+            'mygento_' . $this->helper->getCode() . '/delivery/' . $action,
+            ['_secure' => true, 'order_id' => $this->getOrder()->getId()]
+        );
     }
 }

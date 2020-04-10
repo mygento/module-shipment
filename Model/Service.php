@@ -16,29 +16,14 @@ use Magento\Sales\Api\Data\OrderInterface;
 class Service implements \Mygento\Shipment\Api\Service\BaseInterface
 {
     /**
+     * @var \Mygento\Shipment\Model\Service\Tracking
+     */
+    private $tracking;
+
+    /**
      * @var \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory
      */
     private $timeFactory;
-
-    /**
-     * @var \Magento\Sales\Model\Order\Email\Sender\ShipmentSender
-     */
-    private $shipmentSender;
-
-    /**
-     * @var \Magento\Framework\DB\TransactionFactory
-     */
-    private $transactionFactory;
-
-    /**
-     * @var \Magento\Sales\Model\Order\ShipmentFactory
-     */
-    private $shipmentFactory;
-
-    /**
-     * @var \Magento\Sales\Model\Order\Shipment\TrackFactory
-     */
-    private $trackFactory;
 
     /**
      * @var \Mygento\Shipment\Helper\Dimensions
@@ -64,33 +49,24 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      * @param \Mygento\Shipment\Api\PointManagerInterface $pointManager
      * @param \Mygento\Base\Helper\Discount $taxHelper
      * @param \Mygento\Shipment\Helper\Dimensions $dimensionHelper
-     * @param \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender
+     * @param \Mygento\Shipment\Model\Service\Tracking $tracking
      * @param \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
      * @param \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory
-     * @param \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory
-     * @param \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory
-     * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
      */
     public function __construct(
         \Mygento\Shipment\Api\PointManagerInterface $pointManager,
         \Mygento\Base\Helper\Discount $taxHelper,
         \Mygento\Shipment\Helper\Dimensions $dimensionHelper,
-        \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender,
+        \Mygento\Shipment\Model\Service\Tracking $tracking,
         \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory,
-        \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory,
-        \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory,
-        \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory,
-        \Magento\Framework\DB\TransactionFactory $transactionFactory
+        \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory
     ) {
         $this->pointManager = $pointManager;
         $this->taxHelper = $taxHelper;
         $this->resultFactory = $resultFactory;
         $this->dimensionHelper = $dimensionHelper;
-        $this->trackFactory = $trackFactory;
-        $this->shipmentFactory = $shipmentFactory;
-        $this->transactionFactory = $transactionFactory;
-        $this->shipmentSender = $shipmentSender;
         $this->timeFactory = $timeFactory;
+        $this->tracking = $tracking;
     }
 
     /**
@@ -184,62 +160,17 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         string $trackingCode,
         bool $notify = false
     ) {
-        $shipping = $order->getShippingMethod(true);
+        return $this->tracking->setTracking($order, $trackingCode, $notify);
+    }
 
-        $data = [
-            'carrier_code' => $shipping->getCarrierCode(),
-            'title' => $order->getShippingDescription(),
-            'number' => $trackingCode,
-        ];
-
-        // Создание новой доставки
-        if (!$order->canShip()) {
-            throw \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
-        }
-
-        // Сохранение кода для созданной доставки
-        if ($order->getShipmentsCollection()->count() > 0) {
-            $shipment = $order->getShipmentsCollection()->getFirstItem();
-
-            if (count($shipment->getAllTracks()) !== 0) {
-                throw \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
-            }
-
-            $shipment->addTrack($this->trackFactory->create()->addData($data));
-            $transaction = $this->transactionFactory->create();
-            $transaction->addObject($shipment);
-            $transaction->addObject($shipment->getOrder());
-            $transaction->save();
-
-            return $shipment;
-        }
-
-        $items = [];
-        foreach ($order->getAllItems() as $item) {
-            if (!$item->getQtyToShip() || $item->getIsVirtual()) {
-                continue;
-            }
-            $items[$item->getId()] = [
-                'order_item_id' => $item->getId(),
-                'qty' => $item->getQtyToShip(),
-            ];
-        }
-
-        $shipment = $this->shipmentFactory->create($order, $items, [$data]);
-
-        $shipment->register();
-        $shipment->getOrder()->setCustomerNoteNotify($notify);
-        $shipment->addComment(__('Order shipped by %1', $shipping->getCarrierCode()));
-        $shipment->getOrder()->setIsInProcess(true);
-        $transaction = $this->transactionFactory->create();
-        $transaction->addObject($shipment);
-        $transaction->addObject($shipment->getOrder());
-        $transaction->save();
-
-        if ($notify) {
-            $this->shipmentSender->send($shipment);
-        }
-
-        return $shipment;
+    /**
+     * @param string $trackingCode
+     * @param string $carrier
+     * @throws \Magento\Framework\Exception\NotFoundException
+     * @return \Magento\Sales\Model\Order
+     */
+    public function findOrderByTracking(string $trackingCode, string $carrier)
+    {
+        return $this->tracking->findOrderByTracking($trackingCode, $carrier);
     }
 }

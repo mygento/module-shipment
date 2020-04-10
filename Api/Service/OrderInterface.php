@@ -35,4 +35,12 @@ interface OrderInterface
         string $trackingCode,
         bool $notify = false
     );
+
+    /**
+     * @param string $trackingCode
+     * @param string $carrier
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return \Magento\Sales\Model\Order
+     */
+    public function findOrderByTracking(string $trackingCode, string $carrier);
 }

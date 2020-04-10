@@ -12,6 +12,9 @@ use Mygento\Shipment\Api\DimensionInterface;
 use Mygento\Shipment\Api\Service\CalculateInterface;
 use Mygento\Shipment\Api\Service\OrderInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 abstract class AbstractService implements CalculateInterface, OrderInterface
 {
     /** @var float */
@@ -146,5 +149,16 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     public function getEstimateTimeInstance(string $from, string $to)
     {
         return $this->baseService->getEstimateTimeInstance($from, $to);
+    }
+
+    /**
+     * @param string $trackingCode
+     * @param string $carrier
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return \Magento\Sales\Model\Order
+     */
+    public function findOrderByTracking(string $trackingCode, string $carrier)
+    {
+        return $this->baseService->findOrderByTracking($trackingCode);
     }
 }

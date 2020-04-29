@@ -100,7 +100,7 @@ class Tracking
 
         // Создание новой доставки
         if (!$order->canShip()) {
-            throw \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
+            throw new \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
         }
 
         // Сохранение кода для созданной доставки
@@ -108,7 +108,7 @@ class Tracking
             $shipment = $order->getShipmentsCollection()->getFirstItem();
 
             if (count($shipment->getAllTracks()) !== 0) {
-                throw \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
+                throw new \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
             }
 
             $shipment->addTrack($this->trackFactory->create()->addData($data));

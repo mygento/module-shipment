@@ -98,11 +98,6 @@ class Tracking
             'number' => $trackingCode,
         ];
 
-        // Создание новой доставки
-        if (!$order->canShip()) {
-            throw new \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
-        }
-
         // Сохранение кода для созданной доставки
         if ($order->hasShipments()) {
             $shipment = $order->getShipmentsCollection()->getFirstItem();
@@ -118,6 +113,11 @@ class Tracking
             $transaction->save();
 
             return $shipment;
+        }
+
+        // Создание новой доставки
+        if (!$order->canShip()) {
+            throw new \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
         }
 
         $items = [];

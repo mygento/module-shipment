@@ -14,12 +14,17 @@ interface OrderInterface
      * @param \Magento\Sales\Model\Order $order
      * @param array $data
      */
-    public function orderCreate(\Magento\Sales\Model\Order $order, $data = []);
+    public function createOrder(\Magento\Sales\Model\Order $order, $data = []);
 
     /**
      * @param int|string $orderId
      */
-    public function orderCancel($orderId);
+    public function cancelOrder($orderId);
+
+    /**
+     * @param \Magento\Sales\Model\Order $order
+     */
+    public function updateOrderStatus(\Magento\Sales\Model\Order $order);
 
     /**
      * Добавление кода отслеживания

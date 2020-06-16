@@ -14,17 +14,142 @@ $address = $order->getShippingAddress();
             <tbody>
                 <tr>
                     <th><?= $block->escapeHtml(__('Delivery Date')) ?></th>
-                    <td><?= $block->escapeHtml($address->getExtensionAttributes()->getDeliveryDate());?></td>
+                    <td>
+                        <div class="deliverydate_current" style="display: inline-block">
+                            <?= $block->escapeHtml($address->getExtensionAttributes()->getDeliveryDate()); ?>
+                        </div>
+                        <div class="deliverydate_inline" style="display: none">
+                            <input type="text" class="input-text" id="delivery-date"
+                               style="width: auto" name="delivery-date"
+                               value="<?php echo $address->getExtensionAttributes()->getDeliveryDate(); ?>"
+                            />
+                        </div>
+                        <div style="display: inline-block;margin-left: 0.5rem;">
+                            <a href="#" class="deliverydate_edit"><?= $block->escapeHtml(__('Edit')) ?></a>
+                            <a href="#" class="deliverydate_save" style="display: none">
+                                <?= $block->escapeHtml(__('Save')) ?>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
-                    <th><?= $block->escapeHtml(__('Delivery Time From')) ?></th>
-                    <td><?= $block->escapeHtml($address->getExtensionAttributes()->getDeliveryTimeFrom());?></td>
-                </tr>
-                <tr>
-                    <th><?= $block->escapeHtml(__('Delivery Time To')) ?></th>
-                    <td><?= $block->escapeHtml($address->getExtensionAttributes()->getDeliveryTimeTo());?></td>
+                    <th><?= $block->escapeHtml(__('Delivery Time')) ?></th>
+                    <td>
+                        <?php
+                        $from = $address->getExtensionAttributes()->getDeliveryTimeFrom();
+                        $to = $address->getExtensionAttributes()->getDeliveryTimeTo();
+                        ?>
+                        <div class="deliverytime_current" style="display: inline-block">
+                            <?= $block->escapeHtml($from); ?>
+                            -
+                            <?= $block->escapeHtml($to); ?>
+                        </div>
+                        <div class="deliverytime_inline" style="display: none">
+                            <input name="deliverytime_from" type="text" maxlength="2" value="<?= str_replace(':00', '', $from) ?>" style="width: 3rem" />
+                             -
+                            <input name="deliverytime_to" type="text" maxlength="2" value="<?= str_replace(':00', '', $to) ?>" style="width: 3rem" />
+                        </div>
+                        <div style="display: inline-block;margin-left: 0.5rem;">
+                            <a href="#" class="deliverytime_edit"><?= $block->escapeHtml(__('Edit')) ?></a>
+                            <a href="#" class="deliverytime_save" style="display: none">
+                                <?= $block->escapeHtml(__('Save')) ?>
+                            </a>
+                        </div>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </section>
+<script>
+    require([
+        'jquery',
+        'mage/translate',
+        'Magento_Ui/js/modal/alert',
+        'mage/calendar'
+    ], function ($, $t, alert) {
+        var saveDateUrl = '<?php echo $block->getUrl('shipment/order/deliveryDate', ['id' => $this->getOrder()->getId()]) ?>';
+        var saveTimeUrl = '<?php echo $block->getUrl('shipment/order/deliveryTime', ['id' => $this->getOrder()->getId()]) ?>';
+        $('.deliverydate_edit').click(function(event) {
+            event.preventDefault();
+            $('.deliverydate_current').hide();
+            $('.deliverydate_inline').css('display', 'inline-block');
+            $('.deliverydate_edit').hide();
+            $('.deliverydate_save').show();
+        });
+        $('.deliverydate_save').click(function(event) {
+            event.preventDefault();
+            $("body").trigger('processStart');
+            var formData = { field: $('.deliverydate_inline input').val() };
+            $.post(saveDateUrl, formData).done(function( data ) {
+                $('.deliverydate_save').hide();
+                $('.deliverydate_edit').show();
+                $('.deliverydate_current').css('display', 'inline-block');
+                $('.deliverydate_inline').hide();
+
+                if (data.error) {
+                    alert({
+                        title: $.mage.__('Error'),
+                        content: $.mage.__('Fail to save'),
+                    });
+                    return;
+                }
+                $('.deliverydate_current').text(data.content);
+            }).fail(function() {
+                alert({
+                    title: $.mage.__('Error'),
+                    content: $.mage.__('Fail to save'),
+                });
+            }).always(function() {
+                $("body").trigger('processStop');
+            });
+        });
+        $('#delivery-date').calendar({
+            dateFormat: "yy-mm-dd",
+            changeMonth: true,
+            changeYear: true,
+            showButtonPanel: true,
+            currentText: $t('Go Today'),
+            closeText: $t('Close'),
+        });
+
+
+        $('.deliverytime_edit').click(function(event) {
+            event.preventDefault();
+            $('.deliverytime_current').hide();
+            $('.deliverytime_inline').css('display', 'inline-block');
+            $('.deliverytime_edit').hide();
+            $('.deliverytime_save').show();
+        });
+        $('.deliverytime_save').click(function(event) {
+            event.preventDefault();
+            $("body").trigger('processStart');
+            var formData = {
+                from: $('.deliverytime_inline input[name=deliverytime_from]').val(),
+                to:  $('.deliverytime_inline input[name=deliverytime_to]').val()
+            };
+            $.post(saveTimeUrl, formData).done(function( data ) {
+                $('.deliverytime_save').hide();
+                $('.deliverytime_edit').show();
+                $('.deliverytime_current').css('display', 'inline-block');
+                $('.deliverytime_inline').hide();
+
+                if (data.error) {
+                    alert({
+                        title: $.mage.__('Error'),
+                        content: $.mage.__('Fail to save'),
+                    });
+                    return;
+                }
+                $('.deliverytime_current').text(data.content);
+            }).fail(function() {
+                alert({
+                    title: $.mage.__('Error'),
+                    content: $.mage.__('Fail to save'),
+                });
+            }).always(function() {
+                $("body").trigger('processStop');
+            });
+        });
+    });
+</script>

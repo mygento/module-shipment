@@ -59,8 +59,8 @@ class DeliveryTime extends \Magento\Backend\App\Action
             $deliveryTo = $deliveryFrom;
         }
 
-        $from = str_pad($deliveryFrom, 2, '0', STR_PAD_LEFT) . ':00';
-        $to = str_pad($deliveryTo, 2, '0', STR_PAD_LEFT) . ':00';
+        $from = str_pad((string) $deliveryFrom, 2, '0', STR_PAD_LEFT) . ':00';
+        $to = str_pad((string) $deliveryTo, 2, '0', STR_PAD_LEFT) . ':00';
 
         $messages = [];
         $error = false;

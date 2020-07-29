@@ -137,9 +137,9 @@ class Dimensions
     }
 
     /**
-     * @param type $attributeCode
-     * @param type $productId
-     * @return type
+     * @param string $attributeCode
+     * @param int|string $productId
+     * @return mixed
      */
     public function getProductAttrValue($attributeCode, $productId)
     {
@@ -178,7 +178,7 @@ class Dimensions
      * @param int|string $productId
      * @param float $coefficient
      */
-    private function getAttrValueByParam($configPath, $productId, $coefficient = 1): float
+    private function getAttrValueByParam($configPath, $productId, $coefficient = 1.0): float
     {
         $value = $this->attrHelper->getValueByConfigPathOrDefault($configPath, $productId);
 

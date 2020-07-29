@@ -77,7 +77,6 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      * Создание метода доставки
      *
      * @param \Mygento\Shipment\Api\Data\CalculateResultInterface $method
-     * @return \Magento\Quote\Model\Quote\Address\RateResult\Method
      */
     public function createRateMethod(CalculateResultInterface $method)
     {

@@ -45,7 +45,7 @@ class Autoship implements \Mygento\Shipment\Api\Service\AutoshipInterface
     /**
      * @param string[] $statuses
      * @param \Magento\Framework\Api\Filter[] $filters
-     * @return []
+     * @return \Magento\Sales\Api\Data\OrderInterface[]
      */
     public function getOrdersByStatuses(array $statuses, array $filters = [])
     {

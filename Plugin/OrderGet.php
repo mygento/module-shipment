@@ -35,7 +35,7 @@ class OrderGet
         \Magento\Sales\Api\OrderRepositoryInterface $subject,
         \Magento\Sales\Model\ResourceModel\Order\Collection $resultOrder
     ) {
-        /** @var $order */
+        /** @var \Magento\Sales\Api\Data\OrderInterface $order */
         foreach ($resultOrder->getItems() as $order) {
             $this->afterGet($subject, $order);
         }

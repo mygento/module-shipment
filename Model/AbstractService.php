@@ -159,6 +159,6 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
      */
     public function findOrderByTracking(string $trackingCode, string $carrier)
     {
-        return $this->baseService->findOrderByTracking($trackingCode);
+        return $this->baseService->findOrderByTracking($trackingCode, $carrier);
     }
 }

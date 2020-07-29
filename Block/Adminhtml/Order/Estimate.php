@@ -84,7 +84,7 @@ class Estimate extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Meth
 
         try {
             return $this->serializer->unserialize($rate->getEstimateDate());
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             unset($e);
 
             return [];

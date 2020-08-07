@@ -26,3 +26,8 @@
 "shipment_nf","Доставка не найдена"
 "shipment_track_nf","Код отслеживания не найден"
 "wrong_shipment_track","Неверный код отслеживания"
+"Delivery Timing","Информация о доставке"
+"Delivery Date","Дата доставки"
+"Delivery Time","Время доставки"
+"Delivery","Код доставки"
+"Last Delivery Code",Код"

@@ -80,6 +80,14 @@ class Data extends \Mygento\Base\Helper\Data
     /**
      * @return string
      */
+    public function getCarrierCode(): string
+    {
+        return $this->getCode();
+    }
+
+    /**
+     * @return string
+     */
     protected function getDebugConfigPath(): string
     {
         return 'debug';

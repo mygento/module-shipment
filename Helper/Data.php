@@ -12,6 +12,15 @@ use Mygento\Base\Api\ProductAttributeHelperInterface;
 
 class Data extends \Mygento\Base\Helper\Data
 {
+    const XML_TEST = 'test';
+    const XML_TAX_ENABLED = 'tax_options/tax';
+    const XML_TAX_SAME_PRODUCT = 'tax_options/tax_same';
+    const XML_TAX_ALL_PRODUCT = 'tax_options/tax_products';
+    const XML_TAX_PRODUCT_ATTR = 'tax_options/tax_product_attr';
+    const XML_TAX_SHIPPING = 'tax_options/tax_shipping';
+    const XML_AUTO_SHIPPING = 'order_statuses/autoshipping';
+    const XML_AUTO_SHIPPING_STATUSES = 'order_statuses/autoshipping_statuses';
+
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;
 
@@ -83,6 +92,81 @@ class Data extends \Mygento\Base\Helper\Data
     public function getCarrierCode(): string
     {
         return $this->getCode();
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return bool
+     */
+    public function isTestMode($scopeCode = null): bool
+    {
+        return (bool) $this->getConfig(self::XML_TEST, $scopeCode);
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return bool
+     */
+    public function isEnabledTax($scopeCode = null): bool
+    {
+        return (bool) $this->getConfig(self::XML_TAX_ENABLED, $scopeCode);
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return bool
+     */
+    public function isSameTaxPerProduct($scopeCode = null): bool
+    {
+        return (bool) $this->getConfig(self::XML_TAX_SAME_PRODUCT, $scopeCode);
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return mixed
+     */
+    public function getAllProductTax($scopeCode = null)
+    {
+        return $this->getConfig(self::XML_TAX_ALL_PRODUCT, $scopeCode);
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return mixed
+     */
+    public function getProductTaxAttribute($scopeCode = null)
+    {
+        return $this->getConfig(self::XML_TAX_PRODUCT_ATTR, $scopeCode);
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return mixed
+     */
+    public function getTaxForShipping($scopeCode = null)
+    {
+        return $this->getConfig(self::XML_TAX_SHIPPING, $scopeCode);
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return bool
+     */
+    public function isEnabledAutoShipping($scopeCode = null): bool
+    {
+        return (bool) $this->getConfig(self::XML_AUTO_SHIPPING, $scopeCode);
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return array
+     */
+    public function getAutoShippingStatuses($scopeCode = null): array
+    {
+        return explode(
+            ',',
+            $this->getConfig(self::XML_AUTO_SHIPPING_STATUSES, $scopeCode) ?: ''
+        );
     }
 
     /**

@@ -129,11 +129,16 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         OrderInterface $order,
         \Mygento\Shipment\Helper\Data $helper
     ) {
+        $attributeCode = '';
+        if (!$helper->isSameTaxPerProduct($order->getStoreId())) {
+            $attributeCode = $helper->getProductTaxAttribute($order->getStoreId()) ?: '';
+        }
+
         return $this->taxHelper->getRecalculated(
             $order,
-            $helper->getConfig('tax_options/tax_products'),
-            $helper->getConfig('tax_product_attr'),
-            $helper->getConfig('tax_options/tax_shipping')
+            $helper->getAllProductTax($order->getStoreId()),
+            $attributeCode,
+            $helper->getTaxForShipping($order->getStoreId())
         );
     }
 

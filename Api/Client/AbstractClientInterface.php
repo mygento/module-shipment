@@ -13,8 +13,9 @@ interface AbstractClientInterface extends BaseInterface
     /**
      * @param string $method
      * @param array $data
+     * @param int|string $scopeCode
      */
-    public function sendApiRequest(string $method, $data);
+    public function sendApiRequest(string $method, $data, $scopeCode = null);
 
     /**
      * Создание события

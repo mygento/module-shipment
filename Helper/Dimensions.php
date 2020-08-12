@@ -11,17 +11,33 @@ namespace Mygento\Shipment\Helper;
 class Dimensions
 {
     /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product
+     */
+    private $productResource;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    private $storeManager;
+
+    /**
      * @var \Mygento\Base\Api\ProductAttributeHelperInterface
      */
     private $attrHelper;
 
     /**
      * @param \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper
+     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
+     * @param \Magento\Catalog\Model\ResourceModel\Product $productResource
      */
     public function __construct(
-        \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper
+        \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Catalog\Model\ResourceModel\Product $productResource
     ) {
         $this->attrHelper = $attrHelper;
+        $this->storeManager = $storeManager;
+        $this->productResource = $productResource;
     }
 
     /**
@@ -139,19 +155,21 @@ class Dimensions
     /**
      * @param string $attributeCode
      * @param int|string $productId
-     * @return mixed
+     * @param int|string|null $storeId
+     * @return array|bool|string
      */
-    public function getProductAttrValue($attributeCode, $productId)
+    public function getProductAttrValue($attributeCode, $productId, $storeId = null)
     {
         $attribute = $this->productResource->getAttribute($attributeCode);
-        $store = $this->storeManager->getStore();
+        if (!$attribute) {
+            return $attribute;
+        }
+        if ($storeId === null) {
+            $storeId = $this->storeManager->getStore()->getId();
+        }
 
-        $value = $this->productResource->getAttributeRawValue($productId, $attributeCode, $store);
+        $value = $this->productResource->getAttributeRawValue($productId, $attributeCode, $storeId);
         if (!$attribute->usesSource()) {
-            if (!empty($value)) {
-                return $value;
-            }
-
             return $value;
         }
 

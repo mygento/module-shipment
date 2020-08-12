@@ -54,20 +54,22 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     }
 
     /**
+     * @param mixed|null $scopeCode
      * @return float
      */
-    public function getSizeRatio(): float
+    public function getSizeRatio($scopeCode = null): float
     {
-        return (float) $this->helper->getConfig(DimensionInterface::SIZE)
+        return (float) $this->helper->getConfig(DimensionInterface::SIZE, $scopeCode)
             * $this->sizeCoefficient;
     }
 
     /**
+     * @param mixed|null $scopeCode
      * @return float
      */
-    public function getWeightRatio(): float
+    public function getWeightRatio($scopeCode = null): float
     {
-        return (float) $this->helper->getConfig(DimensionInterface::WEIGHT)
+        return (float) $this->helper->getConfig(DimensionInterface::WEIGHT, $scopeCode)
             * $this->weightCoefficient;
     }
 

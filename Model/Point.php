@@ -514,19 +514,19 @@ class Point extends AbstractModel implements \Mygento\Shipment\Api\Data\PointInt
      * Get online prepaid
      * @return bool|null
      */
-    public function getOnlinePrepaid()
+    public function getPrepaidOnly()
     {
-        return $this->getData(self::ONLINE_PREPAID);
+        return $this->getData(self::PREPAID_ONLY);
     }
 
     /**
      * Set online prepaid
-     * @param bool $onlinePrepaid
+     * @param bool $prepaidOnly
      * @return $this
      */
-    public function setOnlinePrepaid($onlinePrepaid)
+    public function setPrepaidOnly($prepaidOnly)
     {
-        return $this->setData(self::ONLINE_PREPAID, $onlinePrepaid);
+        return $this->setData(self::PREPAID_ONLY, $prepaidOnly);
     }
 
     /**

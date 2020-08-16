@@ -310,7 +310,7 @@
                 <options class="Magento\Config\Model\Config\Source\Yesno"/>
             </settings>
         </column>
-        <column name="online_prepaid" component="Magento_Ui/js/grid/columns/select">
+        <column name="prepaid_only" component="Magento_Ui/js/grid/columns/select">
             <settings>
                 <filter>select</filter>
                 <dataType>select</dataType>

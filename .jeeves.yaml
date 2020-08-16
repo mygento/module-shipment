@@ -131,10 +131,10 @@ Mygento:
           nullable: false
           comment: 'Card delivery'
           default: 1
-        online_prepaid:
+        prepaid_only:
           type: boolean
           nullable: false
-          comment: 'Online prepaid'
+          comment: 'Prepaid only'
           default: 1
         twenty_four_hours:
           type: boolean

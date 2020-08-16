@@ -57,7 +57,7 @@
         <column xsi:type="decimal" name="longitude" nullable="false" precision="10" scale="7" comment="Longitude"/>
         <column xsi:type="boolean" name="cash_delivery" nullable="false" default="1" comment="Cash delivery"/>
         <column xsi:type="boolean" name="card_delivery" nullable="false" default="1" comment="Card delivery"/>
-        <column xsi:type="boolean" name="online_prepaid" nullable="false" default="1" comment="Online prepaid"/>
+        <column xsi:type="boolean" name="prepaid_only" nullable="false" default="1" comment="Prepaid only"/>
         <column xsi:type="boolean" name="twenty_four_hours" nullable="false" default="0" comment="Twenty-four Hours"/>
         <column xsi:type="boolean" name="testing_available" nullable="false" default="0" comment="Testing Available"/>
         <column xsi:type="varchar" name="icon" nullable="true" length="255" comment="Icon"/>

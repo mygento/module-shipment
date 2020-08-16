@@ -36,7 +36,7 @@ interface PointInterface
     const LONGITUDE = 'longitude';
     const CASH_DELIVERY = 'cash_delivery';
     const CARD_DELIVERY = 'card_delivery';
-    const ONLINE_PREPAID = 'online_prepaid';
+    const PREPAID_ONLY = 'prepaid_only';
     const TWENTY_FOUR_HOURS = 'twenty_four_hours';
     const TESTING_AVAILABLE = 'testing_available';
     const ICON = 'icon';
@@ -384,14 +384,14 @@ interface PointInterface
      * Get online prepaid
      * @return bool|null
      */
-    public function getOnlinePrepaid();
+    public function getPrepaidOnly();
 
     /**
      * Set online prepaid
-     * @param bool $onlinePrepaid
+     * @param bool $prepaidOnly
      * @return $this
      */
-    public function setOnlinePrepaid($onlinePrepaid);
+    public function setPrepaidOnly($prepaidOnly);
 
     /**
      * Get twenty four hours

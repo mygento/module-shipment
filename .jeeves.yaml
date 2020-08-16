@@ -83,6 +83,22 @@ Mygento:
           type: varchar
           nullable: true
           comment: 'Working Hours'
+        max_size:
+          type: decimal
+          unsigned: true
+          nullable: false
+          comment: 'Max Size'
+          precision: 5
+          scale: 2
+          default: 999
+        max_weight:
+          type: decimal
+          unsigned: true
+          nullable: false
+          comment: 'Max Width'
+          precision: 5
+          scale: 2
+          default: 999
         image:
           type: varchar
           nullable: true

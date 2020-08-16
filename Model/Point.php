@@ -359,6 +359,44 @@ class Point extends AbstractModel implements \Mygento\Shipment\Api\Data\PointInt
     }
 
     /**
+     * Get max size
+     * @return float|null
+     */
+    public function getMaxSize()
+    {
+        return $this->getData(self::MAX_SIZE);
+    }
+
+    /**
+     * Set max size
+     * @param float $maxSize
+     * @return $this
+     */
+    public function setMaxSize($maxSize)
+    {
+        return $this->setData(self::MAX_SIZE, $maxSize);
+    }
+
+    /**
+     * Get max weight
+     * @return float|null
+     */
+    public function getMaxWeight()
+    {
+        return $this->getData(self::MAX_WEIGHT);
+    }
+
+    /**
+     * Set max weight
+     * @param float $maxWeight
+     * @return $this
+     */
+    public function setMaxWeight($maxWeight)
+    {
+        return $this->setData(self::MAX_WEIGHT, $maxWeight);
+    }
+
+    /**
      * Get image
      * @return string|null
      */

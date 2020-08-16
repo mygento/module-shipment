@@ -28,6 +28,8 @@ interface PointInterface
     const PHONE_NUMBER = 'phone_number';
     const SCHEDULE = 'schedule';
     const WORKING_HOURS = 'working_hours';
+    const MAX_SIZE = 'max_size';
+    const MAX_WEIGHT = 'max_weight';
     const IMAGE = 'image';
     const SORT_ORDER = 'sort_order';
     const LATITUDE = 'latitude';
@@ -273,6 +275,32 @@ interface PointInterface
      * @return $this
      */
     public function setWorkingHours($workingHours);
+
+    /**
+     * Get max size
+     * @return float|null
+     */
+    public function getMaxSize();
+
+    /**
+     * Set max size
+     * @param float $maxSize
+     * @return $this
+     */
+    public function setMaxSize($maxSize);
+
+    /**
+     * Get max weight
+     * @return float|null
+     */
+    public function getMaxWeight();
+
+    /**
+     * Set max weight
+     * @param float $maxWeight
+     * @return $this
+     */
+    public function setMaxWeight($maxWeight);
 
     /**
      * Get image

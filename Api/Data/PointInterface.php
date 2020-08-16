@@ -29,6 +29,7 @@ interface PointInterface
     const SCHEDULE = 'schedule';
     const WORKING_HOURS = 'working_hours';
     const MAX_SIZE = 'max_size';
+    const MIN_WEIGHT = 'min_weight';
     const MAX_WEIGHT = 'max_weight';
     const IMAGE = 'image';
     const SORT_ORDER = 'sort_order';
@@ -288,6 +289,19 @@ interface PointInterface
      * @return $this
      */
     public function setMaxSize($maxSize);
+
+    /**
+     * Get min weight
+     * @return float|null
+     */
+    public function getMinWeight();
+
+    /**
+     * Set min weight
+     * @param float $minWeight
+     * @return $this
+     */
+    public function setMinWeight($minWeight);
 
     /**
      * Get max weight

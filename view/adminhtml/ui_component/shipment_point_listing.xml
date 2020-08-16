@@ -238,6 +238,16 @@
                 <label translate="true">Max Size</label>
             </settings>
         </column>
+        <column name="min_weight">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Min Weight</label>
+            </settings>
+        </column>
         <column name="max_weight">
             <settings>
                 <filter>text</filter>

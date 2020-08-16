@@ -378,6 +378,25 @@ class Point extends AbstractModel implements \Mygento\Shipment\Api\Data\PointInt
     }
 
     /**
+     * Get min weight
+     * @return float|null
+     */
+    public function getMinWeight()
+    {
+        return $this->getData(self::MIN_WEIGHT);
+    }
+
+    /**
+     * Set min weight
+     * @param float $minWeight
+     * @return $this
+     */
+    public function setMinWeight($minWeight)
+    {
+        return $this->setData(self::MIN_WEIGHT, $minWeight);
+    }
+
+    /**
      * Get max weight
      * @return float|null
      */

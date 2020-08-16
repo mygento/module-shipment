@@ -50,7 +50,8 @@
         <column xsi:type="text" name="schedule" nullable="true" comment="Schedule"/>
         <column xsi:type="varchar" name="working_hours" nullable="true" length="255" comment="Working Hours"/>
         <column xsi:type="decimal" name="max_size" nullable="false" precision="5" scale="2" default="999" comment="Max Size"/>
-        <column xsi:type="decimal" name="max_weight" nullable="false" precision="5" scale="2" default="999" comment="Max Width"/>
+        <column xsi:type="decimal" name="min_weight" nullable="false" precision="5" scale="2" default="0" comment="Min Weight"/>
+        <column xsi:type="decimal" name="max_weight" nullable="false" precision="5" scale="2" default="999" comment="Max Weight"/>
         <column xsi:type="varchar" name="image" nullable="true" length="255" comment="Image"/>
         <column xsi:type="smallint" name="sort_order" nullable="false" identity="false" unsigned="true" default="0" comment="Sort Order"/>
         <column xsi:type="decimal" name="latitude" nullable="false" precision="10" scale="7" comment="Latitude"/>

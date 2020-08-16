@@ -10,7 +10,6 @@ Mygento:
           identity: true
           unsigned: true
           comment: 'ID'
-          padding: 10
         is_active:
           type: boolean
           nullable: false
@@ -29,7 +28,6 @@ Mygento:
           unsigned: true
           nullable: false
           comment: 'Point Priority'
-          padding: 6
           default: 0
         type:
           type: varchar
@@ -45,7 +43,6 @@ Mygento:
           unsigned: true
           nullable: true
           comment: 'City ID'
-          padding: 10
         city:
           type: varchar
           nullable: false
@@ -95,7 +92,6 @@ Mygento:
           unsigned: true
           nullable: false
           comment: 'Sort Order'
-          padding: 6
           default: 0
         latitude:
           type: decimal

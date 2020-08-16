@@ -12,7 +12,7 @@ class QuoteSubmitBefore implements \Magento\Framework\Event\ObserverInterface
 {
     /**
      * @param \Magento\Framework\Event\Observer $observer
-     * @return $this
+     * @return void
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
@@ -31,7 +31,5 @@ class QuoteSubmitBefore implements \Magento\Framework\Event\ObserverInterface
         $observer->getEvent()->getOrder()->getShippingAddress()->setShipmentDate(
             $observer->getEvent()->getQuote()->getShippingAddress()->getShipmentDate()
         );
-
-        return $this;
     }
 }

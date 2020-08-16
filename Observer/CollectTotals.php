@@ -26,7 +26,7 @@ class CollectTotals implements \Magento\Framework\Event\ObserverInterface
 
     /**
      * @param \Magento\Framework\Event\Observer $observer
-     * @return type
+     * @return void
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {

@@ -116,4 +116,12 @@ class PointManager implements \Mygento\Shipment\Api\PointManagerInterface
 
         return $collection->getItems();
     }
+
+    /**
+     * @return \Magento\Framework\DB\Adapter\AdapterInterface
+     */
+    public function getConnection()
+    {
+        return $this->point->getConnection();
+    }
 }

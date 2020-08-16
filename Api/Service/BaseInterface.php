@@ -23,11 +23,6 @@ interface BaseInterface
     public function getEstimateTimeInstance(string $from, string $to);
 
     /**
-     * @return \Mygento\Shipment\Api\PointManagerInterface
-     */
-    public function getPointManager();
-
-    /**
      * @return \Mygento\Base\Helper\Discount
      */
     public function getTaxHelper();

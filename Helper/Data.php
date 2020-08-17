@@ -20,6 +20,8 @@ class Data extends \Mygento\Base\Helper\Data
     const XML_TAX_SHIPPING = 'tax_options/tax_shipping';
     const XML_AUTO_SHIPPING = 'order_statuses/autoshipping';
     const XML_AUTO_SHIPPING_STATUSES = 'order_statuses/autoshipping_statuses';
+    const XML_SHIPMENT_SUCCESS_STATUS = 'shipment_success_status';
+    const XML_SHIPMENT_FAIL_STATUS = 'order_statuses/shipment_fail_status';
 
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;
@@ -167,6 +169,24 @@ class Data extends \Mygento\Base\Helper\Data
             ',',
             $this->getConfig(self::XML_AUTO_SHIPPING_STATUSES, $scopeCode) ?: ''
         );
+    }
+
+    /**
+     * @param int|string $scopeCode
+     * @return bool|string
+     */
+    public function getShipmentFailStatus($scopeCode = null)
+    {
+        return $this->getConfig(self::XML_SHIPMENT_FAIL_STATUS, $scopeCode) ?: false;
+    }
+
+    /**
+     * @param int|string $scopeCode
+     * @return bool|string
+     */
+    public function getShipmentSuccessStatus($scopeCode = null)
+    {
+        return $this->getConfig(self::XML_SHIPMENT_SUCCESS_STATUS, $scopeCode) ?: false;
     }
 
     /**

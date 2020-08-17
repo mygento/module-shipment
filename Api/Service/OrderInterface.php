@@ -48,4 +48,10 @@ interface OrderInterface
      * @return \Magento\Sales\Model\Order
      */
     public function findOrderByTracking(string $trackingCode, string $carrier);
+
+    /**
+     * @param \Magento\Sales\Model\Order $order
+     * @param array $messages
+     */
+    public function failOrder($order, array $messages);
 }

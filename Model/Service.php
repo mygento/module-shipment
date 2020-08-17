@@ -16,6 +16,11 @@ use Magento\Sales\Api\Data\OrderInterface;
 class Service implements \Mygento\Shipment\Api\Service\BaseInterface
 {
     /**
+     * @var \Magento\Sales\Api\OrderRepositoryInterface
+     */
+    private $orderRepo;
+
+    /**
      * @var \Mygento\Shipment\Model\Service\Tracking
      */
     private $tracking;
@@ -50,6 +55,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      * @param \Mygento\Base\Helper\Discount $taxHelper
      * @param \Mygento\Shipment\Helper\Dimensions $dimensionHelper
      * @param \Mygento\Shipment\Model\Service\Tracking $tracking
+     * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepo
      * @param \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory
      * @param \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory
      */
@@ -58,6 +64,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         \Mygento\Base\Helper\Discount $taxHelper,
         \Mygento\Shipment\Helper\Dimensions $dimensionHelper,
         \Mygento\Shipment\Model\Service\Tracking $tracking,
+        \Magento\Sales\Api\OrderRepositoryInterface $orderRepo,
         \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory,
         \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory
     ) {
@@ -67,6 +74,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         $this->dimensionHelper = $dimensionHelper;
         $this->timeFactory = $timeFactory;
         $this->tracking = $tracking;
+        $this->orderRepo = $orderRepo;
     }
 
     /**
@@ -148,6 +156,14 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
     public function getDimensionHelper()
     {
         return $this->dimensionHelper;
+    }
+
+    /**
+     * @return \Magento\Sales\Api\OrderRepositoryInterface
+     */
+    public function getOrderRepository()
+    {
+        return $this->orderRepo;
     }
 
     /**

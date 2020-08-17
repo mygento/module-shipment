@@ -33,6 +33,11 @@ interface BaseInterface
     public function getDimensionHelper();
 
     /**
+     * @return \Magento\Sales\Api\OrderRepositoryInterface
+     */
+    public function getOrderRepository();
+
+    /**
      * @param \Magento\Sales\Api\Data\OrderInterface $order
      * @param \Mygento\Shipment\Helper\Data $helper
      */

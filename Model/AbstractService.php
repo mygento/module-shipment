@@ -127,6 +127,14 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     }
 
     /**
+     * @inheridoc
+     */
+    public function getOrderRepository()
+    {
+        return $this->baseService->getOrderRepository();
+    }
+
+    /**
      * Добавление кода отслеживания
      *
      * @param \Magento\Sales\Model\Order $order
@@ -162,5 +170,19 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     public function findOrderByTracking(string $trackingCode, string $carrier)
     {
         return $this->baseService->findOrderByTracking($trackingCode, $carrier);
+    }
+
+    /**
+     * @param \Magento\Sales\Model\Order $order
+     * @param array $messages
+     */
+    public function failOrder($order, array $messages)
+    {
+        $fail = $this->helper->getShipmentFailStatus($order->getStoreId()) ?? false;
+        $order->addCommentToStatusHistory(
+            __('Order ship fail by %1: %2', $this->helper->getCode(), implode(PHP_EOL, $messages)),
+            $fail
+        );
+        $this->getOrderRepository()->save($order);
     }
 }

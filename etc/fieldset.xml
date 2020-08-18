@@ -17,7 +17,7 @@
             <field name="shipment_date">
                 <aspect name="to_order_address" />
             </field>
-            <field name="shipping_pickup">
+            <field name="pickup_point">
                 <aspect name="to_order_address" />
             </field>
         </fieldset>

@@ -38,7 +38,7 @@ class ShippingAddressManagement
         $extAttributes = $address->getExtensionAttributes();
         if (!empty($extAttributes)) {
             try {
-                $address->setShippingPickup($extAttributes->getPickupPoint());
+                $address->setPickupPoint($extAttributes->getPickupPoint());
             } catch (\Exception $e) {
                 $this->helper->critical($e->getMessage(), ['exception' => $e]);
             }

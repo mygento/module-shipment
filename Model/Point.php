@@ -17,6 +17,14 @@ use Magento\Framework\Model\AbstractModel;
 class Point extends AbstractModel implements \Mygento\Shipment\Api\Data\PointInterface
 {
     /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getProvider() . '_' . $this->getProviderUid();
+    }
+
+    /**
      * Get id
      * @return int|null
      */

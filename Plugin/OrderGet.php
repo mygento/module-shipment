@@ -55,6 +55,7 @@ class OrderGet
         $shippingAddress->getExtensionAttributes()->setDeliveryTimeFrom($shippingAddress->getDeliveryTimeFrom());
         $shippingAddress->getExtensionAttributes()->setDeliveryTimeTo($shippingAddress->getDeliveryTimeTo());
         $shippingAddress->getExtensionAttributes()->setShipmentDate($shippingAddress->getShipmentDate());
+        $shippingAddress->getExtensionAttributes()->setPickupPoint($shippingAddress->getPickupPoint());
 
         return $order;
     }

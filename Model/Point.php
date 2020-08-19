@@ -158,6 +158,44 @@ class Point extends AbstractModel implements \Mygento\Shipment\Api\Data\PointInt
     }
 
     /**
+     * Get region
+     * @return string|null
+     */
+    public function getRegion()
+    {
+        return $this->getData(self::REGION);
+    }
+
+    /**
+     * Set region
+     * @param string $region
+     * @return $this
+     */
+    public function setRegion($region)
+    {
+        return $this->setData(self::REGION, $region);
+    }
+
+    /**
+     * Get region id
+     * @return int|null
+     */
+    public function getRegionId()
+    {
+        return $this->getData(self::REGION_ID);
+    }
+
+    /**
+     * Set region id
+     * @param int $regionId
+     * @return $this
+     */
+    public function setRegionId($regionId)
+    {
+        return $this->setData(self::REGION_ID, $regionId);
+    }
+
+    /**
      * Get city id
      * @return int|null
      */
@@ -538,7 +576,7 @@ class Point extends AbstractModel implements \Mygento\Shipment\Api\Data\PointInt
     }
 
     /**
-     * Get online prepaid
+     * Get prepaid only
      * @return bool|null
      */
     public function getPrepaidOnly()
@@ -547,7 +585,7 @@ class Point extends AbstractModel implements \Mygento\Shipment\Api\Data\PointInt
     }
 
     /**
-     * Set online prepaid
+     * Set prepaid only
      * @param bool $prepaidOnly
      * @return $this
      */

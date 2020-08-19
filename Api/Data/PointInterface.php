@@ -17,6 +17,8 @@ interface PointInterface
     const PRIORITY = 'priority';
     const TYPE = 'type';
     const COUNTRY_ID = 'country_id';
+    const REGION = 'region';
+    const REGION_ID = 'region_id';
     const CITY_ID = 'city_id';
     const CITY = 'city';
     const STREET = 'street';
@@ -133,6 +135,32 @@ interface PointInterface
      * @return $this
      */
     public function setCountryId($countryId);
+
+    /**
+     * Get region
+     * @return string|null
+     */
+    public function getRegion();
+
+    /**
+     * Set region
+     * @param string $region
+     * @return $this
+     */
+    public function setRegion($region);
+
+    /**
+     * Get region id
+     * @return int|null
+     */
+    public function getRegionId();
+
+    /**
+     * Set region id
+     * @param int $regionId
+     * @return $this
+     */
+    public function setRegionId($regionId);
 
     /**
      * Get city id
@@ -395,13 +423,13 @@ interface PointInterface
     public function setCardDelivery($cardDelivery);
 
     /**
-     * Get online prepaid
+     * Get prepaid only
      * @return bool|null
      */
     public function getPrepaidOnly();
 
     /**
-     * Set online prepaid
+     * Set prepaid only
      * @param bool $prepaidOnly
      * @return $this
      */

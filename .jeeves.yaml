@@ -38,6 +38,15 @@ Mygento:
           nullable: false
           comment: 'Country Id in ISO-2'
           length: 2
+        region:
+          type: varchar
+          nullable: true
+          comment: 'Region'
+        region_id:
+          type: int
+          unsigned: true
+          nullable: true
+          comment: 'Region ID'
         city_id:
           type: int
           unsigned: true
@@ -83,14 +92,6 @@ Mygento:
           type: varchar
           nullable: true
           comment: 'Working Hours'
-        min_size:
-          type: decimal
-          unsigned: true
-          nullable: false
-          comment: 'Min Size'
-          precision: 5
-          scale: 2
-          default: 0
         max_size:
           type: decimal
           unsigned: true
@@ -99,6 +100,14 @@ Mygento:
           precision: 5
           scale: 2
           default: 999
+        min_weight:
+          type: decimal
+          unsigned: true
+          nullable: false
+          comment: 'Min Weight'
+          precision: 5
+          scale: 2
+          default: 0
         max_weight:
           type: decimal
           unsigned: true

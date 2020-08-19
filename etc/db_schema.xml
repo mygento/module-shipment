@@ -38,6 +38,8 @@
         <column xsi:type="smallint" name="priority" nullable="false" identity="false" unsigned="true" default="0" comment="Point Priority"/>
         <column xsi:type="varchar" name="type" nullable="false" length="255" comment="Type"/>
         <column xsi:type="varchar" name="country_id" nullable="false" length="2" comment="Country Id in ISO-2"/>
+        <column xsi:type="varchar" name="region" nullable="true" length="255" comment="Region"/>
+        <column xsi:type="int" name="region_id" nullable="true" identity="false" unsigned="true" comment="Region ID"/>
         <column xsi:type="int" name="city_id" nullable="true" identity="false" unsigned="true" comment="City ID"/>
         <column xsi:type="varchar" name="city" nullable="false" length="255" comment="City"/>
         <column xsi:type="varchar" name="street" nullable="false" length="255" comment="Street"/>

@@ -118,6 +118,23 @@ class PointManager implements \Mygento\Shipment\Api\PointManagerInterface
     }
 
     /**
+     * @param string $carrier
+     * @param string $code
+     * @return false|\Mygento\Shipment\Api\Data\PointInterface
+     */
+    public function getPointById(string $carrier, string $code)
+    {
+        /** @var \Mygento\Shipment\Model\ResourceModel\Point\Collection $collection */
+        $collection = $this->collectionFactory->create();
+        $collection->addFieldToFilter(PointInterface::PROVIDER, $carrier);
+        $collection->addFieldToFilter(PointInterface::PROVIDER_UID, $code);
+        $collection->setPageSize(1);
+        $collection->setCurPage(1);
+
+        return current($collection->getItems());
+    }
+
+    /**
      * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
     public function getConnection()

@@ -38,6 +38,13 @@ interface PointManagerInterface
     public function getPointsByCity(string $carrier, string $city);
 
     /**
+     * @param string $carrier
+     * @param string $code
+     * @return false|\Mygento\Shipment\Api\Data\PointInterface
+     */
+    public function getPointById(string $carrier, string $code);
+
+    /**
      * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
     public function getConnection();

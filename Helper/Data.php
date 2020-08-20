@@ -24,6 +24,7 @@ class Data extends \Mygento\Base\Helper\Data
     const XML_SHIPMENT_FAIL_STATUS = 'order_statuses/shipment_fail_status';
     const XML_SHIPMENT_TRACK_CHECK = 'order_statuses/track_check';
     const XML_SHIPMENT_TRACK_STATUSES = 'order_statuses/track_statuses';
+    const XML_SHIPMENT_TRACK_MAPPING = 'order_statuses/track_mapping';
 
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;
@@ -192,6 +193,15 @@ class Data extends \Mygento\Base\Helper\Data
             ',',
             $this->getConfig(self::XML_SHIPMENT_TRACK_STATUSES, $scopeCode) ?: ''
         );
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return string
+     */
+    public function getTrackMapping($scopeCode = null): string
+    {
+        return $this->getConfig(self::XML_SHIPMENT_TRACK_MAPPING, $scopeCode) ?: '[]';
     }
 
     /**

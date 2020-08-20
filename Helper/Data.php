@@ -22,6 +22,8 @@ class Data extends \Mygento\Base\Helper\Data
     const XML_AUTO_SHIPPING_STATUSES = 'order_statuses/autoshipping_statuses';
     const XML_SHIPMENT_SUCCESS_STATUS = 'shipment_success_status';
     const XML_SHIPMENT_FAIL_STATUS = 'order_statuses/shipment_fail_status';
+    const XML_SHIPMENT_TRACK_CHECK = 'order_statuses/track_check';
+    const XML_SHIPMENT_TRACK_STATUSES = 'order_statuses/track_statuses';
 
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;
@@ -161,6 +163,15 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
+     * @return bool
+     */
+    public function isEnabledTrackCheck($scopeCode = null): bool
+    {
+        return (bool) $this->getConfig(self::XML_SHIPMENT_TRACK_CHECK, $scopeCode);
+    }
+
+    /**
+     * @param mixed|null $scopeCode
      * @return array
      */
     public function getAutoShippingStatuses($scopeCode = null): array
@@ -168,6 +179,18 @@ class Data extends \Mygento\Base\Helper\Data
         return explode(
             ',',
             $this->getConfig(self::XML_AUTO_SHIPPING_STATUSES, $scopeCode) ?: ''
+        );
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return array
+     */
+    public function getTrackCheckStatuses($scopeCode = null): array
+    {
+        return explode(
+            ',',
+            $this->getConfig(self::XML_SHIPMENT_TRACK_STATUSES, $scopeCode) ?: ''
         );
     }
 

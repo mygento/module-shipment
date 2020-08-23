@@ -8,6 +8,7 @@
 
 namespace Mygento\Shipment\Helper;
 
+use Magento\Framework\Api\Filter;
 use Mygento\Base\Api\ProductAttributeHelperInterface;
 
 class Data extends \Mygento\Base\Helper\Data
@@ -32,14 +33,19 @@ class Data extends \Mygento\Base\Helper\Data
     /** @var string */
     protected $code = 'shipment';
 
+    /** @var \Magento\Framework\Api\FilterBuilder */
+    private $filterBuilder;
+
     /**
      * @param \Magento\Checkout\Model\Session $checkoutSession
+     * @param \Magento\Framework\Api\FilterBuilder $filterBuilder
      * @param \Mygento\Base\Model\LogManager $logManager
      * @param \Magento\Framework\Encryption\Encryptor $encryptor
      * @param \Magento\Framework\App\Helper\Context $context
      */
     public function __construct(
         \Magento\Checkout\Model\Session $checkoutSession,
+        \Magento\Framework\Api\FilterBuilder $filterBuilder,
         \Mygento\Base\Model\LogManager $logManager,
         \Magento\Framework\Encryption\Encryptor $encryptor,
         \Magento\Framework\App\Helper\Context $context
@@ -50,6 +56,7 @@ class Data extends \Mygento\Base\Helper\Data
             $context
         );
         $this->checkoutSession = $checkoutSession;
+        $this->filterBuilder = $filterBuilder;
     }
 
     /**
@@ -220,6 +227,30 @@ class Data extends \Mygento\Base\Helper\Data
     public function getShipmentSuccessStatus($scopeCode = null)
     {
         return $this->getConfig(self::XML_SHIPMENT_SUCCESS_STATUS, $scopeCode) ?: false;
+    }
+
+    /**
+     * @param string $field
+     * @param array|string|null $value
+     * @param string $condition
+     * @return Filter[]
+     */
+    public function getCarrierFilters(
+        string $field = 'shipping_method',
+        $value = null,
+        string $condition = 'like'
+    ): array {
+        if ($value === null) {
+            $value = $this->getCarrierCode() . '_%';
+        }
+
+        return [
+            $this->filterBuilder
+                ->setField($field)
+                ->setConditionType($condition)
+                ->setValue($value)
+                ->create(),
+        ];
     }
 
     /**

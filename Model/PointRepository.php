@@ -8,9 +8,6 @@
 
 namespace Mygento\Shipment\Model;
 
-use Magento\Framework\Api\SortOrder;
-use Magento\Framework\Data\Collection;
-
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
@@ -29,21 +26,30 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
     private $searchResultsFactory;
 
     /**
-     * @param \Mygento\Shipment\Model\ResourceModel\Point $resource
-     * @param \Mygento\Shipment\Model\ResourceModel\Point\CollectionFactory $collectionFactory
+     * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface
+     */
+    private $collectionProcessor;
+
+    /**
+     * PointRepository constructor.
+     * @param ResourceModel\Point $resource
+     * @param ResourceModel\Point\CollectionFactory $collectionFactory
      * @param \Mygento\Shipment\Api\Data\PointInterfaceFactory $entityFactory
      * @param \Mygento\Shipment\Api\Data\PointSearchResultsInterfaceFactory $searchResultsFactory
+     * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface|null $collectionProcessor
      */
     public function __construct(
         ResourceModel\Point $resource,
         ResourceModel\Point\CollectionFactory $collectionFactory,
         \Mygento\Shipment\Api\Data\PointInterfaceFactory $entityFactory,
-        \Mygento\Shipment\Api\Data\PointSearchResultsInterfaceFactory $searchResultsFactory
+        \Mygento\Shipment\Api\Data\PointSearchResultsInterfaceFactory $searchResultsFactory,
+        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor = null
     ) {
         $this->resource = $resource;
         $this->collectionFactory = $collectionFactory;
         $this->entityFactory = $entityFactory;
         $this->searchResultsFactory = $searchResultsFactory;
+        $this->collectionProcessor = $collectionProcessor;
     }
 
     /**
@@ -119,33 +125,10 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
     {
         /** @var \Mygento\Shipment\Model\ResourceModel\Point\Collection $collection */
         $collection = $this->collectionFactory->create();
-        foreach ($criteria->getFilterGroups() as $filterGroup) {
-            $fields = [];
-            $conditions = [];
-            foreach ($filterGroup->getFilters() as $filter) {
-                $condition = $filter->getConditionType() ? $filter->getConditionType() : 'eq';
-                $fields[] = $filter->getField();
-                $conditions[] = [$condition => $filter->getValue()];
-            }
-            if ($fields) {
-                $collection->addFieldToFilter($fields, $conditions);
-            }
+
+        if ($this->collectionProcessor) {
+            $this->collectionProcessor->process($criteria, $collection);
         }
-        $sortOrders = $criteria->getSortOrders();
-        $sortAsc = SortOrder::SORT_ASC;
-        $orderAsc = Collection::SORT_ORDER_ASC;
-        $orderDesc = Collection::SORT_ORDER_DESC;
-        if ($sortOrders) {
-            /** @var SortOrder $sortOrder */
-            foreach ($sortOrders as $sortOrder) {
-                $collection->addOrder(
-                    $sortOrder->getField(),
-                    ($sortOrder->getDirection() == $sortAsc) ? $orderAsc : $orderDesc
-                );
-            }
-        }
-        $collection->setCurPage($criteria->getCurrentPage());
-        $collection->setPageSize($criteria->getPageSize());
 
         /** @var \Mygento\Shipment\Api\Data\PointSearchResultsInterface $searchResults */
         $searchResults = $this->searchResultsFactory->create();

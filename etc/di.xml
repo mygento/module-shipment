@@ -27,6 +27,21 @@
     <preference for="Mygento\Shipment\Api\Data\PointInterface" type="Mygento\Shipment\Model\Point"/>
     <preference for="Mygento\Shipment\Api\Data\PointSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
+    <virtualType name="Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Mygento\Shipment\Api\PointRepositoryInterface">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor</argument>
+        </arguments>
+    </type>
+
     <type name="Magento\Framework\Model\Entity\RepositoryFactory">
         <arguments>
             <argument name="entities" xsi:type="array">

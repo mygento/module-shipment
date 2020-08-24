@@ -254,6 +254,15 @@ class Data extends \Mygento\Base\Helper\Data
     }
 
     /**
+     * @param \Magento\Sales\Model\Order $order
+     * @return string
+     */
+    public function getUniqueOrderId(\Magento\Sales\Model\Order $order)
+    {
+        return $order->getIncrementId();
+    }
+
+    /**
      * @return string
      */
     protected function getDebugConfigPath(): string

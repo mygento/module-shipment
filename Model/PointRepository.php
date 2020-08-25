@@ -128,21 +128,6 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
     {
         /** @var \Mygento\Shipment\Model\ResourceModel\Point\Collection $collection */
         $collection = $this->collectionFactory->create();
-        $sortOrders = $criteria->getSortOrders();
-        $sortAsc = SortOrder::SORT_ASC;
-        $orderAsc = Collection::SORT_ORDER_ASC;
-        $orderDesc = Collection::SORT_ORDER_DESC;
-        if ($sortOrders) {
-            /** @var SortOrder $sortOrder */
-            foreach ($sortOrders as $sortOrder) {
-                $collection->addOrder(
-                    $sortOrder->getField(),
-                    ($sortOrder->getDirection() == $sortAsc) ? $orderAsc : $orderDesc
-                );
-            }
-        }
-        $collection->setCurPage($criteria->getCurrentPage());
-        $collection->setPageSize($criteria->getPageSize());
 
         if ($this->collectionProcessor) {
             $this->collectionProcessor->process($criteria, $collection);

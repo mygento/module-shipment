@@ -27,13 +27,12 @@
     <preference for="Mygento\Shipment\Api\Data\PointInterface" type="Mygento\Shipment\Model\Point"/>
     <preference for="Mygento\Shipment\Api\Data\PointSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
 
-    <virtualType name="Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor\JoinProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\JoinProcessor"/>
-    <virtualType name="Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor\FilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor"/>
     <virtualType name="Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
-                <item name="filters" xsi:type="object">Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor\FilterProcessor</item>
-                <item name="joins" xsi:type="object">Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor\JoinProcessor</item>
+                <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
             </argument>
         </arguments>
     </virtualType>

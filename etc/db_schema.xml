@@ -11,8 +11,7 @@
 
     <!--Core-->
     <table name="quote_address">
-        <column xsi:type="varchar" name="pickup_point" nullable="true" comment="Shipping Pickup Point" onCreate="migrateDataFrom(shipping_pickup)" />
-
+        <column xsi:type="varchar" name="pickup_point" nullable="true" comment="Shipping Pickup Point" />
         <column xsi:type="varchar" name="shipment_date" nullable="true" length="10" comment="Shipment Date"/>
         <column xsi:type="varchar" name="delivery_date" nullable="true" length="10" comment="Shipping Delivery Date"/>
         <column xsi:type="varchar" name="delivery_time_from" nullable="true" length="5" comment="Shipping Delivery Time From"/>
@@ -21,8 +20,7 @@
     </table>
 
     <table name="sales_order_address">
-        <column xsi:type="varchar" name="pickup_point" nullable="true" comment="Shipping Pickup Point" onCreate="migrateDataFrom(shipping_pickup)" />
-
+        <column xsi:type="varchar" name="pickup_point" nullable="true" comment="Shipping Pickup Point" />
         <column xsi:type="varchar" name="shipment_date" nullable="true" length="10" comment="Shipment Date"/>
         <column xsi:type="varchar" name="delivery_date" nullable="true" length="10" comment="Shipping Delivery Date"/>
         <column xsi:type="varchar" name="delivery_time_from" nullable="true" length="5" comment="Shipping Delivery Time From"/>

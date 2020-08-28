@@ -112,7 +112,7 @@ Mygento:
           type: decimal
           unsigned: true
           nullable: false
-          comment: 'Max Width'
+          comment: 'Max Weight'
           precision: 5
           scale: 2
           default: 999
@@ -197,6 +197,8 @@ Mygento:
           type: float
         order_sum:
           type: float
+        store_id:
+          type: int
         raw_request:
           type: varchar
     CalculateResult:

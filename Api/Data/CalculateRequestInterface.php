@@ -16,6 +16,7 @@ interface CalculateRequestInterface
     const REGION_CODE = 'region_code';
     const WEIGHT = 'weight';
     const ORDER_SUM = 'order_sum';
+    const STORE_ID = 'store_id';
     const RAW_REQUEST = 'raw_request';
 
     /**
@@ -95,6 +96,19 @@ interface CalculateRequestInterface
      * @return $this
      */
     public function setOrderSum($orderSum);
+
+    /**
+     * Get store id
+     * @return int|null
+     */
+    public function getStoreId();
+
+    /**
+     * Set store id
+     * @param int $storeId
+     * @return $this
+     */
+    public function setStoreId($storeId);
 
     /**
      * Get raw request

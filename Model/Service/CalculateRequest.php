@@ -128,6 +128,25 @@ class CalculateRequest extends DataObject implements CalculateRequestInterface
     }
 
     /**
+     * Get store id
+     * @return int|null
+     */
+    public function getStoreId()
+    {
+        return $this->getData(self::STORE_ID);
+    }
+
+    /**
+     * Set store id
+     * @param int $storeId
+     * @return $this
+     */
+    public function setStoreId($storeId)
+    {
+        return $this->setData(self::STORE_ID, $storeId);
+    }
+
+    /**
      * Get raw request
      * @return \Magento\Quote\Model\Quote\Address\RateRequest|null
      */

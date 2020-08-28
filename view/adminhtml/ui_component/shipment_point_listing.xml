@@ -118,6 +118,26 @@
                 <label translate="true">Country Id</label>
             </settings>
         </column>
+        <column name="region">
+            <settings>
+                <filter>text</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Region</label>
+            </settings>
+        </column>
+        <column name="region_id">
+            <settings>
+                <filter>textRange</filter>
+                <dataType>text</dataType>
+                <editor>
+                    <editorType>text</editorType>
+                </editor>
+                <label translate="true">Region Id</label>
+            </settings>
+        </column>
         <column name="city_id">
             <settings>
                 <filter>textRange</filter>
@@ -327,7 +347,7 @@
                 <editor>
                     <editorType>select</editorType>
                 </editor>
-                <label translate="true">Online Prepaid</label>
+                <label translate="true">Prepaid Only</label>
                 <options class="Magento\Config\Model\Config\Source\Yesno"/>
             </settings>
         </column>

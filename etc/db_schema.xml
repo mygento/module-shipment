@@ -73,5 +73,11 @@
         <index referenceId="MYG_SHIP_POINT_ACTIVE" indexType="btree">
             <column name="is_active"/>
         </index>
+        <index referenceId="MYG_SHIP_POINT_COUNTRY" indexType="btree">
+            <column name="country_id"/>
+        </index>
+        <index referenceId="MYG_SHIP_POINT_REGION" indexType="btree">
+            <column name="region_id"/>
+        </index>
     </table>
 </schema>

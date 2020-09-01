@@ -181,6 +181,10 @@ Mygento:
             columns: ['provider', 'provider_uid']
         MYG_SHIP_POINT_ACTIVE:
             columns: ['is_active']
+        MYG_SHIP_POINT_COUNTRY:
+            columns: ['country_id']
+        MYG_SHIP_POINT_REGION:
+            columns: ['region_id']
     CalculateRequest:
       gui: false
       readonly: true

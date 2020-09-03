@@ -50,6 +50,9 @@ class OrderGet
     private function getOrderAddress(\Magento\Sales\Api\Data\OrderInterface $order)
     {
         $shippingAddress = $order->getShippingAddress();
+        if (!$shippingAddress) {
+            return $order;
+        }
         $shippingAddress->getExtensionAttributes()->setDeliveryEstimate($shippingAddress->getDeliveryEstimate());
         $shippingAddress->getExtensionAttributes()->setDeliveryDate($shippingAddress->getDeliveryDate());
         $shippingAddress->getExtensionAttributes()->setDeliveryTimeFrom($shippingAddress->getDeliveryTimeFrom());

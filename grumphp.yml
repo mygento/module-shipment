@@ -16,5 +16,9 @@ parameters:
             ruleset: ['vendor/mygento/coding-standard/Mygento-Mage2/phpmd.xml']
         phpcs:
             warning_severity: null
+        phpstan:
+          ignore_patterns: ['Test']
+          level: 5
+          memory_limit: "1G"
 #        psalm:
         xmllint:

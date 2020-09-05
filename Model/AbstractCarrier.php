@@ -191,6 +191,14 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
     }
 
     /**
+     * @return \Magento\Shipping\Model\Tracking\Result\Status
+     */
+    protected function getTrackingResultStatus()
+    {
+        return $this->baseCarrier->getTrackingResult();
+    }
+
+    /**
      * @param string $message
      * @return bool|\Magento\Quote\Model\Quote\Address\RateResult\Error
      */

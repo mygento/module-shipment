@@ -8,8 +8,15 @@
 
 namespace Mygento\Shipment\Model;
 
+use Magento\Shipping\Model\Tracking;
+
 class Carrier implements \Mygento\Shipment\Api\Carrier\BaseInterface
 {
+    /**
+     * @var \Magento\Shipping\Model\Tracking\Result\StatusFactory
+     */
+    private $trackingResultFactory;
+
     /**
      * @var \Mygento\Shipment\Api\Data\CalculateRequestInterfaceFactory
      */
@@ -41,19 +48,22 @@ class Carrier implements \Mygento\Shipment\Api\Carrier\BaseInterface
      * @param \Mygento\Shipment\Api\Data\CalculateRequestInterfaceFactory $calculateFactory
      * @param \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory
      * @param \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory
+     * @param \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackingResultFactory
      */
     public function __construct(
         \Mygento\Shipment\Helper\Data $helper,
         \Magento\Checkout\Model\Session $checkoutSession,
         \Mygento\Shipment\Api\Data\CalculateRequestInterfaceFactory $calculateFactory,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
-        \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory
+        \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
+        \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackingResultFactory
     ) {
         $this->helper = $helper;
         $this->rateResultFactory = $rateResultFactory;
         $this->rateMethodFactory = $rateMethodFactory;
         $this->checkoutSession = $checkoutSession;
         $this->calculateFactory = $calculateFactory;
+        $this->trackingResultFactory = $trackingResultFactory;
     }
 
     /**
@@ -93,5 +103,13 @@ class Carrier implements \Mygento\Shipment\Api\Carrier\BaseInterface
         }
 
         return $subtotal;
+    }
+
+    /**
+     * @return \Magento\Shipping\Model\Tracking\Result\Status
+     */
+    public function getTrackingResult(): Tracking\Result\Status
+    {
+        return $this->trackingResultFactory->create();
     }
 }

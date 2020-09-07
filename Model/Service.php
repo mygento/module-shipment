@@ -170,6 +170,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      * Добавление кода отслеживания
      *
      * @param \Magento\Sales\Model\Order $order
+     * @param string $carrierCode
      * @param string $trackingCode
      * @param bool $notify
      *
@@ -178,10 +179,11 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      */
     public function setTracking(
         \Magento\Sales\Model\Order $order,
+        string $carrierCode,
         string $trackingCode,
         bool $notify = false
     ) {
-        return $this->tracking->setTracking($order, $trackingCode, $notify);
+        return $this->tracking->setTracking($order, $carrierCode, $trackingCode, $notify);
     }
 
     /**

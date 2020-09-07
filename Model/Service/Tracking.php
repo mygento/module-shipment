@@ -79,6 +79,7 @@ class Tracking
      * Добавление кода отслеживания
      *
      * @param \Magento\Sales\Model\Order $order
+     * @param string $carrierCode
      * @param string $trackingCode
      * @param bool $notify
      *
@@ -87,13 +88,12 @@ class Tracking
      */
     public function setTracking(
         \Magento\Sales\Model\Order $order,
+        string $carrierCode,
         string $trackingCode,
         bool $notify = false
     ) {
-        $shipping = $order->getShippingMethod(true);
-
         $data = [
-            'carrier_code' => $shipping->getCarrierCode(),
+            'carrier_code' => $carrierCode,
             'title' => $order->getShippingDescription(),
             'number' => $trackingCode,
         ];
@@ -135,7 +135,7 @@ class Tracking
 
         $shipment->register();
         $shipment->getOrder()->setCustomerNoteNotify($notify);
-        $shipment->addComment(__('Order shipped by %1', $shipping->getCarrierCode()));
+        $shipment->addComment(__('Order shipped by %1', $carrierCode));
         $shipment->getOrder()->setIsInProcess(true);
         $transaction = $this->transactionFactory->create();
         $transaction->addObject($shipment);

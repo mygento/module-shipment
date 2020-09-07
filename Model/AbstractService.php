@@ -138,6 +138,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
      * Добавление кода отслеживания
      *
      * @param \Magento\Sales\Model\Order $order
+     * @param string $carrierCode
      * @param string $trackingCode
      * @param bool $notify
      *
@@ -145,10 +146,11 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
      */
     public function setTracking(
         \Magento\Sales\Model\Order $order,
+        string $carrierCode,
         string $trackingCode,
         bool $notify = false
     ) {
-        return $this->baseService->setTracking($order, $trackingCode, $notify);
+        return $this->baseService->setTracking($order, $carrierCode, $trackingCode, $notify);
     }
 
     /**

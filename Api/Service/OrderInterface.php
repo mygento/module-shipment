@@ -30,6 +30,7 @@ interface OrderInterface
      * Добавление кода отслеживания
      *
      * @param \Magento\Sales\Model\Order $order
+     * @param string $carrierCode
      * @param string $trackingCode
      * @param bool $notify
      *
@@ -37,6 +38,7 @@ interface OrderInterface
      */
     public function setTracking(
         \Magento\Sales\Model\Order $order,
+        string $carrierCode,
         string $trackingCode,
         bool $notify = false
     );

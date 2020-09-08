@@ -177,6 +177,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     /**
      * @param \Magento\Sales\Model\Order $order
      * @param array $messages
+     * @return null
      */
     public function failOrder($order, array $messages)
     {
@@ -186,5 +187,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
             $fail
         );
         $this->getOrderRepository()->save($order);
+
+        return null;
     }
 }

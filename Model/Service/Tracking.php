@@ -11,6 +11,9 @@ namespace Mygento\Shipment\Model\Service;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Sales\Api\Data\ShipmentTrackInterface;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class Tracking
 {
     /**
@@ -49,10 +52,16 @@ class Tracking
     private $orderRepo;
 
     /**
+     * @var \Magento\Framework\Event\ManagerInterface
+     */
+    private $eventManager;
+
+    /**
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepo
      * @param \Magento\Sales\Api\ShipmentTrackRepositoryInterface $trackRepo
      * @param \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender
      * @param \Magento\Framework\Api\SearchCriteriaBuilder $builder
+     * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory
      * @param \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory
      * @param \Magento\Framework\DB\TransactionFactory $transactionFactory
@@ -62,6 +71,7 @@ class Tracking
         \Magento\Sales\Api\ShipmentTrackRepositoryInterface $trackRepo,
         \Magento\Sales\Model\Order\Email\Sender\ShipmentSender $shipmentSender,
         \Magento\Framework\Api\SearchCriteriaBuilder $builder,
+        \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory,
         \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory,
         \Magento\Framework\DB\TransactionFactory $transactionFactory
@@ -70,6 +80,7 @@ class Tracking
         $this->trackRepo = $trackRepo;
         $this->shipmentSender = $shipmentSender;
         $this->builder = $builder;
+        $this->eventManager = $eventManager;
         $this->shipmentFactory = $shipmentFactory;
         $this->trackFactory = $trackFactory;
         $this->transactionFactory = $transactionFactory;
@@ -100,11 +111,18 @@ class Tracking
 
         // Сохранение кода для созданной доставки
         if ($order->hasShipments()) {
+            /** @var \Magento\Sales\Model\Order\Shipment $shipment */
             $shipment = $order->getShipmentsCollection()->getFirstItem();
 
             if (count($shipment->getAllTracks()) !== 0) {
                 throw new \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
             }
+
+            $this->eventManager->dispatch('mygento_shipment_track_assign', [
+                'shipment' => $shipment,
+                'order' => $shipment->getOrder(),
+                'tracking' => $trackingCode,
+            ]);
 
             $shipment->addTrack($this->trackFactory->create()->addData($data));
             $transaction = $this->transactionFactory->create();
@@ -131,12 +149,20 @@ class Tracking
             ];
         }
 
+        /** @var \Magento\Sales\Model\Order\Shipment $shipment */
         $shipment = $this->shipmentFactory->create($order, $items, [$data]);
 
         $shipment->register();
         $shipment->getOrder()->setCustomerNoteNotify($notify);
         $shipment->addComment(__('Order shipped by %1', $carrierCode));
         $shipment->getOrder()->setIsInProcess(true);
+
+        $this->eventManager->dispatch('mygento_shipment_track_assign', [
+            'shipment' => $shipment,
+            'order' => $shipment->getOrder(),
+            'tracking' => $trackingCode,
+        ]);
+
         $transaction = $this->transactionFactory->create();
         $transaction->addObject($shipment);
         $transaction->addObject($shipment->getOrder());
@@ -153,7 +179,7 @@ class Tracking
      * @param string $trackingCode
      * @param string $carrier
      * @throws \Magento\Framework\Exception\NoSuchEntityException
-     * @return \Magento\Sales\Model\Order
+     * @return \Magento\Sales\Api\Data\OrderInterface|\Magento\Sales\Model\Order
      */
     public function findOrderByTracking(string $trackingCode, string $carrier)
     {

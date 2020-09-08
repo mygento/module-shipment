@@ -26,6 +26,9 @@ class Data extends \Mygento\Base\Helper\Data
     const XML_SHIPMENT_TRACK_CHECK = 'order_statuses/track_check';
     const XML_SHIPMENT_TRACK_STATUSES = 'order_statuses/track_statuses';
     const XML_SHIPMENT_TRACK_MAPPING = 'order_statuses/track_mapping';
+    const XML_MARKING = 'marking/enabled';
+    const XML_MARKING_FLAG = 'marking/marking_flag';
+    const XML_MARKING_FIELD = 'marking/marking_field';
 
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;
@@ -227,6 +230,33 @@ class Data extends \Mygento\Base\Helper\Data
     public function getShipmentSuccessStatus($scopeCode = null)
     {
         return $this->getConfig(self::XML_SHIPMENT_SUCCESS_STATUS, $scopeCode) ?: false;
+    }
+
+    /**
+     * @param mixed|null $scopeCode
+     * @return bool
+     */
+    public function isEnabledMarking($scopeCode = null): bool
+    {
+        return (bool) $this->getConfig(self::XML_MARKING, $scopeCode);
+    }
+
+    /**
+     * @param int|string $scopeCode
+     * @return mixed
+     */
+    public function getMarkingFlag($scopeCode = null)
+    {
+        return $this->getConfig(self::XML_MARKING_FLAG, $scopeCode);
+    }
+
+    /**
+     * @param int|string $scopeCode
+     * @return mixed
+     */
+    public function getMarking($scopeCode = null)
+    {
+        return $this->getConfig(self::XML_MARKING_FIELD, $scopeCode);
     }
 
     /**

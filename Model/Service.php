@@ -142,11 +142,21 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
             $attributeCode = $helper->getProductTaxAttribute($order->getStoreId()) ?: '';
         }
 
+        $markFlag = '';
+        $markField = '';
+
+        if ($helper->isEnabledMarking($order->getStoreId())) {
+            $markFlag = $helper->getMarkingFlag($order->getStoreId());
+            $markField = $helper->getMarking($order->getStoreId());
+        }
+
         return $this->taxHelper->getRecalculated(
             $order,
             $helper->getAllProductTax($order->getStoreId()),
             $attributeCode,
-            $helper->getTaxForShipping($order->getStoreId())
+            $helper->getTaxForShipping($order->getStoreId()),
+            $markFlag,
+            $markField
         );
     }
 

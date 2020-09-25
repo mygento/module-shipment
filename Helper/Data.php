@@ -29,6 +29,7 @@ class Data extends \Mygento\Base\Helper\Data
     const XML_MARKING = 'marking/enabled';
     const XML_MARKING_FLAG = 'marking/marking_flag';
     const XML_MARKING_FIELD = 'marking/marking_field';
+    const XML_MARKING_REFUND = 'marking/marking_refund';
 
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;
@@ -257,6 +258,15 @@ class Data extends \Mygento\Base\Helper\Data
     public function getMarking($scopeCode = null)
     {
         return $this->getConfig(self::XML_MARKING_FIELD, $scopeCode);
+    }
+
+    /**
+     * @param int|string $scopeCode
+     * @return mixed
+     */
+    public function getMarkingRefund($scopeCode = null)
+    {
+        return $this->getConfig(self::XML_MARKING_REFUND, $scopeCode);
     }
 
     /**

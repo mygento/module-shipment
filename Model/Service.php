@@ -137,26 +137,30 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         OrderInterface $order,
         \Mygento\Shipment\Helper\Data $helper
     ) {
+        $storeId = $order->getStoreId();
         $attributeCode = '';
-        if (!$helper->isSameTaxPerProduct($order->getStoreId())) {
-            $attributeCode = $helper->getProductTaxAttribute($order->getStoreId()) ?: '';
+        if (!$helper->isSameTaxPerProduct($storeId)) {
+            $attributeCode = $helper->getProductTaxAttribute($storeId) ?: '';
         }
 
         $markFlag = '';
         $markField = '';
+        $markRefund = '';
 
-        if ($helper->isEnabledMarking($order->getStoreId())) {
-            $markFlag = $helper->getMarkingFlag($order->getStoreId());
-            $markField = $helper->getMarking($order->getStoreId());
+        if ($helper->isEnabledMarking($storeId)) {
+            $markFlag = $helper->getMarkingFlag($storeId);
+            $markField = $helper->getMarking($storeId);
+            $markRefund = $helper->getMarkingRefund($storeId);
         }
 
         return $this->taxHelper->getRecalculated(
             $order,
-            $helper->getAllProductTax($order->getStoreId()),
+            $helper->getAllProductTax($storeId),
             $attributeCode,
-            $helper->getTaxForShipping($order->getStoreId()),
+            $helper->getTaxForShipping($storeId),
             $markFlag,
-            $markField
+            $markField,
+            $markRefund
         );
     }
 
@@ -200,7 +204,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      * @param string $trackingCode
      * @param string $carrier
      * @throws \Magento\Framework\Exception\NotFoundException
-     * @return \Magento\Sales\Model\Order
+     * @return \Magento\Sales\Api\Data\OrderInterface|\Magento\Sales\Model\Order
      */
     public function findOrderByTracking(string $trackingCode, string $carrier)
     {

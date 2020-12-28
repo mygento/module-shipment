@@ -23,7 +23,7 @@ interface BaseInterface
     public function getEstimateTimeInstance(string $from, string $to);
 
     /**
-     * @return \Mygento\Base\Helper\Discount
+     * @return \Mygento\Base\Service\RecalculatorFacade
      */
     public function getTaxHelper();
 

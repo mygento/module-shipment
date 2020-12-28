@@ -46,13 +46,13 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
     private $resultFactory;
 
     /**
-     * @var \Mygento\Base\Helper\Discount
+     * @var \Mygento\Base\Service\RecalculatorFacade
      */
     private $taxHelper;
 
     /**
      * @param \Mygento\Shipment\Api\PointManagerInterface $pointManager
-     * @param \Mygento\Base\Helper\Discount $taxHelper
+     * @param \Mygento\Base\Service\RecalculatorFacade $taxHelper
      * @param \Mygento\Shipment\Helper\Dimensions $dimensionHelper
      * @param \Mygento\Shipment\Model\Service\Tracking $tracking
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepo
@@ -61,7 +61,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      */
     public function __construct(
         \Mygento\Shipment\Api\PointManagerInterface $pointManager,
-        \Mygento\Base\Helper\Discount $taxHelper,
+        \Mygento\Base\Service\RecalculatorFacade $taxHelper,
         \Mygento\Shipment\Helper\Dimensions $dimensionHelper,
         \Mygento\Shipment\Model\Service\Tracking $tracking,
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepo,
@@ -121,7 +121,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
     }
 
     /**
-     * @return \Mygento\Base\Helper\Discount
+     * @return \Mygento\Base\Service\RecalculatorFacade
      */
     public function getTaxHelper()
     {
@@ -153,7 +153,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
             $markRefund = $helper->getMarkingRefund($storeId);
         }
 
-        return $this->taxHelper->getRecalculated(
+        return $this->taxHelper->execute(
             $order,
             $helper->getAllProductTax($storeId),
             $attributeCode,

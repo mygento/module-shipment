@@ -13,8 +13,9 @@ interface AutoshipInterface
     /**
      * @param string[] $statuses
      * @param array $filters
+     * @param int|string $storeId
      */
-    public function getOrdersByStatuses(array $statuses, array $filters = []);
+    public function getOrdersByStatuses(array $statuses, array $filters = [], $storeId = null);
 
     /**
      * @param string $field

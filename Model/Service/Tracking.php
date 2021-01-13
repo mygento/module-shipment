@@ -143,10 +143,7 @@ class Tracking
             if (!$item->getQtyToShip() || $item->getIsVirtual()) {
                 continue;
             }
-            $items[$item->getId()] = [
-                'order_item_id' => $item->getId(),
-                'qty' => $item->getQtyToShip(),
-            ];
+            $items[$item->getId()] = (int) $item->getQtyToShip();
         }
 
         /** @var \Magento\Sales\Model\Order\Shipment $shipment */

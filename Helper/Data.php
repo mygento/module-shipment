@@ -188,10 +188,10 @@ class Data extends \Mygento\Base\Helper\Data
      */
     public function getAutoShippingStatuses($scopeCode = null): array
     {
-        return explode(
+        return array_filter(explode(
             ',',
             $this->getConfig(self::XML_AUTO_SHIPPING_STATUSES, $scopeCode) ?: ''
-        );
+        ));
     }
 
     /**
@@ -200,10 +200,10 @@ class Data extends \Mygento\Base\Helper\Data
      */
     public function getTrackCheckStatuses($scopeCode = null): array
     {
-        return explode(
+        return array_filter(explode(
             ',',
             $this->getConfig(self::XML_SHIPMENT_TRACK_STATUSES, $scopeCode) ?: ''
-        );
+        ));
     }
 
     /**

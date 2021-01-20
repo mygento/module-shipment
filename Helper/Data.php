@@ -303,6 +303,30 @@ class Data extends \Mygento\Base\Helper\Data
     }
 
     /**
+     * @param \Magento\Quote\Model\Quote|\Magento\Sales\Model\Order $entity
+     * @return array
+     */
+    public function extractPickupPoint($entity): array
+    {
+        $address = $entity->getShippingAddress();
+        if (!$address) {
+            return [];
+        }
+
+        $point = explode('_', $address->getPickupPoint());
+        if (count($point) < 2) {
+            return [];
+        }
+
+        $result = [
+            'carrier' => array_shift($point),
+        ];
+        $result['pickup'] = implode('_', $point);
+
+        return $result;
+    }
+
+    /**
      * @return string
      */
     protected function getDebugConfigPath(): string

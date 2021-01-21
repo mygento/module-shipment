@@ -2,6 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     <preference for="Mygento\Shipment\Api\Data\CalculateRequestInterface" type="Mygento\Shipment\Model\Service\CalculateRequest" />
     <preference for="Mygento\Shipment\Api\Data\CalculateResultInterface" type="Mygento\Shipment\Model\Service\CalculateResult" />
+    <preference for="Mygento\Shipment\Api\CarrierManagerInterface" type="Mygento\Shipment\Model\CarrierManager"/>
     <preference for="Mygento\Shipment\Api\Data\EstimateTimeInterface" type="Mygento\Shipment\Model\Estimate\Time" />
     <preference for="Mygento\Shipment\Api\PointManagerInterface" type="Mygento\Shipment\Model\PointManager"/>
     <preference for="Mygento\Shipment\Api\Service\AutoshipInterface" type="Mygento\Shipment\Model\Cron\Autoship"/>

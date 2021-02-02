@@ -100,7 +100,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     }
 
     /**
-     * @return \Mygento\Base\Helper\Discount
+     * @return \Mygento\Base\Service\RecalculatorFacade
      */
     public function getTaxHelper()
     {
@@ -127,7 +127,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     }
 
     /**
-     * @inheridoc
+     * @inheritdoc
      */
     public function getOrderRepository()
     {

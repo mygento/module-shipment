@@ -30,7 +30,7 @@ class OrderStatuses extends \Magento\Framework\View\Element\Html\Select
     }
 
     /**
-     * @inheridoc
+     * @inheritdoc
      */
     public function _toHtml()
     {
@@ -46,7 +46,6 @@ class OrderStatuses extends \Magento\Framework\View\Element\Html\Select
 
     /**
      * @param string $value
-     * @return $this
      */
     public function setInputName($value)
     {

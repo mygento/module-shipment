@@ -36,9 +36,12 @@ class ShippingAddressManagement
         \Magento\Quote\Api\Data\AddressInterface $address
     ) {
         $extAttributes = $address->getExtensionAttributes();
-        if (!empty($extAttributes)) {
+        if ($extAttributes instanceof \Magento\Framework\Api\AbstractSimpleObject) {
             try {
-                $address->setPickupPoint($extAttributes->getPickupPoint());
+                $extAttributesArray = $extAttributes->__toArray();
+                if (array_key_exists('pickup_point', $extAttributesArray)) {
+                    $address->setPickupPoint($extAttributes->getPickupPoint());
+                }
             } catch (\Exception $e) {
                 $this->helper->critical($e->getMessage(), ['exception' => $e]);
             }

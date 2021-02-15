@@ -3,6 +3,7 @@
 $order = $block->getOrder();
 $address = $order->getShippingAddress();
 ?>
+<?php if (false == empty($address)): ?>
 <section class="admin__page-section">
     <div class="admin__page-section-title">
         <strong class="title">
@@ -154,3 +155,4 @@ $address = $order->getShippingAddress();
         });
     });
 </script>
+<?php endif; ?>

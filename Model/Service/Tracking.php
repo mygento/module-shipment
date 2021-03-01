@@ -115,7 +115,7 @@ class Tracking
             $shipment = $order->getShipmentsCollection()->getFirstItem();
 
             if (count($shipment->getAllTracks()) !== 0) {
-                throw new \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
+                return $this->matchExistingTrack($shipment, $trackingCode, $carrierCode);
             }
 
             $this->eventManager->dispatch('mygento_shipment_track_assign', [
@@ -196,5 +196,17 @@ class Tracking
         $track = reset($items);
 
         return $this->orderRepo->get($track->getOrderId());
+    }
+
+    private function matchExistingTrack($shipment, $trackingCode, $carrierCode)
+    {
+        foreach ($shipment->getAllTracks() as $t) {
+            /** @var \Magento\Sales\Model\Order\Shipment\Track $t */
+            if ($t->getNumber() === $trackingCode && $t->getCarrierCode() === $carrierCode) {
+                return $shipment;
+            }
+        }
+
+        throw new \Magento\Framework\Exception\CouldNotSaveException(__('Cannot do shipment for the order.'));
     }
 }

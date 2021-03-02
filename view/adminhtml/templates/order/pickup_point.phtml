@@ -1,0 +1,43 @@
+<?php
+/** @var \Mygento\Shipment\Block\Adminhtml\Order\PickupPoint $block */
+?>
+<?php
+$points = $block->getPoints();
+?>
+<dl class="admin__order-shipment-methods">
+    <dl class="admin__order-shipment-methods">
+        <dt class="admin__order-shipment-methods-title"><?= $block->escapeHtml(__('Delivery Pickup Points')) ?>:</dt>
+        <dd class="admin__order-shipment-methods-options">
+            <?php foreach ($points as $pointKey => $pointName): ?>
+                <?php
+                $checked = $block->isPointActive($pointKey) ? 'checked="checked"' : '';
+                $radioProperty = 'name="order[estimate][pickup_point]" type="radio" onclick="order.setPickupPoint(this.value)"'
+                ?>
+                <ul class="admin__order-shipment-methods-options-list">
+                    <li class="admin__field-option">
+                        <input <?= /* @noEscape */ $radioProperty ?>
+                            value="<?= $block->escapeHtmlAttr($pointKey) ?>"
+                            id="s_method_<?= $block->escapeHtmlAttr($pointKey) ?>" <?= /* @noEscape */ $checked ?>
+                            class="admin__control-radio required-entry"
+                        />
+                        <label class="admin__field-label" for="s_method_<?= $block->escapeHtmlAttr($pointKey) ?>">
+                            <strong><?= $pointName ?></strong>
+                        </label>
+                    </li>
+                </ul>
+            <?php endforeach; ?>
+        </dd>
+    </dl>
+</dl>
+<script>
+    order.setPickupPoint = function (date) {
+        var data = {};
+
+        data['estimate[pickup_point]'] = date;
+        this.loadArea([
+            'shipping_method',
+            'totals',
+            'billing_method'
+        ], true, data);
+    };
+</script>

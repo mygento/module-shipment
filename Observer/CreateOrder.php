@@ -47,6 +47,8 @@ class CreateOrder implements \Magento\Framework\Event\ObserverInterface
             $extensionAttributes->setDeliveryTimeTo(null);
             $quote->getShippingAddress()->setDeliveryTimeTo(null);
 
+            $quote->getShippingAddress()->setPickupPoint(null);
+
             $quote->getShippingAddress()->setExtensionAttributes($extensionAttributes);
 
             return;
@@ -74,6 +76,8 @@ class CreateOrder implements \Magento\Framework\Event\ObserverInterface
 
         $extensionAttributes->setDeliveryTimeTo($data['time_to'] ?? null);
         $quote->getShippingAddress()->setDeliveryTimeTo($data['time_to'] ?? null);
+
+        $quote->getShippingAddress()->setPickupPoint($data['pickup_point'] ?? null);
 
         $quote->getShippingAddress()->setExtensionAttributes($extensionAttributes);
     }

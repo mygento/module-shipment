@@ -3,6 +3,7 @@
     <body>
         <referenceContainer name="shipping_method">
             <block class="Mygento\Shipment\Block\Adminhtml\Order\Estimate" name="sales_order_create_estimate" template="Mygento_Shipment::order/estimate.phtml"/>
+            <block class="Mygento\Shipment\Block\Adminhtml\Order\PickupPoint" name="sales_order_create_pickup_point" template="Mygento_Shipment::order/pickup_point.phtml"/>
         </referenceContainer>
     </body>
 </page>

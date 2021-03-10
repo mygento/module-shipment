@@ -8,32 +8,30 @@ $points = $block->getPoints();
     <dl class="admin__order-shipment-methods">
         <dt class="admin__order-shipment-methods-title"><?= $block->escapeHtml(__('Delivery Pickup Points')) ?>:</dt>
         <dd class="admin__order-shipment-methods-options">
+            <datalist id="points" >
+                <?php
+                $selectedValue = '';
+                $selectedName = '';
+                ?>
             <?php foreach ($points as $pointKey => $pointName): ?>
                 <?php
-                $checked = $block->isPointActive($pointKey) ? 'checked="checked"' : '';
-                $radioProperty = 'name="order[estimate][pickup_point]" type="radio" onclick="order.setPickupPoint(this.value)"'
+                if ($block->isPointActive($pointKey)) {
+                    $selectedValue = $pointKey;
+                    $selectedName = $pointName;
+                }
                 ?>
-                <ul class="admin__order-shipment-methods-options-list">
-                    <li class="admin__field-option">
-                        <input <?= /* @noEscape */ $radioProperty ?>
-                            value="<?= $block->escapeHtmlAttr($pointKey) ?>"
-                            id="s_method_<?= $block->escapeHtmlAttr($pointKey) ?>" <?= /* @noEscape */ $checked ?>
-                            class="admin__control-radio required-entry"
-                        />
-                        <label class="admin__field-label" for="s_method_<?= $block->escapeHtmlAttr($pointKey) ?>">
-                            <strong><?= $pointName ?></strong>
-                        </label>
-                    </li>
-                </ul>
+                <option value="<?= $block->escapeHtmlAttr($pointKey) ?>"><?= $pointName ?></option>
             <?php endforeach; ?>
+            </datalist>
+            <input list="points" onchange="order.setPickupPoint(this.value)" value="<?= $selectedName?>" style="width: 100%" class="input-text admin__control-text"/>
+            <input type="hidden" value="<?= $selectedValue?>" name="order[estimate][pickup_point]" />
         </dd>
     </dl>
 </dl>
 <script>
-    order.setPickupPoint = function (date) {
+    order.setPickupPoint = function (point) {
         var data = {};
-
-        data['estimate[pickup_point]'] = date;
+        data['estimate[pickup_point]'] = point;
         this.loadArea([
             'shipping_method',
             'totals',

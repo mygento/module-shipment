@@ -1,4 +1,4 @@
-parameters:
+grumphp:
     git_dir: .
     bin_dir: vendor/bin
     tasks:
@@ -17,8 +17,8 @@ parameters:
         phpcs:
             warning_severity: null
         phpstan:
-          ignore_patterns: ['Test']
-          level: 5
-          memory_limit: "1G"
+            autoload_file: 'vendor/mygento/coding-standard/stan/autoload.php'
+            ignore_patterns: [ 'Test' ]
+            level: 1
 #        psalm:
         xmllint:

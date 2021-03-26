@@ -1,6 +1,4 @@
 grumphp:
-    git_dir: .
-    bin_dir: vendor/bin
     tasks:
         composer:
             no_check_lock: true
@@ -16,9 +14,8 @@ grumphp:
             ruleset: ['vendor/mygento/coding-standard/Mygento-Mage2/phpmd.xml']
         phpcs:
             warning_severity: null
+        xmllint:
         phpstan:
             autoload_file: 'vendor/mygento/coding-standard/stan/autoload.php'
             ignore_patterns: [ 'Test' ]
             level: 1
-#        psalm:
-        xmllint:

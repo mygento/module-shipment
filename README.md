@@ -1,6 +1,6 @@
 # Magento 2 Shipment Base
 
-[![Build Status](https://travis-ci.org/mygento/module-shipment.svg?branch=v2.3)](https://travis-ci.org/mygento/module-shipment)
+[![Build Status](https://travis-ci.org/mygento/module-shipment.svg?branch=v2.4)](https://travis-ci.org/mygento/module-shipment)
 [![Latest Stable Version](https://poser.pugx.org/mygento/module-shipment/v/stable)](https://packagist.org/packages/mygento/module-shipment)
 [![Total Downloads](https://poser.pugx.org/mygento/module-shipment/downloads)](https://packagist.org/packages/mygento/module-shipment)
 

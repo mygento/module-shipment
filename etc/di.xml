@@ -65,4 +65,9 @@
             <argument name="resourceModel" xsi:type="string">Mygento\Shipment\Model\ResourceModel\Point</argument>
         </arguments>
     </type>
+    <type name="Mygento\Shipment\Model\Service\Tracking">
+        <arguments>
+            <argument name="shipmentSender" xsi:type="object">Magento\Sales\Model\Order\Shipment\Sender\EmailSender\Proxy</argument>
+        </arguments>
+    </type>
 </config>

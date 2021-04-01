@@ -37,7 +37,7 @@ class Tracking
     private $builder;
 
     /**
-     * @var \Magento\Sales\Model\Order\Email\Sender\ShipmentSender
+     * @var \Magento\Sales\Model\Order\Shipment\Sender\EmailSender
      */
     private $shipmentSender;
 
@@ -59,7 +59,7 @@ class Tracking
     /**
      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepo
      * @param \Magento\Sales\Api\ShipmentTrackRepositoryInterface $trackRepo
-     * @param \Magento\Sales\Model\Order\Email\Sender\ShipmentSender\Proxy $shipmentSender
+     * @param \Magento\Sales\Model\Order\Shipment\Sender\EmailSender $shipmentSender
      * @param \Magento\Framework\Api\SearchCriteriaBuilder $builder
      * @param \Magento\Framework\Event\ManagerInterface $eventManager
      * @param \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory
@@ -69,7 +69,7 @@ class Tracking
     public function __construct(
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepo,
         \Magento\Sales\Api\ShipmentTrackRepositoryInterface $trackRepo,
-        \Magento\Sales\Model\Order\Email\Sender\ShipmentSender\Proxy $shipmentSender,
+        \Magento\Sales\Model\Order\Shipment\Sender\EmailSender $shipmentSender,
         \Magento\Framework\Api\SearchCriteriaBuilder $builder,
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory,
@@ -166,7 +166,7 @@ class Tracking
         $transaction->save();
 
         if ($notify) {
-            $this->shipmentSender->send($shipment);
+            $this->shipmentSender->send($order, $shipment);
         }
 
         return $shipment;

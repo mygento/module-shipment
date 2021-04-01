@@ -25,4 +25,4 @@ Every extension should have three classes:
 
 ## Compability
 
-The module is tested on magento version 2.4.x
+The module is tested on magento version 2.4.x 

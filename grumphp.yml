@@ -18,7 +18,6 @@ parameters:
             warning_severity: null
         phpstan:
           ignore_patterns: ['Test']
-          level: 5
+          level: 1
           memory_limit: "1G"
-#        psalm:
         xmllint:

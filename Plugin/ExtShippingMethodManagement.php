@@ -65,7 +65,7 @@ class ExtShippingMethodManagement
     }
 
     /**
-     * @param $estimate
+     * @param array|string $estimate
      * @return mixed
      */
     private function unserializeEstimate($estimate)

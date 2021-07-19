@@ -10,7 +10,6 @@ namespace Mygento\Shipment\Helper;
 
 use Magento\Framework\Api\Filter;
 use Mygento\Base\Api\ProductAttributeHelperInterface;
-use Magento\Framework\Serialize\Serializer\Json;
 
 class Data extends \Mygento\Base\Helper\Data
 {
@@ -38,9 +37,6 @@ class Data extends \Mygento\Base\Helper\Data
     /** @var string */
     protected $code = 'shipment';
 
-    /** @var Json */
-    protected $serializer;
-
     /** @var \Magento\Framework\Api\FilterBuilder */
     private $filterBuilder;
 
@@ -56,18 +52,15 @@ class Data extends \Mygento\Base\Helper\Data
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
         \Mygento\Base\Model\LogManager $logManager,
         \Magento\Framework\Encryption\Encryptor $encryptor,
-        \Magento\Framework\App\Helper\Context $context,
-        Json $serializer
+        \Magento\Framework\App\Helper\Context $context
     ) {
         parent::__construct(
             $logManager,
             $encryptor,
             $context
         );
-
         $this->checkoutSession = $checkoutSession;
         $this->filterBuilder = $filterBuilder;
-        $this->serializer = $serializer;
     }
 
     /**

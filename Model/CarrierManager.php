@@ -15,9 +15,17 @@ class CarrierManager implements \Mygento\Shipment\Api\CarrierManagerInterface
      */
     private $carriers;
 
+    /**
+     * @param array $carriers
+     */
     public function __construct(array $carriers = [])
     {
         $this->carriers = $carriers;
+    }
+
+    public function getCarrierCodes(): array
+    {
+        return array_keys($this->carriers);
     }
 
     public function getCarrierServiceInstance(string $carrier): ?AbstractService

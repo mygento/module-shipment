@@ -13,5 +13,6 @@ use Mygento\Shipment\Model\AbstractService;
 interface CarrierManagerInterface
 {
     public function getCarrierCodes(): array;
+
     public function getCarrierServiceInstance(string $carrier): ?AbstractService;
 }

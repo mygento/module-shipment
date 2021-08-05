@@ -9,6 +9,7 @@
 namespace Mygento\Shipment\Model;
 
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\Exception\NoSuchEntityException;
 use Mygento\Shipment\Api\Data\PointInterface;
 use Mygento\Shipment\Api\Data\PointProviderInterface;
 
@@ -132,6 +133,30 @@ class PointManager implements \Mygento\Shipment\Api\PointManagerInterface
         $collection->setCurPage(1);
 
         return current($collection->getItems());
+    }
+
+    /**
+     * @param \Magento\Quote\Api\Data\CartInterface|\Magento\Sales\Api\Data\OrderInterface $entity
+     * @throws NoSuchEntityException
+     * @return PointInterface
+     */
+    public function getPointByEntity($entity): PointInterface
+    {
+        $pointInfo = $this->helper->extractPickupPoint($entity);
+        $pointCarrier = $pointInfo['carrier'] ?? false;
+        $pointCode = $pointInfo['pickup'] ?? false;
+
+        if (!$pointCarrier || !$pointCode) {
+            throw new NoSuchEntityException();
+        }
+
+        $pickupPoint = $this->getPointById($pointCarrier, $pointCode);
+
+        if (!$pickupPoint) {
+            throw new NoSuchEntityException();
+        }
+
+        return $pickupPoint;
     }
 
     /**

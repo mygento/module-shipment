@@ -136,13 +136,13 @@ class PointManager implements \Mygento\Shipment\Api\PointManagerInterface
     }
 
     /**
-     * @param \Magento\Quote\Api\Data\CartInterface $quote
+     * @param \Magento\Quote\Api\Data\CartInterface|\Magento\Sales\Api\Data\OrderInterface $entity
      * @throws NoSuchEntityException
      * @return PointInterface
      */
-    public function getPointByQuote(\Magento\Quote\Api\Data\CartInterface $quote)
+    public function getPointByEntity($entity): PointInterface
     {
-        $pointInfo = $this->helper->extractPickupPoint($quote);
+        $pointInfo = $this->helper->extractPickupPoint($entity);
         $pointCarrier = $pointInfo['carrier'] ?? false;
         $pointCode = $pointInfo['pickup'] ?? false;
 

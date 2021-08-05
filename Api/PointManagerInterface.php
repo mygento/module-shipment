@@ -45,6 +45,13 @@ interface PointManagerInterface
     public function getPointById(string $carrier, string $code);
 
     /**
+     * @param \Magento\Quote\Api\Data\CartInterface $quote
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return \Mygento\Shipment\Api\Data\PointInterface
+     */
+    public function getPointByQuote(\Magento\Quote\Api\Data\CartInterface $quote);
+
+    /**
      * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
     public function getConnection();

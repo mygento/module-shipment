@@ -53,6 +53,7 @@ class QuoteRate
         $result->setEstimate($rate->getEstimate());
 
         $result->setPickupPoints($rate->getPickupPoints());
+        $result->setDescription($rate->getDescription());
 
         // deprecated
         $result->setLatitude($rate->getLatitude());

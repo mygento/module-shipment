@@ -217,8 +217,6 @@ Mygento:
           type: varchar
         method_title:
           type: varchar
-        description:
-          type: text
         price:
           type: float
         cost:

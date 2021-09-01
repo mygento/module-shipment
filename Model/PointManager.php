@@ -161,8 +161,8 @@ class PointManager implements \Mygento\Shipment\Api\PointManagerInterface
 
     /**
      * @param $code
-     * @return PointInterface
      * @throws NoSuchEntityException
+     * @return PointInterface
      */
     public function getPointByCode($code)
     {
@@ -175,6 +175,7 @@ class PointManager implements \Mygento\Shipment\Api\PointManagerInterface
         if (!$point) {
             throw new NoSuchEntityException();
         }
+
         return $point;
     }
 

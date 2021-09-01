@@ -14,6 +14,7 @@ interface CalculateResultInterface
     const CARRIER_TITLE = 'carrier_title';
     const METHOD = 'method';
     const METHOD_TITLE = 'method_title';
+    const DESCRIPTION = 'description';
     const PRICE = 'price';
     const COST = 'cost';
     const ESTIMATE_DATE = 'estimate_date';
@@ -76,6 +77,19 @@ interface CalculateResultInterface
      * @return $this
      */
     public function setMethodTitle($methodTitle);
+
+    /**
+     * Get description
+     * @return string|null
+     */
+    public function getDescription();
+
+    /**
+     * Set description
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription($description);
 
     /**
      * Get price

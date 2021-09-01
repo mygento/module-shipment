@@ -160,6 +160,25 @@ class PointManager implements \Mygento\Shipment\Api\PointManagerInterface
     }
 
     /**
+     * @param $code
+     * @return PointInterface
+     * @throws NoSuchEntityException
+     */
+    public function getPointByCode($code)
+    {
+        $pointData = explode('_', $code);
+        if (count($pointData) < 2) {
+            throw new NoSuchEntityException();
+        }
+        [$provider, $providerUid] = $pointData;
+        $point = $this->getPointById($provider, $providerUid);
+        if (!$point) {
+            throw new NoSuchEntityException();
+        }
+        return $point;
+    }
+
+    /**
      * @return \Magento\Framework\DB\Adapter\AdapterInterface
      */
     public function getConnection()

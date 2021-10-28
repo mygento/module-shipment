@@ -8,15 +8,13 @@
 
 namespace Mygento\Shipment\Api;
 
-use Magento\Sales\Model\Order;
-
 interface OrderStatusUpdaterInterface
 {
     /**
-     * @param Order $order
+     * @param \Magento\Sales\Model\Order $order
      * @param string $status
      * @param string $comment
      * @return mixed
      */
-    public function update(Order $order, string $status, string $comment = '');
+    public function update(\Magento\Sales\Model\Order $order, string $status, string $comment = '');
 }

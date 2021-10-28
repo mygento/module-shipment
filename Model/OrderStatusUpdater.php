@@ -31,6 +31,9 @@ class OrderStatusUpdater implements OrderStatusUpdaterInterface
      * @param Order $order
      * @param string $status
      * @param string $comment
+     * @throws \Magento\Framework\Exception\AlreadyExistsException
+     * @throws \Magento\Framework\Exception\InputException
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
      */
     public function update(Order $order, string $status, string $comment = '')
     {

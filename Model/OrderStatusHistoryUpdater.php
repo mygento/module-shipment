@@ -12,7 +12,7 @@ use Magento\Sales\Model\Order;
 use Mygento\Base\Model\OrderRepository;
 use Mygento\Shipment\Api\OrderStatusUpdaterInterface;
 
-class OrderStatusUpdater implements OrderStatusUpdaterInterface
+class OrderStatusHistoryUpdater implements OrderStatusUpdaterInterface
 {
     /**
      * @var OrderRepository

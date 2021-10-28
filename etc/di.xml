@@ -6,6 +6,7 @@
     <preference for="Mygento\Shipment\Api\Data\EstimateTimeInterface" type="Mygento\Shipment\Model\Estimate\Time" />
     <preference for="Mygento\Shipment\Api\PointManagerInterface" type="Mygento\Shipment\Model\PointManager"/>
     <preference for="Mygento\Shipment\Api\Service\AutoshipInterface" type="Mygento\Shipment\Model\Cron\Autoship"/>
+    <preference for="Mygento\Shipment\Api\OrderStatusUpdaterInterface" type="Mygento\Shipment\Model\OrderStatusUpdater"/>
 
     <!-- extenstion attributes -->
     <type name="Magento\Quote\Model\Quote\Address\Rate">

@@ -210,4 +210,15 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
     {
         return $this->tracking->findOrderByTracking($trackingCode, $carrier);
     }
+
+    /**
+     * @param \Magento\Sales\Model\Order $order
+     * @param string $status
+     * @param string $comment
+     */
+    public function addOrderComment(\Magento\Sales\Model\Order $order, string $status, string $comment = '')
+    {
+        $order->addStatusToHistory($status, $comment);
+        $this->orderRepo->save($order);
+    }
 }

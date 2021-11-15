@@ -52,4 +52,15 @@ interface BaseInterface
      * @return string
      */
     public function convertEstimateToDate(string $code, int $estimate): string;
+
+    /**
+     * @param \Magento\Sales\Model\Order $order
+     * @param string $status
+     * @param string $comment
+     */
+    public function addOrderComment(
+        \Magento\Sales\Model\Order $order,
+        string $status,
+        string $comment = ''
+    );
 }

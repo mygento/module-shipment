@@ -201,6 +201,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
         string $status,
         string $comment = ''
     ) {
-        $this->baseService->addOrderComment($order, $status, $comment);
+        $order->addStatusToHistory($status, $comment);
+        $this->getOrderRepository()->save($order);
     }
 }

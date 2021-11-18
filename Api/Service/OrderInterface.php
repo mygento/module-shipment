@@ -56,15 +56,4 @@ interface OrderInterface
      * @param array $messages
      */
     public function failOrder($order, array $messages);
-
-    /**
-     * @param \Magento\Sales\Model\Order $order
-     * @param string $status
-     * @param string $comment
-     */
-    public function addOrderComment(
-        \Magento\Sales\Model\Order $order,
-        string $status,
-        string $comment = ''
-    );
 }

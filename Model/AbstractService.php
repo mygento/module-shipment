@@ -190,17 +190,4 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
 
         return null;
     }
-
-    /**
-     * @param \Magento\Sales\Model\Order $order
-     * @param string $status
-     * @param string $comment
-     */
-    public function addOrderComment(
-        \Magento\Sales\Model\Order $order,
-        string $status,
-        string $comment = ''
-    ) {
-        $this->baseService->addOrderComment($order, $status, $comment);
-    }
 }

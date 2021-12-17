@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -10,8 +10,8 @@ namespace Mygento\Shipment\Api\Data;
 
 interface EstimateTimeInterface extends \JsonSerializable
 {
-    const FROM = 'from';
-    const TO = 'to';
+    public const FROM = 'from';
+    public const TO = 'to';
 
     /**
      * Get from

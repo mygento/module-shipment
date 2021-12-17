@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -10,40 +10,40 @@ namespace Mygento\Shipment\Api\Data;
 
 interface PointInterface
 {
-    const ID = 'id';
-    const IS_ACTIVE = 'is_active';
-    const PROVIDER = 'provider';
-    const PROVIDER_UID = 'provider_uid';
-    const PRIORITY = 'priority';
-    const TYPE = 'type';
-    const COUNTRY_ID = 'country_id';
-    const REGION = 'region';
-    const REGION_ID = 'region_id';
-    const CITY_ID = 'city_id';
-    const CITY = 'city';
-    const STREET = 'street';
-    const NAME = 'name';
-    const ADDRESS = 'address';
-    const ADDRESS_DESCRIPTION = 'address_description';
-    const DESCRIPTION = 'description';
-    const POSTCODE = 'postcode';
-    const PHONE_NUMBER = 'phone_number';
-    const SCHEDULE = 'schedule';
-    const WORKING_HOURS = 'working_hours';
-    const MAX_SIZE = 'max_size';
-    const MIN_WEIGHT = 'min_weight';
-    const MAX_WEIGHT = 'max_weight';
-    const IMAGE = 'image';
-    const SORT_ORDER = 'sort_order';
-    const LATITUDE = 'latitude';
-    const LONGITUDE = 'longitude';
-    const CASH_DELIVERY = 'cash_delivery';
-    const CARD_DELIVERY = 'card_delivery';
-    const PREPAID_ONLY = 'prepaid_only';
-    const TWENTY_FOUR_HOURS = 'twenty_four_hours';
-    const TESTING_AVAILABLE = 'testing_available';
-    const ICON = 'icon';
-    const PRICE = 'price';
+    public const ID = 'id';
+    public const IS_ACTIVE = 'is_active';
+    public const PROVIDER = 'provider';
+    public const PROVIDER_UID = 'provider_uid';
+    public const PRIORITY = 'priority';
+    public const TYPE = 'type';
+    public const COUNTRY_ID = 'country_id';
+    public const REGION = 'region';
+    public const REGION_ID = 'region_id';
+    public const CITY_ID = 'city_id';
+    public const CITY = 'city';
+    public const STREET = 'street';
+    public const NAME = 'name';
+    public const ADDRESS = 'address';
+    public const ADDRESS_DESCRIPTION = 'address_description';
+    public const DESCRIPTION = 'description';
+    public const POSTCODE = 'postcode';
+    public const PHONE_NUMBER = 'phone_number';
+    public const SCHEDULE = 'schedule';
+    public const WORKING_HOURS = 'working_hours';
+    public const MAX_SIZE = 'max_size';
+    public const MIN_WEIGHT = 'min_weight';
+    public const MAX_WEIGHT = 'max_weight';
+    public const IMAGE = 'image';
+    public const SORT_ORDER = 'sort_order';
+    public const LATITUDE = 'latitude';
+    public const LONGITUDE = 'longitude';
+    public const CASH_DELIVERY = 'cash_delivery';
+    public const CARD_DELIVERY = 'card_delivery';
+    public const PREPAID_ONLY = 'prepaid_only';
+    public const TWENTY_FOUR_HOURS = 'twenty_four_hours';
+    public const TESTING_AVAILABLE = 'testing_available';
+    public const ICON = 'icon';
+    public const PRICE = 'price';
 
     /**
      * Get id

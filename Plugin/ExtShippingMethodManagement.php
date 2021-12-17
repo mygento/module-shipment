@@ -2,11 +2,13 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
 namespace Mygento\Shipment\Plugin;
+
+use Magento\Framework\Serialize\Serializer\Json;
 
 class ExtShippingMethodManagement
 {
@@ -16,12 +18,20 @@ class ExtShippingMethodManagement
     private $shippingExtAttr;
 
     /**
+     * @var Json
+     */
+    private $json;
+
+    /**
      * @param \Magento\Quote\Api\Data\ShippingMethodExtensionFactory $shippingExtAttr
+     * @param Json $json
      */
     public function __construct(
-        \Magento\Quote\Api\Data\ShippingMethodExtensionFactory $shippingExtAttr
+        \Magento\Quote\Api\Data\ShippingMethodExtensionFactory $shippingExtAttr,
+        Json $json
     ) {
         $this->shippingExtAttr = $shippingExtAttr;
+        $this->json = $json;
     }
 
     /**
@@ -40,11 +50,12 @@ class ExtShippingMethodManagement
             $result->getExtensionAttributes()
             ?? $this->shippingExtAttr->create();
 
-        $extensionAttributes->setEstimateDate($rateModel->getEstimateDate());
-        $extensionAttributes->setEstimateTime($rateModel->getEstimateTime());
+        $extensionAttributes->setEstimateDate($this->unserializeEstimate($rateModel->getEstimateDate()));
+        $extensionAttributes->setEstimateTime($this->unserializeEstimate($rateModel->getEstimateTime()));
         $extensionAttributes->setEstimate($rateModel->getEstimate());
 
         $extensionAttributes->setPickupPoints($rateModel->getPickupPoints());
+        $extensionAttributes->setDescription($rateModel->getDescription());
         // deprecated
         $extensionAttributes->setLatitude($rateModel->getLatitude());
         $extensionAttributes->setLongitude($rateModel->getLongitude());
@@ -52,5 +63,22 @@ class ExtShippingMethodManagement
         $result->setExtensionAttributes($extensionAttributes);
 
         return $result;
+    }
+
+    /**
+     * @param array|string $estimate
+     * @return mixed
+     */
+    private function unserializeEstimate($estimate)
+    {
+        if (is_string($estimate)) {
+            try {
+                $estimate = $this->json->unserialize($estimate);
+            } catch (\Exception $e) {
+                $estimate = [];
+            }
+        }
+
+        return $estimate;
     }
 }

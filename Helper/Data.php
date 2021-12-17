@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -13,23 +13,23 @@ use Mygento\Base\Api\ProductAttributeHelperInterface;
 
 class Data extends \Mygento\Base\Helper\Data
 {
-    const XML_TEST = 'test';
-    const XML_TAX_ENABLED = 'tax_options/tax';
-    const XML_TAX_SAME_PRODUCT = 'tax_options/tax_same';
-    const XML_TAX_ALL_PRODUCT = 'tax_options/tax_products';
-    const XML_TAX_PRODUCT_ATTR = 'tax_options/tax_product_attr';
-    const XML_TAX_SHIPPING = 'tax_options/tax_shipping';
-    const XML_AUTO_SHIPPING = 'order_statuses/autoshipping';
-    const XML_AUTO_SHIPPING_STATUSES = 'order_statuses/autoshipping_statuses';
-    const XML_SHIPMENT_SUCCESS_STATUS = 'order_statuses/shipment_success_status';
-    const XML_SHIPMENT_FAIL_STATUS = 'order_statuses/shipment_fail_status';
-    const XML_SHIPMENT_TRACK_CHECK = 'order_statuses/track_check';
-    const XML_SHIPMENT_TRACK_STATUSES = 'order_statuses/track_statuses';
-    const XML_SHIPMENT_TRACK_MAPPING = 'order_statuses/track_mapping';
-    const XML_MARKING = 'marking/enabled';
-    const XML_MARKING_FLAG = 'marking/marking_flag';
-    const XML_MARKING_FIELD = 'marking/marking_field';
-    const XML_MARKING_REFUND = 'marking/marking_refund';
+    public const XML_TEST = 'test';
+    public const XML_TAX_ENABLED = 'tax_options/tax';
+    public const XML_TAX_SAME_PRODUCT = 'tax_options/tax_same';
+    public const XML_TAX_ALL_PRODUCT = 'tax_options/tax_products';
+    public const XML_TAX_PRODUCT_ATTR = 'tax_options/tax_product_attr';
+    public const XML_TAX_SHIPPING = 'tax_options/tax_shipping';
+    public const XML_AUTO_SHIPPING = 'order_statuses/autoshipping';
+    public const XML_AUTO_SHIPPING_STATUSES = 'order_statuses/autoshipping_statuses';
+    public const XML_SHIPMENT_SUCCESS_STATUS = 'order_statuses/shipment_success_status';
+    public const XML_SHIPMENT_FAIL_STATUS = 'order_statuses/shipment_fail_status';
+    public const XML_SHIPMENT_TRACK_CHECK = 'order_statuses/track_check';
+    public const XML_SHIPMENT_TRACK_STATUSES = 'order_statuses/track_statuses';
+    public const XML_SHIPMENT_TRACK_MAPPING = 'order_statuses/track_mapping';
+    public const XML_MARKING = 'marking/enabled';
+    public const XML_MARKING_FLAG = 'marking/marking_flag';
+    public const XML_MARKING_FIELD = 'marking/marking_field';
+    public const XML_MARKING_REFUND = 'marking/marking_refund';
 
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;

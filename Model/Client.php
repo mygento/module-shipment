@@ -2,11 +2,14 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
 namespace Mygento\Shipment\Model;
+
+use Magento\Framework\HTTP\Client\Curl;
+use Magento\Framework\HTTP\Client\CurlFactory;
 
 class Client implements \Mygento\Shipment\Api\Client\BaseInterface
 {
@@ -16,17 +19,17 @@ class Client implements \Mygento\Shipment\Api\Client\BaseInterface
     private $eventManager;
 
     /**
-     * @var \Magento\Framework\HTTP\Client\Curl
+     * @var CurlFactory
      */
     private $curl;
 
     /**
-     * @param \Magento\Framework\HTTP\Client\Curl $curl
      * @param \Magento\Framework\Event\Manager $eventManager
+     * @param \Magento\Framework\HTTP\Client\CurlFactory $curl
      */
     public function __construct(
-        \Magento\Framework\HTTP\Client\Curl $curl,
-        \Magento\Framework\Event\Manager $eventManager
+        \Magento\Framework\Event\Manager $eventManager,
+        CurlFactory $curl
     ) {
         $this->curl = $curl;
         $this->eventManager = $eventManager;
@@ -36,11 +39,12 @@ class Client implements \Mygento\Shipment\Api\Client\BaseInterface
      * @param array $options
      * @return \Magento\Framework\HTTP\Client\Curl
      */
-    public function getHttpClient(array $options = [])
+    public function getHttpClient(array $options = []): Curl
     {
-        $this->curl->setOptions($options);
+        $curl = $this->curl->create();
+        $curl->setOptions($options);
 
-        return $this->curl;
+        return $curl;
     }
 
     /**

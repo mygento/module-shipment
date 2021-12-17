@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -10,20 +10,21 @@ namespace Mygento\Shipment\Api\Data;
 
 interface CalculateResultInterface
 {
-    const CARRIER = 'carrier';
-    const CARRIER_TITLE = 'carrier_title';
-    const METHOD = 'method';
-    const METHOD_TITLE = 'method_title';
-    const PRICE = 'price';
-    const COST = 'cost';
-    const ESTIMATE_DATE = 'estimate_date';
-    const ESTIMATE_TIME = 'estimate_time';
-    const ESTIMATE = 'estimate';
-    const PICKUP_POINTS = 'pickup_points';
-    const LATITUDE = 'latitude';
-    const ERROR = 'error';
-    const ERROR_MESSAGE = 'error_message';
-    const LONGITUDE = 'longitude';
+    public const CARRIER = 'carrier';
+    public const CARRIER_TITLE = 'carrier_title';
+    public const METHOD = 'method';
+    public const METHOD_TITLE = 'method_title';
+    public const DESCRIPTION = 'description';
+    public const PRICE = 'price';
+    public const COST = 'cost';
+    public const ESTIMATE_DATE = 'estimate_date';
+    public const ESTIMATE_TIME = 'estimate_time';
+    public const ESTIMATE = 'estimate';
+    public const PICKUP_POINTS = 'pickup_points';
+    public const LATITUDE = 'latitude';
+    public const ERROR = 'error';
+    public const ERROR_MESSAGE = 'error_message';
+    public const LONGITUDE = 'longitude';
 
     /**
      * Get carrier
@@ -76,6 +77,19 @@ interface CalculateResultInterface
      * @return $this
      */
     public function setMethodTitle($methodTitle);
+
+    /**
+     * Get description
+     * @return string|null
+     */
+    public function getDescription();
+
+    /**
+     * Set description
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription($description);
 
     /**
      * Get price

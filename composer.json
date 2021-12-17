@@ -1,7 +1,7 @@
 {
     "name": "mygento/module-shipment",
     "type": "magento2-module",
-    "version": "2.4.0-RC3",
+    "version": "2.4.1",
     "license": "OSL-3.0",
     "homepage": "https://github.com/mygento/module-shipment",
     "description": "Magento 2 Shipment Base",
@@ -26,10 +26,10 @@
     "prefer-stable": true,
     "require": {
         "magento/module-shipping": "100.*",
-        "mygento/module-base": "~2.4.0-RC2"
+        "mygento/module-base": "~2.4.1"
     },
     "require-dev": {
-        "mygento/coding-standard": "~2.14.0-beta3"
+        "mygento/coding-standard": "~2.14.0-beta5"
     },
     "autoload": {
         "files": [

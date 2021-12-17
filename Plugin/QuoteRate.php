@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -53,6 +53,7 @@ class QuoteRate
         $result->setEstimate($rate->getEstimate());
 
         $result->setPickupPoints($rate->getPickupPoints());
+        $result->setDescription($rate->getDescription());
 
         // deprecated
         $result->setLatitude($rate->getLatitude());

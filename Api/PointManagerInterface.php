@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -43,6 +43,13 @@ interface PointManagerInterface
      * @return false|\Mygento\Shipment\Api\Data\PointInterface
      */
     public function getPointById(string $carrier, string $code);
+
+    /**
+     * @param \Magento\Quote\Api\Data\CartInterface|\Magento\Sales\Api\Data\OrderInterface $entity
+     * @throws \Magento\Framework\Exception\NoSuchEntityException
+     * @return \Mygento\Shipment\Api\Data\PointInterface
+     */
+    public function getPointByEntity($entity): \Mygento\Shipment\Api\Data\PointInterface;
 
     /**
      * @return \Magento\Framework\DB\Adapter\AdapterInterface

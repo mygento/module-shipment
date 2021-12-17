@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -189,5 +189,18 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
         $this->getOrderRepository()->save($order);
 
         return null;
+    }
+
+    /**
+     * @param \Magento\Sales\Model\Order $order
+     * @param string $status
+     * @param string $comment
+     */
+    public function addOrderComment(
+        \Magento\Sales\Model\Order $order,
+        string $status,
+        string $comment = ''
+    ) {
+        $this->baseService->addOrderComment($order, $status, $comment);
     }
 }

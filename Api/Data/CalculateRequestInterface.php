@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -10,14 +10,14 @@ namespace Mygento\Shipment\Api\Data;
 
 interface CalculateRequestInterface
 {
-    const CITY = 'city';
-    const INDEX = 'index';
-    const REGION_NAME = 'region_name';
-    const REGION_CODE = 'region_code';
-    const WEIGHT = 'weight';
-    const ORDER_SUM = 'order_sum';
-    const STORE_ID = 'store_id';
-    const RAW_REQUEST = 'raw_request';
+    public const CITY = 'city';
+    public const INDEX = 'index';
+    public const REGION_NAME = 'region_name';
+    public const REGION_CODE = 'region_code';
+    public const WEIGHT = 'weight';
+    public const ORDER_SUM = 'order_sum';
+    public const STORE_ID = 'store_id';
+    public const RAW_REQUEST = 'raw_request';
 
     /**
      * Get city

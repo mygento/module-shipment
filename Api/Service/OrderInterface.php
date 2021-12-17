@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -56,4 +56,15 @@ interface OrderInterface
      * @param array $messages
      */
     public function failOrder($order, array $messages);
+
+    /**
+     * @param \Magento\Sales\Model\Order $order
+     * @param string $status
+     * @param string $comment
+     */
+    public function addOrderComment(
+        \Magento\Sales\Model\Order $order,
+        string $status,
+        string $comment = ''
+    );
 }

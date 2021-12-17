@@ -5,6 +5,7 @@
         <attribute code="estimate_time" type="Mygento\Shipment\Api\Data\EstimateTimeInterface[]" />
         <attribute code="estimate" type="int" />
         <attribute code="pickup_points" type="Mygento\Shipment\Api\Data\PointInterface[]" />
+        <attribute code="description" type="string" />
 
         <!-- deprecated -->
         <attribute code="latitude" type="string" />

@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -86,6 +86,25 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     public function setMethodTitle($methodTitle)
     {
         return $this->setData(self::METHOD_TITLE, $methodTitle);
+    }
+
+    /**
+     * Get description
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->getData(self::DESCRIPTION);
+    }
+
+    /**
+     * Set description
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        return $this->setData(self::DESCRIPTION, $description);
     }
 
     /**

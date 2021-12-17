@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -15,7 +15,7 @@ abstract class Point extends \Magento\Backend\App\Action
      *
      * @see _isAllowed()
      */
-    const ADMIN_RESOURCE = 'Mygento_Shipment::point';
+    public const ADMIN_RESOURCE = 'Mygento_Shipment::point';
 
     /**
      * Core registry

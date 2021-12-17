@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2020 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2021 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -13,8 +13,8 @@ use Mygento\Shipment\Block\Adminhtml\Config\Magento\OrderStatuses;
 
 abstract class TrackStatuses extends AbstractFieldArray
 {
-    const CARRIER = 'carrier_status';
-    const ORDER = 'order_status';
+    public const CARRIER = 'carrier_status';
+    public const ORDER = 'order_status';
 
     /**
      * @var \Magento\Framework\View\Element\Html\Select

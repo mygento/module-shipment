@@ -9,9 +9,27 @@
 namespace Mygento\Shipment\Model\Service;
 
 use Magento\Framework\DataObject;
+use Magento\Framework\Api\ExtensionAttributesFactory;
+use Mygento\Shipment\Api\Data\CalculateResultExtensionInterface;
 
 class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\CalculateResultInterface
 {
+    /**
+     * @var ExtensionAttributesFactory
+     */
+    protected $extensionAttributesFactory;
+
+    public function __construct(
+        ExtensionAttributesFactory $extensionFactory,
+        array $data = []
+    ) {
+        $this->extensionAttributesFactory = $extensionFactory;
+        parent::__construct($data);
+        if (isset($data[self::EXTENSION_ATTRIBUTES_KEY]) && is_array($data[self::EXTENSION_ATTRIBUTES_KEY])) {
+            $this->populateExtensionAttributes($data[self::EXTENSION_ATTRIBUTES_KEY]);
+        }
+    }
+
     /**
      * Get carrier
      * @return string|null
@@ -276,5 +294,31 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     public function setLongitude($longitude)
     {
         return $this->setData(self::LONGITUDE, $longitude);
+    }
+
+    /**
+     * Instantiate extension attributes object and populate it with the provided data.
+     *
+     * @param array $extensionAttributesData
+     * @return void
+     */
+    private function populateExtensionAttributes(array $extensionAttributesData = [])
+    {
+        $extensionAttributes = $this->extensionAttributesFactory->create(get_class($this), $extensionAttributesData);
+        $this->setExtensionAttributes($extensionAttributes);
+    }
+
+    public function getExtensionAttributes()
+    {
+        if (!$this->getData(self::EXTENSION_ATTRIBUTES_KEY)) {
+            $this->populateExtensionAttributes([]);
+        }
+        return $this->getData(self::EXTENSION_ATTRIBUTES_KEY);
+    }
+
+    public function setExtensionAttributes(CalculateResultExtensionInterface $extensionAttributes)
+    {
+        $this->setData(self::EXTENSION_ATTRIBUTES_KEY, $extensionAttributes);
+        return $this;
     }
 }

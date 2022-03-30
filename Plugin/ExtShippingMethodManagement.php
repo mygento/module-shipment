@@ -55,6 +55,7 @@ class ExtShippingMethodManagement
         $extensionAttributes->setEstimate($rateModel->getEstimate());
 
         $extensionAttributes->setPickupPoints($rateModel->getPickupPoints());
+        $extensionAttributes->setDescription($rateModel->getDescription());
         // deprecated
         $extensionAttributes->setLatitude($rateModel->getLatitude());
         $extensionAttributes->setLongitude($rateModel->getLongitude());

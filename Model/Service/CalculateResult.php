@@ -107,6 +107,25 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     }
 
     /**
+     * Get description
+     * @return string|null
+     */
+    public function getDescription()
+    {
+        return $this->getData(self::DESCRIPTION);
+    }
+
+    /**
+     * Set description
+     * @param string $description
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        return $this->setData(self::DESCRIPTION, $description);
+    }
+
+    /**
      * Get price
      * @return float|null
      */

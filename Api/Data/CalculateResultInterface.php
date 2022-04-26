@@ -8,7 +8,10 @@
 
 namespace Mygento\Shipment\Api\Data;
 
-interface CalculateResultInterface
+use Magento\Framework\Api\ExtensibleDataInterface;
+use Mygento\Shipment\Api\Data\CalculateResultExtensionInterface;
+
+interface CalculateResultInterface extends ExtensibleDataInterface
 {
     public const CARRIER = 'carrier';
     public const CARRIER_TITLE = 'carrier_title';
@@ -220,4 +223,19 @@ interface CalculateResultInterface
      * @return $this
      */
     public function setLongitude($longitude);
+
+    /**
+     * Retrieve existing extension attributes object or create a new one.
+     *
+     * @return \Mygento\Shipment\Api\Data\CalculateResultExtensionInterface
+     */
+    public function getExtensionAttributes();
+
+    /**
+     * Set an extension attributes object.
+     *
+     * @param \Mygento\Shipment\Api\Data\CalculateResultExtensionInterface $extensionAttributes
+     * @return $this
+     */
+    public function setExtensionAttributes(CalculateResultExtensionInterface $extensionAttributes);
 }

@@ -8,8 +8,8 @@
 
 namespace Mygento\Shipment\Model\Service;
 
-use Magento\Framework\DataObject;
 use Magento\Framework\Api\ExtensionAttributesFactory;
+use Magento\Framework\DataObject;
 use Mygento\Shipment\Api\Data\CalculateResultExtensionInterface;
 
 class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\CalculateResultInterface
@@ -315,6 +315,22 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
         return $this->setData(self::LONGITUDE, $longitude);
     }
 
+    public function getExtensionAttributes()
+    {
+        if (!$this->getData(self::EXTENSION_ATTRIBUTES_KEY)) {
+            $this->populateExtensionAttributes([]);
+        }
+
+        return $this->getData(self::EXTENSION_ATTRIBUTES_KEY);
+    }
+
+    public function setExtensionAttributes(CalculateResultExtensionInterface $extensionAttributes)
+    {
+        $this->setData(self::EXTENSION_ATTRIBUTES_KEY, $extensionAttributes);
+
+        return $this;
+    }
+
     /**
      * Instantiate extension attributes object and populate it with the provided data.
      *
@@ -325,19 +341,5 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     {
         $extensionAttributes = $this->extensionAttributesFactory->create(get_class($this), $extensionAttributesData);
         $this->setExtensionAttributes($extensionAttributes);
-    }
-
-    public function getExtensionAttributes()
-    {
-        if (!$this->getData(self::EXTENSION_ATTRIBUTES_KEY)) {
-            $this->populateExtensionAttributes([]);
-        }
-        return $this->getData(self::EXTENSION_ATTRIBUTES_KEY);
-    }
-
-    public function setExtensionAttributes(CalculateResultExtensionInterface $extensionAttributes)
-    {
-        $this->setData(self::EXTENSION_ATTRIBUTES_KEY, $extensionAttributes);
-        return $this;
     }
 }

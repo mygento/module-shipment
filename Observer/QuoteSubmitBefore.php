@@ -16,7 +16,8 @@ class QuoteSubmitBefore implements \Magento\Framework\Event\ObserverInterface
      */
     public function execute(\Magento\Framework\Event\Observer $observer)
     {
-        if (!$observer->getEvent()->getQuote()->getShippingAddress() ||
+        if (
+            !$observer->getEvent()->getQuote()->getShippingAddress() ||
             $observer->getEvent()->getQuote()->isVirtual()
         ) {
             return;

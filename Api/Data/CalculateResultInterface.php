@@ -9,7 +9,6 @@
 namespace Mygento\Shipment\Api\Data;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
-use Mygento\Shipment\Api\Data\CalculateResultExtensionInterface;
 
 interface CalculateResultInterface extends ExtensibleDataInterface
 {

@@ -57,8 +57,10 @@ class Dimensions
         }
 
         foreach ($object->getAllItems() as $item) {
-            if (!($item->getProduct() instanceof \Magento\Catalog\Model\Product)
-                || $item->getParentItemId()) {
+            if (
+                !($item->getProduct() instanceof \Magento\Catalog\Model\Product)
+                || $item->getParentItemId()
+            ) {
                 continue;
             }
 
@@ -136,10 +138,12 @@ class Dimensions
      */
     public function isValidDimensionArr($arr): bool
     {
-        if (!is_array($arr)
+        if (
+            !is_array($arr)
             || !array_key_exists('width', $arr)
             || !array_key_exists('height', $arr)
-            || !array_key_exists('length', $arr)) {
+            || !array_key_exists('length', $arr)
+        ) {
             return false;
         }
 

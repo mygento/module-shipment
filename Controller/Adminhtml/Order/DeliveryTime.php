@@ -43,9 +43,11 @@ class DeliveryTime extends \Magento\Backend\App\Action
         /** @var \Magento\Framework\Controller\Result\Json $resultJson */
         $resultJson = $this->jsonFactory->create();
 
-        if (!($this->getRequest()->getParam('isAjax'))
+        if (
+            !($this->getRequest()->getParam('isAjax'))
             || !$this->getRequest()->getParam('from')
-            || !$this->getRequest()->getParam('to')) {
+            || !$this->getRequest()->getParam('to')
+        ) {
             return $resultJson->setData([
                 'messages' => [__('Please correct the data sent.')],
                 'error' => true,

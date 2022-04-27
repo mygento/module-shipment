@@ -54,6 +54,7 @@ class Time extends DataObject implements EstimateTimeInterface
     /**
      * @return array
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->getData();

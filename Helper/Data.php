@@ -99,6 +99,9 @@ class Data extends \Mygento\Base\Helper\Data
      */
     public function isShippedBy(\Magento\Sales\Model\Order $order)
     {
+        if ($order->getIsVirtual()) {
+            return false;
+        }
         return strpos($order->getShippingMethod(), $this->getCode() . '_') !== false;
     }
 
@@ -313,7 +316,7 @@ class Data extends \Mygento\Base\Helper\Data
             return [];
         }
 
-        $point = explode('_', $address->getPickupPoint());
+        $point = explode('_', $address->getPickupPoint() ?? '');
         if (count($point) < 2) {
             return [];
         }

@@ -102,6 +102,7 @@ class Data extends \Mygento\Base\Helper\Data
         if ($order->getIsVirtual()) {
             return false;
         }
+
         return strpos($order->getShippingMethod(), $this->getCode() . '_') !== false;
     }
 

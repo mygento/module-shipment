@@ -191,7 +191,7 @@ class Dimensions
         return (float) str_replace(
             [' ', ','],
             ['', '.'],
-            $value
+            $value ?? ''
         );
     }
 

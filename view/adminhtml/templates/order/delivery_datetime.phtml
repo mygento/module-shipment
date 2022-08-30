@@ -37,8 +37,8 @@ $address = $order->getShippingAddress();
                     <th><?= $block->escapeHtml(__('Delivery Time')) ?></th>
                     <td>
                         <?php
-                        $from = $address->getExtensionAttributes()->getDeliveryTimeFrom();
-                        $to = $address->getExtensionAttributes()->getDeliveryTimeTo();
+                        $from = $address->getExtensionAttributes()->getDeliveryTimeFrom() ?? '';
+                        $to = $address->getExtensionAttributes()->getDeliveryTimeTo() ?? '';
                         ?>
                         <div class="deliverytime_current" style="display: inline-block">
                             <?= $block->escapeHtml($from); ?>

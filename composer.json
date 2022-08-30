@@ -1,7 +1,7 @@
 {
     "name": "mygento/module-shipment",
     "type": "magento2-module",
-    "version": "2.4.2",
+    "version": "2.4.3",
     "license": "OSL-3.0",
     "homepage": "https://github.com/mygento/module-shipment",
     "description": "Magento 2 Shipment Base",
@@ -29,7 +29,7 @@
         "mygento/module-base": "~2.4.1"
     },
     "require-dev": {
-        "mygento/coding-standard": "~2.14.0-beta5"
+        "mygento/coding-standard": "~2.14.0"
     },
     "autoload": {
         "files": [
@@ -48,7 +48,7 @@
     "config": {
         "allow-plugins": {
             "magento/composer-dependency-version-audit-plugin": false,
-            "phpro/grumphp": false
+            "phpro/grumphp": true
         }
     }
 }

@@ -177,14 +177,14 @@ Mygento:
           scale: 4
       indexes:
         MYG_SHIP_POINT_PROVIDER_PROVIDER_UID:
-            type: 'unique'
-            columns: ['provider', 'provider_uid']
+          type: 'unique'
+          columns: ['provider', 'provider_uid']
         MYG_SHIP_POINT_ACTIVE:
-            columns: ['is_active']
+          columns: ['is_active']
         MYG_SHIP_POINT_COUNTRY:
-            columns: ['country_id']
+          columns: ['country_id']
         MYG_SHIP_POINT_REGION:
-            columns: ['region_id']
+          columns: ['region_id']
     CalculateRequest:
       gui: false
       readonly: true

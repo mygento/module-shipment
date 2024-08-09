@@ -1,20 +1,22 @@
 grumphp:
-    tasks:
-        composer:
-            no_check_lock: true
-        git_blacklist:
-            keywords:
-                - "die("
-                - "var_dump("
-                - "exit;"
-        phplint:
-        phpcsfixer:
-            config: '.php-cs-fixer.php'
-        phpmd:
-            ruleset: ['vendor/mygento/coding-standard/Mygento-Mage2/phpmd.xml']
-        phpcs:
-            warning_severity: 0
-        xmllint:
-        phpstan:
-            autoload_file: 'vendor/mygento/coding-standard/stan/autoload.php'
-            level: 1
+  tasks:
+    composer:
+      no_check_lock: true
+    git_blacklist:
+      keywords:
+        - 'die('
+        - 'var_dump('
+        - 'exit;'
+    phplint:
+    phpcsfixer:
+      config: '.php-cs-fixer.php'
+    phpmd:
+      ruleset: ['vendor/mygento/coding-standard/Mygento-Mage2/phpmd.xml']
+      exclude: ['Test']
+    phpcs:
+      warning_severity: 0
+    xmllint:
+    phpstan:
+      autoload_file: 'vendor/mygento/coding-standard/stan/autoload.php'
+      ignore_patterns: ['Test']
+      level: 1

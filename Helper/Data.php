@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2021 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2024 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -13,23 +13,23 @@ use Mygento\Base\Api\ProductAttributeHelperInterface;
 
 class Data extends \Mygento\Base\Helper\Data
 {
-    public const XML_TEST = 'test';
-    public const XML_TAX_ENABLED = 'tax_options/tax';
-    public const XML_TAX_SAME_PRODUCT = 'tax_options/tax_same';
-    public const XML_TAX_ALL_PRODUCT = 'tax_options/tax_products';
-    public const XML_TAX_PRODUCT_ATTR = 'tax_options/tax_product_attr';
-    public const XML_TAX_SHIPPING = 'tax_options/tax_shipping';
-    public const XML_AUTO_SHIPPING = 'order_statuses/autoshipping';
-    public const XML_AUTO_SHIPPING_STATUSES = 'order_statuses/autoshipping_statuses';
-    public const XML_SHIPMENT_SUCCESS_STATUS = 'order_statuses/shipment_success_status';
-    public const XML_SHIPMENT_FAIL_STATUS = 'order_statuses/shipment_fail_status';
-    public const XML_SHIPMENT_TRACK_CHECK = 'order_statuses/track_check';
-    public const XML_SHIPMENT_TRACK_STATUSES = 'order_statuses/track_statuses';
-    public const XML_SHIPMENT_TRACK_MAPPING = 'order_statuses/track_mapping';
-    public const XML_MARKING = 'marking/enabled';
-    public const XML_MARKING_FLAG = 'marking/marking_flag';
-    public const XML_MARKING_FIELD = 'marking/marking_field';
-    public const XML_MARKING_REFUND = 'marking/marking_refund';
+    private const XML_TEST = 'test';
+    private const XML_TAX_ENABLED = 'tax_options/tax';
+    private const XML_TAX_SAME_PRODUCT = 'tax_options/tax_same';
+    private const XML_TAX_ALL_PRODUCT = 'tax_options/tax_products';
+    private const XML_TAX_PRODUCT_ATTR = 'tax_options/tax_product_attr';
+    private const XML_TAX_SHIPPING = 'tax_options/tax_shipping';
+    private const XML_AUTO_SHIPPING = 'order_statuses/autoshipping';
+    private const XML_AUTO_SHIPPING_STATUSES = 'order_statuses/autoshipping_statuses';
+    private const XML_SHIPMENT_SUCCESS_STATUS = 'order_statuses/shipment_success_status';
+    private const XML_SHIPMENT_FAIL_STATUS = 'order_statuses/shipment_fail_status';
+    private const XML_SHIPMENT_TRACK_CHECK = 'order_statuses/track_check';
+    private const XML_SHIPMENT_TRACK_STATUSES = 'order_statuses/track_statuses';
+    private const XML_SHIPMENT_TRACK_MAPPING = 'order_statuses/track_mapping';
+    private const XML_MARKING = 'marking/enabled';
+    private const XML_MARKING_FLAG = 'marking/marking_flag';
+    private const XML_MARKING_FIELD = 'marking/marking_field';
+    private const XML_MARKING_REFUND = 'marking/marking_refund';
 
     /** @var \Magento\Checkout\Model\Session */
     protected $checkoutSession;
@@ -40,13 +40,6 @@ class Data extends \Mygento\Base\Helper\Data
     /** @var \Magento\Framework\Api\FilterBuilder */
     private $filterBuilder;
 
-    /**
-     * @param \Magento\Checkout\Model\Session $checkoutSession
-     * @param \Magento\Framework\Api\FilterBuilder $filterBuilder
-     * @param \Mygento\Base\Model\LogManager $logManager
-     * @param \Magento\Framework\Encryption\Encryptor $encryptor
-     * @param \Magento\Framework\App\Helper\Context $context
-     */
     public function __construct(
         \Magento\Checkout\Model\Session $checkoutSession,
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
@@ -116,7 +109,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return bool
      */
     public function isTestMode($scopeCode = null): bool
     {
@@ -125,7 +117,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return bool
      */
     public function isEnabledTax($scopeCode = null): bool
     {
@@ -134,7 +125,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return bool
      */
     public function isSameTaxPerProduct($scopeCode = null): bool
     {
@@ -170,7 +160,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return bool
      */
     public function isEnabledAutoShipping($scopeCode = null): bool
     {
@@ -179,7 +168,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return bool
      */
     public function isEnabledTrackCheck($scopeCode = null): bool
     {
@@ -188,7 +176,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return array
      */
     public function getAutoShippingStatuses($scopeCode = null): array
     {
@@ -200,7 +187,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return array
      */
     public function getTrackCheckStatuses($scopeCode = null): array
     {
@@ -212,7 +198,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return string
      */
     public function getTrackMapping($scopeCode = null): string
     {
@@ -221,7 +206,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param int|string $scopeCode
-     * @return bool|string
      */
     public function getShipmentFailStatus($scopeCode = null)
     {
@@ -230,7 +214,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param int|string $scopeCode
-     * @return bool|string
      */
     public function getShipmentSuccessStatus($scopeCode = null)
     {
@@ -239,7 +222,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param mixed|null $scopeCode
-     * @return bool
      */
     public function isEnabledMarking($scopeCode = null): bool
     {
@@ -248,7 +230,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param int|string $scopeCode
-     * @return mixed
      */
     public function getMarkingFlag($scopeCode = null)
     {
@@ -257,7 +238,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param int|string $scopeCode
-     * @return mixed
      */
     public function getMarking($scopeCode = null)
     {
@@ -266,7 +246,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param int|string $scopeCode
-     * @return mixed
      */
     public function getMarkingRefund($scopeCode = null)
     {
@@ -297,10 +276,6 @@ class Data extends \Mygento\Base\Helper\Data
         ];
     }
 
-    /**
-     * @param \Magento\Sales\Model\Order $order
-     * @return string
-     */
     public function getUniqueOrderId(\Magento\Sales\Model\Order $order)
     {
         return $order->getIncrementId();
@@ -308,7 +283,6 @@ class Data extends \Mygento\Base\Helper\Data
 
     /**
      * @param \Magento\Quote\Model\Quote|\Magento\Sales\Model\Order $entity
-     * @return array
      */
     public function extractPickupPoint($entity): array
     {
@@ -330,9 +304,6 @@ class Data extends \Mygento\Base\Helper\Data
         return $result;
     }
 
-    /**
-     * @return string
-     */
     protected function getDebugConfigPath(): string
     {
         return 'debug';

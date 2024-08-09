@@ -14,6 +14,7 @@ use Mygento\Base\Api\ProductAttributeHelperInterface;
 class Data extends \Mygento\Base\Helper\Data
 {
     private const XML_TEST = 'test';
+    private const XML_TITLE = 'title';
     private const XML_TAX_ENABLED = 'tax_options/tax';
     private const XML_TAX_SAME_PRODUCT = 'tax_options/tax_same';
     private const XML_TAX_ALL_PRODUCT = 'tax_options/tax_products';
@@ -99,12 +100,14 @@ class Data extends \Mygento\Base\Helper\Data
         return strpos($order->getShippingMethod(), $this->getCode() . '_') !== false;
     }
 
-    /**
-     * @return string
-     */
     public function getCarrierCode(): string
     {
         return $this->getCode();
+    }
+
+    public function getCarrierTitle($scopeCode = null): string
+    {
+        return $this->getConfig(self::XML_TITLE, $scopeCode);
     }
 
     /**

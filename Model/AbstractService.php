@@ -17,6 +17,11 @@ use Mygento\Shipment\Api\Service\OrderInterface;
  */
 abstract class AbstractService implements CalculateInterface, OrderInterface
 {
+    protected const WEIGHT_KG = 1 / 1000;
+    protected const WEIGHT_GR = 1.0;
+    protected const SIZE_CM = 1.0;
+    protected const SIZE_M = 1 / 100;
+
     /** @var float */
     protected $weightCoefficient = 1.0;
 

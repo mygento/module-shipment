@@ -8,14 +8,18 @@
 
 namespace Mygento\Shipment\Model\ResourceModel;
 
-class Point extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
+
+class Point extends AbstractDb
 {
+    public const TABLE_NAME = 'mygento_shipment_point';
+    public const TABLE_PRIMARY_KEY = 'id';
+
     /**
      * Initialize resource model
-     * @return void
      */
     protected function _construct()
     {
-        $this->_init('mygento_shipment_point', 'id');
+        $this->_init(self::TABLE_NAME, self::TABLE_PRIMARY_KEY);
     }
 }

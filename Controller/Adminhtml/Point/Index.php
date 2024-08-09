@@ -8,43 +8,37 @@
 
 namespace Mygento\Shipment\Controller\Adminhtml\Point;
 
-class Index extends \Mygento\Shipment\Controller\Adminhtml\Point
+use Magento\Backend\App\Action\Context;
+use Magento\Framework\App\Request\DataPersistorInterface;
+use Magento\Framework\Controller\ResultInterface;
+use Magento\Framework\Registry;
+use Magento\Framework\View\Result\PageFactory;
+use Mygento\Shipment\Api\PointRepositoryInterface;
+use Mygento\Shipment\Controller\Adminhtml\Point;
+
+class Index extends Point
 {
-    /** @var \Magento\Framework\View\Result\PageFactory */
-    private $resultPageFactory;
-
-    /** @var \Magento\Framework\App\Request\DataPersistorInterface */
-    private $dataPersistor;
-
-    /**
-     * @param \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor
-     * @param \Magento\Framework\View\Result\PageFactory $resultPageFactory
-     * @param \Mygento\Shipment\Api\PointRepositoryInterface $repository
-     * @param \Magento\Framework\Registry $coreRegistry
-     * @param \Magento\Backend\App\Action\Context $context
-     */
     public function __construct(
-        \Magento\Framework\App\Request\DataPersistorInterface $dataPersistor,
-        \Magento\Framework\View\Result\PageFactory $resultPageFactory,
-        \Mygento\Shipment\Api\PointRepositoryInterface $repository,
-        \Magento\Framework\Registry $coreRegistry,
-        \Magento\Backend\App\Action\Context $context
+        private readonly PageFactory $resultPageFactory,
+        private readonly DataPersistorInterface $dataPersistor,
+        PointRepositoryInterface $repository,
+        Registry $coreRegistry,
+        Context $context,
     ) {
-        $this->resultPageFactory = $resultPageFactory;
-        $this->dataPersistor = $dataPersistor;
         parent::__construct($repository, $coreRegistry, $context);
     }
 
     /**
      * Index action
-     *
-     * @return \Magento\Framework\Controller\ResultInterface
      */
-    public function execute()
+    public function execute(): ResultInterface
     {
         /** @var \Magento\Backend\Model\View\Result\Page $resultPage */
         $resultPage = $this->resultPageFactory->create();
-        $this->initPage($resultPage)->getConfig()->getTitle()->prepend(__('Point'));
+        $resultPage
+            ->setActiveMenu('Mygento_Shipment::point')
+            ->getConfig()
+            ->getTitle()->prepend(__('Point')->render());
 
         $this->dataPersistor->clear('shipment_point');
 

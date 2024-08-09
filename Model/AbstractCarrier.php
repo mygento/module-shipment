@@ -26,14 +26,6 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     protected $helper;
 
-    /**
-     * @param \Mygento\Shipment\Model\Carrier $baseCarrier
-     * @param \Mygento\Shipment\Helper\Data $helper
-     * @param \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
-     * @param \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory
-     * @param \Psr\Log\LoggerInterface $logger
-     * @param array $data
-     */
     public function __construct(
         \Mygento\Shipment\Model\Carrier $baseCarrier,
         \Mygento\Shipment\Helper\Data $helper,
@@ -70,7 +62,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     public function convertCity(RateRequest $request, $mode = MB_CASE_TITLE): string
     {
-        return mb_convert_case(trim($request->getDestCity()), $mode, 'UTF-8');
+        return mb_convert_case(trim($request->getDestCity() ?? ''), $mode, 'UTF-8');
     }
 
     /**
@@ -142,7 +134,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
             return false;
         }
         $this->helper->info('Started calculating to: ' . $request->getDestCity());
-        if (strlen($request->getDestCity()) <= 2) {
+        if (strlen($request->getDestCity() ?? '') <= 2) {
             $this->helper->info('City strlen <= 2, aborting ...');
 
             return false;

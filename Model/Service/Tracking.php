@@ -74,7 +74,7 @@ class Tracking
         \Magento\Framework\Event\ManagerInterface $eventManager,
         \Magento\Sales\Model\Order\ShipmentFactory $shipmentFactory,
         \Magento\Sales\Model\Order\Shipment\TrackFactory $trackFactory,
-        \Magento\Framework\DB\TransactionFactory $transactionFactory
+        \Magento\Framework\DB\TransactionFactory $transactionFactory,
     ) {
         $this->orderRepo = $orderRepo;
         $this->trackRepo = $trackRepo;
@@ -101,7 +101,7 @@ class Tracking
         \Magento\Sales\Model\Order $order,
         string $carrierCode,
         string $trackingCode,
-        bool $notify = false
+        bool $notify = false,
     ) {
         $data = [
             'carrier_code' => $carrierCode,
@@ -124,11 +124,16 @@ class Tracking
                 'tracking' => $trackingCode,
             ]);
 
+            $shipment->addComment(__('Track assigned by %1', $carrierCode));
             $shipment->addTrack($this->trackFactory->create()->addData($data));
             $transaction = $this->transactionFactory->create();
             $transaction->addObject($shipment);
             $transaction->addObject($shipment->getOrder());
             $transaction->save();
+
+            if ($notify) {
+                $this->shipmentSender->send($order, $shipment);
+            }
 
             return $shipment;
         }
@@ -186,7 +191,7 @@ class Tracking
 
         if ($result->getTotalCount() < 1) {
             throw new NoSuchEntityException(
-                __("The entity that was requested doesn't exist. Verify the entity and try again.")
+                __("The entity that was requested doesn't exist. Verify the entity and try again."),
             );
         }
 

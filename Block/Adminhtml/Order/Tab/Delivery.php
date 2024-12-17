@@ -30,7 +30,7 @@ class Delivery extends \Magento\Backend\Block\Widget\Tab
         \Mygento\Shipment\Helper\Data $helper,
         \Magento\Framework\Registry $coreRegistry,
         \Magento\Backend\Block\Template\Context $context,
-        array $data = []
+        array $data = [],
     ) {
         $this->helper = $helper;
         $this->coreRegistry = $coreRegistry;
@@ -106,7 +106,7 @@ class Delivery extends \Magento\Backend\Block\Widget\Tab
     {
         return $this->getUrl(
             'mygento_' . $this->helper->getCode() . '/*/deliverytab',
-            ['_current' => true]
+            ['_current' => true],
         );
     }
 
@@ -118,7 +118,7 @@ class Delivery extends \Magento\Backend\Block\Widget\Tab
     {
         return $this->_urlBuilder->getUrl(
             'mygento_' . $this->helper->getCode() . '/delivery/' . $action,
-            ['_secure' => true, 'order_id' => $this->getOrder()->getId()]
+            ['_secure' => true, 'order_id' => $this->getOrder()->getId()],
         );
     }
 }

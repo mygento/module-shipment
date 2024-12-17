@@ -37,7 +37,7 @@ class ToOrderAddress
     public function afterConvert(
         Address\ToOrderAddress $subject,
         OrderAddressInterface $result,
-        Address $address
+        Address $address,
     ) {
         if ($address->getAddressType() !== Address::ADDRESS_TYPE_SHIPPING) {
             return $result;

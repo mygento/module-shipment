@@ -20,7 +20,7 @@ class OrderGet
      */
     public function afterGet(
         \Magento\Sales\Api\OrderRepositoryInterface $subject,
-        \Magento\Sales\Api\Data\OrderInterface $result
+        \Magento\Sales\Api\Data\OrderInterface $result,
     ) {
         return $this->getOrderAddress($result);
     }
@@ -33,7 +33,7 @@ class OrderGet
      */
     public function afterGetList(
         \Magento\Sales\Api\OrderRepositoryInterface $subject,
-        \Magento\Sales\Model\ResourceModel\Order\Collection $resultOrder
+        \Magento\Sales\Model\ResourceModel\Order\Collection $resultOrder,
     ) {
         /** @var \Magento\Sales\Api\Data\OrderInterface $order */
         foreach ($resultOrder->getItems() as $order) {

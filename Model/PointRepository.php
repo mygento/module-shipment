@@ -43,7 +43,7 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
         ResourceModel\Point\CollectionFactory $collectionFactory,
         \Mygento\Shipment\Api\Data\PointInterfaceFactory $entityFactory,
         \Mygento\Shipment\Api\Data\PointSearchResultsInterfaceFactory $searchResultsFactory,
-        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor = null
+        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor = null,
     ) {
         $this->resource = $resource;
         $this->collectionFactory = $collectionFactory;
@@ -63,7 +63,7 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
         $this->resource->load($entity, $entityId);
         if (!$entity->getId()) {
             throw new \Magento\Framework\Exception\NoSuchEntityException(
-                __('Shipment Point with id "%1" does not exist.', $entityId)
+                __('Shipment Point with id "%1" does not exist.', $entityId),
             );
         }
 
@@ -81,7 +81,7 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
             $this->resource->save($entity);
         } catch (\Exception $exception) {
             throw new \Magento\Framework\Exception\CouldNotSaveException(
-                __($exception->getMessage())
+                __($exception->getMessage()),
             );
         }
 
@@ -99,7 +99,7 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
             $this->resource->delete($entity);
         } catch (\Exception $exception) {
             throw new \Magento\Framework\Exception\CouldNotDeleteException(
-                __($exception->getMessage())
+                __($exception->getMessage()),
             );
         }
 

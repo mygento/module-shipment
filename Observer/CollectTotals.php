@@ -19,7 +19,7 @@ class CollectTotals implements \Magento\Framework\Event\ObserverInterface
      * @param \Magento\Quote\Api\Data\AddressExtensionFactory $extensionFactory
      */
     public function __construct(
-        \Magento\Quote\Api\Data\AddressExtensionFactory $extensionFactory
+        \Magento\Quote\Api\Data\AddressExtensionFactory $extensionFactory,
     ) {
         $this->extensionFactory = $extensionFactory;
     }

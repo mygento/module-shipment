@@ -23,22 +23,22 @@ class QuoteSubmitBefore implements \Magento\Framework\Event\ObserverInterface
             return;
         }
         $observer->getEvent()->getOrder()->getShippingAddress()->setDeliveryEstimate(
-            $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryEstimate()
+            $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryEstimate(),
         );
         $observer->getEvent()->getOrder()->getShippingAddress()->setDeliveryDate(
-            $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryDate()
+            $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryDate(),
         );
         $observer->getEvent()->getOrder()->getShippingAddress()->setDeliveryTimeFrom(
-            $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryTimeFrom()
+            $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryTimeFrom(),
         );
         $observer->getEvent()->getOrder()->getShippingAddress()->setDeliveryTimeTo(
-            $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryTimeTo()
+            $observer->getEvent()->getQuote()->getShippingAddress()->getDeliveryTimeTo(),
         );
         $observer->getEvent()->getOrder()->getShippingAddress()->setShipmentDate(
-            $observer->getEvent()->getQuote()->getShippingAddress()->getShipmentDate()
+            $observer->getEvent()->getQuote()->getShippingAddress()->getShipmentDate(),
         );
         $observer->getEvent()->getOrder()->getShippingAddress()->setPickupPoint(
-            $observer->getEvent()->getQuote()->getShippingAddress()->getPickupPoint()
+            $observer->getEvent()->getQuote()->getShippingAddress()->getPickupPoint(),
         );
     }
 }

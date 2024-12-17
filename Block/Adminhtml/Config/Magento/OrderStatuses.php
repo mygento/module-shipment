@@ -23,7 +23,7 @@ class OrderStatuses extends \Magento\Framework\View\Element\Html\Select
     public function __construct(
         \Magento\Framework\View\Element\Context $context,
         \Mygento\Base\Model\Source\Status $orderStatuses,
-        array $data = []
+        array $data = [],
     ) {
         $this->orderStatuses = $orderStatuses;
         parent::__construct($context, $data);

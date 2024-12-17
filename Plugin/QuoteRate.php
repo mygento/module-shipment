@@ -46,7 +46,7 @@ class QuoteRate
     public function afterImportShippingRate(
         \Magento\Quote\Model\Quote\Address\Rate $subject,
         $result,
-        \Magento\Quote\Model\Quote\Address\RateResult\AbstractResult $rate
+        \Magento\Quote\Model\Quote\Address\RateResult\AbstractResult $rate,
     ) {
         $result->setEstimateDate($rate->getEstimateDate());
         $result->setEstimateTime($rate->getEstimateTime());

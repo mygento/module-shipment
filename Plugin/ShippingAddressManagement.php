@@ -19,7 +19,7 @@ class ShippingAddressManagement
      * @param \Mygento\Shipment\Helper\Data $helper
      */
     public function __construct(
-        \Mygento\Shipment\Helper\Data $helper
+        \Mygento\Shipment\Helper\Data $helper,
     ) {
         $this->helper = $helper;
     }
@@ -33,7 +33,7 @@ class ShippingAddressManagement
     public function beforeAssign(
         \Magento\Quote\Model\ShippingAddressManagement $subject,
         $cartId,
-        \Magento\Quote\Api\Data\AddressInterface $address
+        \Magento\Quote\Api\Data\AddressInterface $address,
     ) {
         $extAttributes = $address->getExtensionAttributes();
         if ($extAttributes instanceof \Magento\Framework\Api\AbstractSimpleObject) {

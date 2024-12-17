@@ -56,7 +56,7 @@ class Carrier implements \Mygento\Shipment\Api\Carrier\BaseInterface
         \Mygento\Shipment\Api\Data\CalculateRequestInterfaceFactory $calculateFactory,
         \Magento\Shipping\Model\Rate\ResultFactory $rateResultFactory,
         \Magento\Quote\Model\Quote\Address\RateResult\MethodFactory $rateMethodFactory,
-        \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackingResultFactory
+        \Magento\Shipping\Model\Tracking\Result\StatusFactory $trackingResultFactory,
     ) {
         $this->helper = $helper;
         $this->rateResultFactory = $rateResultFactory;

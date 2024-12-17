@@ -32,7 +32,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
         \Magento\Quote\Model\Quote\Address\RateResult\ErrorFactory $rateErrorFactory,
         \Psr\Log\LoggerInterface $logger,
-        array $data = []
+        array $data = [],
     ) {
         $this->helper = $helper;
         $this->baseCarrier = $baseCarrier;
@@ -41,7 +41,7 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
             $scopeConfig,
             $rateErrorFactory,
             $logger,
-            $data
+            $data,
         );
     }
 

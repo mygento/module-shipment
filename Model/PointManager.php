@@ -52,7 +52,7 @@ class PointManager implements \Mygento\Shipment\Api\PointManagerInterface
         \Mygento\Shipment\Model\ResourceModel\Point\CollectionFactory $collectionFactory,
         \Mygento\Shipment\Api\Data\PointInterfaceFactory $pointFactory,
         \Mygento\Shipment\Model\ResourceModel\Point $point,
-        array $carrierPool = []
+        array $carrierPool = [],
     ) {
         $this->helper = $helper;
         $this->pointFactory = $pointFactory;

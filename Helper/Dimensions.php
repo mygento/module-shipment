@@ -33,7 +33,7 @@ class Dimensions
     public function __construct(
         \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper,
         \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Catalog\Model\ResourceModel\Product $productResource
+        \Magento\Catalog\Model\ResourceModel\Product $productResource,
     ) {
         $this->attrHelper = $attrHelper;
         $this->storeManager = $storeManager;
@@ -76,17 +76,17 @@ class Dimensions
                     'length' => $this->getAttrValueByParam(
                         $prefix . 'length',
                         $productId,
-                        $sizeCoefficient
+                        $sizeCoefficient,
                     ),
                     'height' => $this->getAttrValueByParam(
                         $prefix . 'height',
                         $productId,
-                        $sizeCoefficient
+                        $sizeCoefficient,
                     ),
                     'width' => $this->getAttrValueByParam(
                         $prefix . 'width',
                         $productId,
-                        $sizeCoefficient
+                        $sizeCoefficient,
                     ),
                     'weight' => round($item->getWeight() * $weightCoefficient, 2),
                 ];
@@ -191,7 +191,7 @@ class Dimensions
         return (float) str_replace(
             [' ', ','],
             ['', '.'],
-            $value ?? ''
+            $value ?? '',
         );
     }
 

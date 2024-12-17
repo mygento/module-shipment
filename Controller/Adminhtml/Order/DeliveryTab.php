@@ -62,7 +62,7 @@ abstract class DeliveryTab extends \Magento\Sales\Controller\Adminhtml\Order
         \Magento\Framework\Controller\Result\RawFactory $resultRawFactory,
         OrderManagementInterface $orderManagement,
         OrderRepositoryInterface $orderRepository,
-        LoggerInterface $logger
+        LoggerInterface $logger,
     ) {
         parent::__construct(
             $context,
@@ -75,7 +75,7 @@ abstract class DeliveryTab extends \Magento\Sales\Controller\Adminhtml\Order
             $resultRawFactory,
             $orderManagement,
             $orderRepository,
-            $logger
+            $logger,
         );
         $this->layoutFactory = $layoutFactory;
     }

@@ -31,7 +31,7 @@ class Estimate extends \Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Meth
         \Magento\Sales\Model\AdminOrder\Create $orderCreate,
         \Magento\Framework\Pricing\PriceCurrencyInterface $priceCurrency,
         \Magento\Tax\Helper\Data $taxData,
-        array $data = []
+        array $data = [],
     ) {
         parent::__construct($context, $sessionQuote, $orderCreate, $priceCurrency, $taxData, $data);
         $this->serializer = $serializer;

@@ -46,12 +46,12 @@ class Data extends \Mygento\Base\Helper\Data
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
         \Mygento\Base\Model\LogManager $logManager,
         \Magento\Framework\Encryption\Encryptor $encryptor,
-        \Magento\Framework\App\Helper\Context $context
+        \Magento\Framework\App\Helper\Context $context,
     ) {
         parent::__construct(
             $logManager,
             $encryptor,
-            $context
+            $context,
         );
         $this->checkoutSession = $checkoutSession;
         $this->filterBuilder = $filterBuilder;
@@ -184,7 +184,7 @@ class Data extends \Mygento\Base\Helper\Data
     {
         return array_filter(explode(
             ',',
-            $this->getConfig(self::XML_AUTO_SHIPPING_STATUSES, $scopeCode) ?: ''
+            $this->getConfig(self::XML_AUTO_SHIPPING_STATUSES, $scopeCode) ?: '',
         ));
     }
 
@@ -195,7 +195,7 @@ class Data extends \Mygento\Base\Helper\Data
     {
         return array_filter(explode(
             ',',
-            $this->getConfig(self::XML_SHIPMENT_TRACK_STATUSES, $scopeCode) ?: ''
+            $this->getConfig(self::XML_SHIPMENT_TRACK_STATUSES, $scopeCode) ?: '',
         ));
     }
 
@@ -264,7 +264,7 @@ class Data extends \Mygento\Base\Helper\Data
     public function getCarrierFilters(
         string $field = 'shipping_method',
         $value = null,
-        string $condition = 'like'
+        string $condition = 'like',
     ): array {
         if ($value === null) {
             $value = $this->getCarrierCode() . '_%';

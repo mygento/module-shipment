@@ -43,7 +43,7 @@ interface BaseInterface
      */
     public function getTaxInfoForItems(
         \Magento\Sales\Api\Data\OrderInterface $order,
-        \Mygento\Shipment\Helper\Data $helper
+        \Mygento\Shipment\Helper\Data $helper,
     );
 
     /**
@@ -61,6 +61,6 @@ interface BaseInterface
     public function addOrderComment(
         \Magento\Sales\Model\Order $order,
         string $status,
-        string $comment = ''
+        string $comment = '',
     );
 }

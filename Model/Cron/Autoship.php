@@ -43,7 +43,7 @@ class Autoship implements \Mygento\Shipment\Api\Service\AutoshipInterface
         \Magento\Sales\Api\OrderRepositoryInterface $repo,
         \Magento\Framework\Api\SearchCriteriaBuilder $builder,
         \Magento\Framework\Api\FilterBuilder $filterBuilder,
-        \Magento\Framework\Api\SortOrderBuilder $sortBuilder
+        \Magento\Framework\Api\SortOrderBuilder $sortBuilder,
     ) {
         $this->repo = $repo;
         $this->builder = $builder;

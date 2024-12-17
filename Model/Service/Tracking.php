@@ -124,6 +124,11 @@ class Tracking
                 'tracking' => $trackingCode,
             ]);
 
+            $shipment->addComment(__('Track assigned by %1', $carrierCode));
+            if ($notify) {
+                $this->shipmentSender->send($order, $shipment);
+            }
+
             $shipment->addTrack($this->trackFactory->create()->addData($data));
             $transaction = $this->transactionFactory->create();
             $transaction->addObject($shipment);

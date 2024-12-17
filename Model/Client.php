@@ -29,7 +29,7 @@ class Client implements \Mygento\Shipment\Api\Client\BaseInterface
      */
     public function __construct(
         \Magento\Framework\Event\Manager $eventManager,
-        CurlFactory $curl
+        CurlFactory $curl,
     ) {
         $this->curl = $curl;
         $this->eventManager = $eventManager;

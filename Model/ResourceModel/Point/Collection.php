@@ -24,7 +24,7 @@ class Collection extends AbstractCollection
     {
         $this->_init(
             Point::class,
-            PointResource::class
+            PointResource::class,
         );
     }
 }

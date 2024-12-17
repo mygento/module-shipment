@@ -51,7 +51,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     public function __construct(
         \Mygento\Shipment\Model\Service $baseService,
         \Mygento\Shipment\Helper\Data $helper,
-        \Magento\Framework\Api\SearchCriteriaBuilder $searchBuilder
+        \Magento\Framework\Api\SearchCriteriaBuilder $searchBuilder,
     ) {
         $this->baseService = $baseService;
         $this->searchBuilder = $searchBuilder;
@@ -118,7 +118,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
      */
     public function getTaxInfoForItems(
         \Magento\Sales\Api\Data\OrderInterface $order,
-        \Mygento\Shipment\Helper\Data $helper
+        \Mygento\Shipment\Helper\Data $helper,
     ) {
         return $this->baseService->getTaxInfoForItems($order, $helper);
     }
@@ -153,7 +153,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
         \Magento\Sales\Model\Order $order,
         string $carrierCode,
         string $trackingCode,
-        bool $notify = false
+        bool $notify = false,
     ) {
         return $this->baseService->setTracking($order, $carrierCode, $trackingCode, $notify);
     }
@@ -189,7 +189,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
         $fail = $this->helper->getShipmentFailStatus($order->getStoreId()) ?? false;
         $order->addCommentToStatusHistory(
             __('Order ship fail by %1: %2', $this->helper->getCode(), implode(PHP_EOL, $messages)),
-            $fail
+            $fail,
         );
         $this->getOrderRepository()->save($order);
 
@@ -204,7 +204,7 @@ abstract class AbstractService implements CalculateInterface, OrderInterface
     public function addOrderComment(
         \Magento\Sales\Model\Order $order,
         string $status,
-        string $comment = ''
+        string $comment = '',
     ) {
         $this->baseService->addOrderComment($order, $status, $comment);
     }

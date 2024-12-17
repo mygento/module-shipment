@@ -28,7 +28,7 @@ class ExtShippingMethodManagement
      */
     public function __construct(
         \Magento\Quote\Api\Data\ShippingMethodExtensionFactory $shippingExtAttr,
-        Json $json
+        Json $json,
     ) {
         $this->shippingExtAttr = $shippingExtAttr;
         $this->json = $json;
@@ -44,7 +44,7 @@ class ExtShippingMethodManagement
     public function afterModelToDataObject(
         \Magento\Quote\Model\Cart\ShippingMethodConverter $subject,
         $result,
-        \Magento\Quote\Model\Quote\Address\Rate $rateModel
+        \Magento\Quote\Model\Quote\Address\Rate $rateModel,
     ) {
         $extensionAttributes =
             $result->getExtensionAttributes()

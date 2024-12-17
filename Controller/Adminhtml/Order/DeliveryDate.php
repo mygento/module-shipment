@@ -28,7 +28,7 @@ class DeliveryDate extends \Magento\Backend\App\Action
     public function __construct(
         \Magento\Sales\Api\OrderRepositoryInterface $repo,
         \Magento\Framework\Controller\Result\JsonFactory $jsonFactory,
-        \Magento\Backend\App\Action\Context $context
+        \Magento\Backend\App\Action\Context $context,
     ) {
         parent::__construct($context);
         $this->repo = $repo;

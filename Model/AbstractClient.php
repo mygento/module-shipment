@@ -26,7 +26,7 @@ abstract class AbstractClient implements \Mygento\Shipment\Api\Client\AbstractCl
      */
     public function __construct(
         \Mygento\Shipment\Helper\Data $helper,
-        \Mygento\Shipment\Model\Client $baseClient
+        \Mygento\Shipment\Model\Client $baseClient,
     ) {
         $this->baseClient = $baseClient;
         $this->helper = $helper;

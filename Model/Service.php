@@ -66,7 +66,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         \Mygento\Shipment\Model\Service\Tracking $tracking,
         \Magento\Sales\Api\OrderRepositoryInterface $orderRepo,
         \Mygento\Shipment\Api\Data\CalculateResultInterfaceFactory $resultFactory,
-        \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory
+        \Mygento\Shipment\Api\Data\EstimateTimeInterfaceFactory $timeFactory,
     ) {
         $this->pointManager = $pointManager;
         $this->taxHelper = $taxHelper;
@@ -135,7 +135,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
      */
     public function getTaxInfoForItems(
         OrderInterface $order,
-        \Mygento\Shipment\Helper\Data $helper
+        \Mygento\Shipment\Helper\Data $helper,
     ) {
         $storeId = $order->getStoreId();
         $attributeCode = '';
@@ -160,7 +160,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
             $helper->getTaxForShipping($storeId),
             $markFlag,
             $markField,
-            $markRefund
+            $markRefund,
         );
     }
 
@@ -195,7 +195,7 @@ class Service implements \Mygento\Shipment\Api\Service\BaseInterface
         \Magento\Sales\Model\Order $order,
         string $carrierCode,
         string $trackingCode,
-        bool $notify = false
+        bool $notify = false,
     ) {
         return $this->tracking->setTracking($order, $carrierCode, $trackingCode, $notify);
     }

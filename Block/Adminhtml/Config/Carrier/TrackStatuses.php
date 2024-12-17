@@ -64,7 +64,7 @@ abstract class TrackStatuses extends AbstractFieldArray
 
         $row->setData(
             'option_extra_attrs',
-            $optionExtraAttr
+            $optionExtraAttr,
         );
     }
 
@@ -77,7 +77,7 @@ abstract class TrackStatuses extends AbstractFieldArray
             $this->carrierStatuses = $this->getLayout()->createBlock(
                 $this->getCarrierStatusBlock(),
                 '',
-                ['data' => ['is_render_to_js_template' => true]]
+                ['data' => ['is_render_to_js_template' => true]],
             );
         }
 
@@ -93,7 +93,7 @@ abstract class TrackStatuses extends AbstractFieldArray
             $this->orderStatuses = $this->getLayout()->createBlock(
                 OrderStatuses::class,
                 '',
-                ['data' => ['is_render_to_js_template' => true]]
+                ['data' => ['is_render_to_js_template' => true]],
             );
         }
 

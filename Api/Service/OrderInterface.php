@@ -40,7 +40,7 @@ interface OrderInterface
         \Magento\Sales\Model\Order $order,
         string $carrierCode,
         string $trackingCode,
-        bool $notify = false
+        bool $notify = false,
     );
 
     /**
@@ -65,6 +65,6 @@ interface OrderInterface
     public function addOrderComment(
         \Magento\Sales\Model\Order $order,
         string $status,
-        string $comment = ''
+        string $comment = '',
     );
 }

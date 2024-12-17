@@ -21,7 +21,7 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
 
     public function __construct(
         ExtensionAttributesFactory $extensionFactory,
-        array $data = []
+        array $data = [],
     ) {
         $this->extensionAttributesFactory = $extensionFactory;
         parent::__construct($data);

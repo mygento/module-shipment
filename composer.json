@@ -1,21 +1,20 @@
 {
     "name": "mygento/module-shipment",
     "type": "magento2-module",
-    "version": "2.4.4",
     "license": "OSL-3.0",
     "homepage": "https://github.com/mygento/module-shipment",
     "description": "Magento 2 Shipment Base",
     "authors": [
         {
             "name": "Nikita Tarasov",
-            "email": "nikita@mygento.net",
-            "homepage": "http://www.mygento.net/",
+            "email": "nikita@mygento.com",
+            "homepage": "http://www.mygento.com/",
             "role": "Developer"
         },
         {
             "name": "Mygento",
-            "email": "connect@mygento.net",
-            "homepage": "https://www.mygento.ru/"
+            "email": "connect@mygento.com",
+            "homepage": "https://www.mygento.com/"
         }
     ],
     "keywords": [

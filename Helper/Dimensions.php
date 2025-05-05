@@ -110,23 +110,36 @@ class Dimensions
     public function dimenAlgo(array $dimensions): array
     {
         $dim = [];
-        $result = [
-            'width' => 0,
-            'height' => 0,
-            'length' => 0,
-        ];
+
         foreach ($dimensions as $d) {
             if ($this->isValidDimensionArr($d)) {
                 $dim[] = $d;
             }
         }
 
+        $totalHeight = 0;
+        $maxLength = 0;
+        $maxWidth = 0;
+
         foreach ($dim as $d) {
-            ($d['width'] > $result['width']) ? $result['width'] = $d['width'] : '';
-            ($d['height'] > $result['height']) ? $result['height'] = $d['height'] : '';
-            $result['length'] += $d['length'];
+            $dimensions = [
+                $d['length'],
+                $d['width'],
+                $d['height'],
+            ];
+            rsort($dimensions);
+
+            list($length, $width, $height) = $dimensions;
+
+            $totalHeight += $height;
+            $maxLength = max($maxLength, $length);
+            $maxWidth = max($maxWidth, $width);
         }
-        $result['volume'] = $result['length'] * $result['height'] * $result['width'];
+
+        $result['volume'] = $maxLength * $maxWidth * $totalHeight;
+        $result['width'] = $maxWidth;
+        $result['length'] = $maxLength;
+        $result['height'] = $totalHeight;
 
         return $result;
     }

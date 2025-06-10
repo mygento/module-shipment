@@ -11,34 +11,15 @@ namespace Mygento\Shipment\Helper;
 class Dimensions
 {
     /**
-     * @var \Magento\Catalog\Model\ResourceModel\Product
-     */
-    private $productResource;
-
-    /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
-     * @var \Mygento\Base\Api\ProductAttributeHelperInterface
-     */
-    private $attrHelper;
-
-    /**
      * @param \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Catalog\Model\ResourceModel\Product $productResource
      */
     public function __construct(
-        \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
-        \Magento\Catalog\Model\ResourceModel\Product $productResource,
-    ) {
-        $this->attrHelper = $attrHelper;
-        $this->storeManager = $storeManager;
-        $this->productResource = $productResource;
-    }
+        private \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper,
+        private \Magento\Store\Model\StoreManagerInterface $storeManager,
+        private \Magento\Catalog\Model\ResourceModel\Product $productResource,
+    ) {}
 
     /**
      * Get items sizes
@@ -122,9 +103,11 @@ class Dimensions
         }
 
         foreach ($dim as $d) {
-            ($d['width'] > $result['width']) ? $result['width'] = $d['width'] : '';
-            ($d['height'] > $result['height']) ? $result['height'] = $d['height'] : '';
-            $result['length'] += $d['length'];
+            $length = max($d['length'], $d['width']);
+            $width = min($d['length'], $d['width']);
+            ($length > $result['length']) ? $result['length'] = $length : '';
+            ($width > $result['width']) ? $result['width'] = $width : '';
+            $result['height'] += $d['height'];
         }
         $result['volume'] = $result['length'] * $result['height'] * $result['width'];
 

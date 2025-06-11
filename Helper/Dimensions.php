@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2024 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2025 Mygento (https://www.mygento.com)
  * @package Mygento_Shipment
  */
 
@@ -122,9 +122,16 @@ class Dimensions
         }
 
         foreach ($dim as $d) {
-            ($d['width'] > $result['width']) ? $result['width'] = $d['width'] : '';
+            //find the maximum items height
             ($d['height'] > $result['height']) ? $result['height'] = $d['height'] : '';
-            $result['length'] += $d['length'];
+
+            //find the longest horizontal side (either length or width) - used as the package length
+            $length = max($d['length'], $d['width']);
+            ($length > $result['length']) ? $result['length'] = $length : '';
+
+            //sum the shorter horizontal side if items are laid in a row
+            $width = min($d['length'], $d['width']);
+            $result['width'] += $width;
         }
         $result['volume'] = $result['length'] * $result['height'] * $result['width'];
 

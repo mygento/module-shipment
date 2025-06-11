@@ -122,13 +122,16 @@ class Dimensions
         }
 
         foreach ($dim as $d) {
-            $length = max($d['length'], $d['height']);
-            $height = min($d['length'], $d['height']);
+            //find the maximum items height
+            ($d['height'] > $result['height']) ? $result['height'] = $d['height'] : '';
 
+            //find the longest horizontal side (either length or width) - used as the package length
+            $length = max($d['length'], $d['width']);
             ($length > $result['length']) ? $result['length'] = $length : '';
-            ($height > $result['height']) ? $result['height'] = $height : '';
 
-            $result['width'] += $d['width'];
+            //sum the shorter horizontal side if items are laid in a row
+            $width = min($d['length'], $d['width']);
+            $result['width'] += $width;
         }
         $result['volume'] = $result['length'] * $result['height'] * $result['width'];
 

@@ -2,7 +2,7 @@
 
 /**
  * @author Mygento Team
- * @copyright 2016-2024 Mygento (https://www.mygento.ru)
+ * @copyright 2016-2025 Mygento (https://www.mygento.ru)
  * @package Mygento_Shipment
  */
 
@@ -11,15 +11,34 @@ namespace Mygento\Shipment\Helper;
 class Dimensions
 {
     /**
+     * @var \Magento\Catalog\Model\ResourceModel\Product
+     */
+    private $productResource;
+
+    /**
+     * @var \Magento\Store\Model\StoreManagerInterface
+     */
+    private $storeManager;
+
+    /**
+     * @var \Mygento\Base\Api\ProductAttributeHelperInterface
+     */
+    private $attrHelper;
+
+    /**
      * @param \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper
      * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param \Magento\Catalog\Model\ResourceModel\Product $productResource
      */
     public function __construct(
-        private \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper,
-        private \Magento\Store\Model\StoreManagerInterface $storeManager,
-        private \Magento\Catalog\Model\ResourceModel\Product $productResource,
-    ) {}
+        \Mygento\Base\Api\ProductAttributeHelperInterface $attrHelper,
+        \Magento\Store\Model\StoreManagerInterface $storeManager,
+        \Magento\Catalog\Model\ResourceModel\Product $productResource,
+    ) {
+        $this->attrHelper = $attrHelper;
+        $this->storeManager = $storeManager;
+        $this->productResource = $productResource;
+    }
 
     /**
      * Get items sizes
@@ -103,11 +122,13 @@ class Dimensions
         }
 
         foreach ($dim as $d) {
-            $length = max($d['length'], $d['width']);
-            $width = min($d['length'], $d['width']);
+            $length = max($d['length'], $d['height']);
+            $height = min($d['length'], $d['height']);
+
             ($length > $result['length']) ? $result['length'] = $length : '';
-            ($width > $result['width']) ? $result['width'] = $width : '';
-            $result['height'] += $d['height'];
+            ($height > $result['height']) ? $result['height'] = $height : '';
+
+            $result['width'] += $d['width'];
         }
         $result['volume'] = $result['length'] * $result['height'] * $result['width'];
 

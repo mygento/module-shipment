@@ -36,8 +36,8 @@ class Collection extends ParentCollection implements SearchResultInterface
         string $eventObject,
         string $resourceModel,
         string $model = \Magento\Framework\View\Element\UiComponent\DataProvider\Document::class,
-        AdapterInterface $connection = null,
-        AbstractDb $resource = null,
+        ?AdapterInterface $connection = null,
+        ?AbstractDb $resource = null,
     ) {
         parent::__construct(
             $entityFactory,
@@ -85,7 +85,7 @@ class Collection extends ParentCollection implements SearchResultInterface
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function setSearchCriteria(SearchCriteriaInterface $searchCriteria = null)
+    public function setSearchCriteria(?SearchCriteriaInterface $searchCriteria = null)
     {
         return $this;
     }
@@ -113,7 +113,7 @@ class Collection extends ParentCollection implements SearchResultInterface
      * @return $this
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function setItems(array $items = null)
+    public function setItems(?array $items = null)
     {
         return $this;
     }

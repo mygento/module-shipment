@@ -28,7 +28,7 @@
         <column xsi:type="int"     name="delivery_estimate" nullable="true" comment="Shipping Delivery Estimate"/>
     </table>
 
-    <table name="mygento_shipment_point" resource="default" engine="innodb" comment="mygento_shipment_point Table">
+    <table name="mygento_shipment_point" resource="default" engine="innodb" comment="Shipment Point Table">
         <column xsi:type="int" name="id" nullable="false" identity="true" unsigned="true" comment="ID"/>
         <column xsi:type="boolean" name="is_active" nullable="false" default="0" comment="Is Active"/>
         <column xsi:type="varchar" name="provider" nullable="false" length="255" comment="Provider"/>

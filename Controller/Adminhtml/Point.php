@@ -22,8 +22,8 @@ abstract class Point extends Action
     public const ADMIN_RESOURCE = 'Mygento_Shipment::point';
 
     public function __construct(
-        protected readonly PointRepositoryInterface $repository,
-        protected readonly Registry $coreRegistry,
+        protected PointRepositoryInterface $repository,
+        protected Registry $coreRegistry,
         Action\Context $context,
     ) {
         parent::__construct($context);

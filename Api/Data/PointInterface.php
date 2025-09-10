@@ -8,6 +8,9 @@
 
 namespace Mygento\Shipment\Api\Data;
 
+/**
+ * @api
+ */
 interface PointInterface
 {
     public const ID = 'id';

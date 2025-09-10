@@ -8,62 +8,41 @@
 
 namespace Mygento\Shipment\Model;
 
+use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
+use Magento\Framework\Exception\CouldNotDeleteException;
+use Magento\Framework\Exception\CouldNotSaveException;
+use Magento\Framework\Exception\NoSuchEntityException;
+use Mygento\Shipment\Api\Data\PointInterface;
+use Mygento\Shipment\Api\Data\PointInterfaceFactory;
+use Mygento\Shipment\Api\Data\PointSearchResultsInterface;
+use Mygento\Shipment\Api\Data\PointSearchResultsInterfaceFactory;
+use Mygento\Shipment\Api\PointRepositoryInterface;
+use Mygento\Shipment\Model\ResourceModel\Point\CollectionFactory;
+
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
+class PointRepository implements PointRepositoryInterface
 {
-    /** @var \Mygento\Shipment\Model\ResourceModel\Point */
-    private $resource;
-
-    /** @var \Mygento\Shipment\Model\ResourceModel\Point\CollectionFactory */
-    private $collectionFactory;
-
-    /** @var \Mygento\Shipment\Api\Data\PointInterfaceFactory */
-    private $entityFactory;
-
-    /** @var \Mygento\Shipment\Api\Data\PointSearchResultsInterfaceFactory */
-    private $searchResultsFactory;
-
-    /**
-     * @var \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface
-     */
-    private $collectionProcessor;
-
-    /**
-     * PointRepository constructor.
-     * @param ResourceModel\Point $resource
-     * @param ResourceModel\Point\CollectionFactory $collectionFactory
-     * @param \Mygento\Shipment\Api\Data\PointInterfaceFactory $entityFactory
-     * @param \Mygento\Shipment\Api\Data\PointSearchResultsInterfaceFactory $searchResultsFactory
-     * @param \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface|null $collectionProcessor
-     */
     public function __construct(
-        ResourceModel\Point $resource,
-        ResourceModel\Point\CollectionFactory $collectionFactory,
-        \Mygento\Shipment\Api\Data\PointInterfaceFactory $entityFactory,
-        \Mygento\Shipment\Api\Data\PointSearchResultsInterfaceFactory $searchResultsFactory,
-        \Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface $collectionProcessor = null,
-    ) {
-        $this->resource = $resource;
-        $this->collectionFactory = $collectionFactory;
-        $this->entityFactory = $entityFactory;
-        $this->searchResultsFactory = $searchResultsFactory;
-        $this->collectionProcessor = $collectionProcessor;
-    }
+        private ResourceModel\Point $resource,
+        private CollectionFactory $collectionFactory,
+        private PointInterfaceFactory $entityFactory,
+        private PointSearchResultsInterfaceFactory $searchResultsFactory,
+        private CollectionProcessorInterface $collectionProcessor,
+    ) {}
 
     /**
-     * @param int $entityId
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     * @return \Mygento\Shipment\Api\Data\PointInterface
+     * @throws NoSuchEntityException
      */
-    public function getById($entityId)
+    public function getById(int $entityId): PointInterface
     {
         $entity = $this->entityFactory->create();
         $this->resource->load($entity, $entityId);
         if (!$entity->getId()) {
-            throw new \Magento\Framework\Exception\NoSuchEntityException(
-                __('Shipment Point with id "%1" does not exist.', $entityId),
+            throw new NoSuchEntityException(
+                __('A Shipment Point with id "%1" does not exist', $entityId),
             );
         }
 
@@ -71,17 +50,16 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
     }
 
     /**
-     * @param \Mygento\Shipment\Api\Data\PointInterface $entity
-     * @throws \Magento\Framework\Exception\CouldNotSaveException
-     * @return \Mygento\Shipment\Api\Data\PointInterface
+     * @throws CouldNotSaveException
      */
-    public function save(\Mygento\Shipment\Api\Data\PointInterface $entity)
+    public function save(PointInterface $entity): PointInterface
     {
         try {
             $this->resource->save($entity);
         } catch (\Exception $exception) {
-            throw new \Magento\Framework\Exception\CouldNotSaveException(
-                __($exception->getMessage()),
+            throw new CouldNotSaveException(
+                __('Could not save the Shipment Point'),
+                $exception,
             );
         }
 
@@ -89,16 +67,14 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
     }
 
     /**
-     * @param \Mygento\Shipment\Api\Data\PointInterface $entity
-     * @throws \Magento\Framework\Exception\CouldNotDeleteException
-     * @return bool
+     * @throws CouldNotDeleteException
      */
-    public function delete(\Mygento\Shipment\Api\Data\PointInterface $entity)
+    public function delete(PointInterface $entity): bool
     {
         try {
             $this->resource->delete($entity);
         } catch (\Exception $exception) {
-            throw new \Magento\Framework\Exception\CouldNotDeleteException(
+            throw new CouldNotDeleteException(
                 __($exception->getMessage()),
             );
         }
@@ -107,30 +83,22 @@ class PointRepository implements \Mygento\Shipment\Api\PointRepositoryInterface
     }
 
     /**
-     * @param int $entityId
-     * @throws \Magento\Framework\Exception\NoSuchEntityException
-     * @throws \Magento\Framework\Exception\CouldNotDeleteException
-     * @return bool
+     * @throws NoSuchEntityException
+     * @throws CouldNotDeleteException
      */
-    public function deleteById($entityId)
+    public function deleteById(int $entityId): bool
     {
         return $this->delete($this->getById($entityId));
     }
 
-    /**
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $criteria
-     * @return \Mygento\Shipment\Api\Data\PointSearchResultsInterface
-     */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $criteria)
+    public function getList(SearchCriteriaInterface $criteria): PointSearchResultsInterface
     {
         /** @var \Mygento\Shipment\Model\ResourceModel\Point\Collection $collection */
         $collection = $this->collectionFactory->create();
 
-        if ($this->collectionProcessor) {
-            $this->collectionProcessor->process($criteria, $collection);
-        }
+        $this->collectionProcessor->process($criteria, $collection);
 
-        /** @var \Mygento\Shipment\Api\Data\PointSearchResultsInterface $searchResults */
+        /** @var PointSearchResultsInterface $searchResults */
         $searchResults = $this->searchResultsFactory->create();
         $searchResults->setSearchCriteria($criteria);
         $searchResults->setItems($collection->getItems());

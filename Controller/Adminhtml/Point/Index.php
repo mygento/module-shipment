@@ -19,8 +19,8 @@ use Mygento\Shipment\Controller\Adminhtml\Point;
 class Index extends Point
 {
     public function __construct(
-        private readonly PageFactory $resultPageFactory,
-        private readonly DataPersistorInterface $dataPersistor,
+        private PageFactory $resultPageFactory,
+        private DataPersistorInterface $dataPersistor,
         PointRepositoryInterface $repository,
         Registry $coreRegistry,
         Context $context,

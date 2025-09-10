@@ -23,12 +23,24 @@
     <type name="Magento\Sales\Api\OrderRepositoryInterface">
         <plugin name="mygento_shipment" type="Mygento\Shipment\Plugin\OrderGet"/>
     </type>
+    <type name="Mygento\Shipment\Model\Service\Tracking">
+        <arguments>
+            <argument name="shipmentSender" xsi:type="object">Magento\Sales\Model\Order\Shipment\Sender\EmailSender\Proxy</argument>
+        </arguments>
+    </type>
 
+    <!-- generated -->
     <preference for="Mygento\Shipment\Api\PointRepositoryInterface" type="Mygento\Shipment\Model\PointRepository"/>
     <preference for="Mygento\Shipment\Api\Data\PointInterface" type="Mygento\Shipment\Model\Point"/>
-    <preference for="Mygento\Shipment\Api\Data\PointSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
-
-    <virtualType name="Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+    <preference for="Mygento\Shipment\Api\Data\PointSearchResultsInterface" type="Mygento\Shipment\Model\PointSearchResults"/>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Mygento\Shipment\Api\Data\PointInterface" xsi:type="string">Mygento\Shipment\Api\PointRepositoryInterface</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Mygento\Shipment\Model\SearchCriteria\PointCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
         <arguments>
             <argument name="processors" xsi:type="array">
                 <item name="filters" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor</item>
@@ -37,17 +49,9 @@
             </argument>
         </arguments>
     </virtualType>
-    <type name="Mygento\Shipment\Api\PointRepositoryInterface">
+    <type name="Mygento\Shipment\Model\PointRepository">
         <arguments>
-            <argument name="collectionProcessor" xsi:type="object">Mygento\Shipment\Model\Api\SearchCriteria\PointCollectionProcessor</argument>
-        </arguments>
-    </type>
-
-    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
-        <arguments>
-            <argument name="entities" xsi:type="array">
-                <item name="Mygento\Shipment\Api\Data\PointInterface" xsi:type="string">Mygento\Shipment\Api\PointRepositoryInterface</item>
-            </argument>
+            <argument name="collectionProcessor" xsi:type="object">Mygento\Shipment\Model\SearchCriteria\PointCollectionProcessor</argument>
         </arguments>
     </type>
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
@@ -63,11 +67,6 @@
             <argument name="eventPrefix" xsi:type="string">shipment_point_grid_collection</argument>
             <argument name="eventObject" xsi:type="string">point_grid_collection</argument>
             <argument name="resourceModel" xsi:type="string">Mygento\Shipment\Model\ResourceModel\Point</argument>
-        </arguments>
-    </type>
-    <type name="Mygento\Shipment\Model\Service\Tracking">
-        <arguments>
-            <argument name="shipmentSender" xsi:type="object">Magento\Sales\Model\Order\Shipment\Sender\EmailSender\Proxy</argument>
         </arguments>
     </type>
 </config>

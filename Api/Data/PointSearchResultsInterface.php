@@ -8,7 +8,9 @@
 
 namespace Mygento\Shipment\Api\Data;
 
-interface PointSearchResultsInterface extends \Magento\Framework\Api\SearchResultsInterface
+use Magento\Framework\Api\SearchResultsInterface;
+
+interface PointSearchResultsInterface extends SearchResultsInterface
 {
     /**
      * Get list of Point

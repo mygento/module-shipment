@@ -1,5 +1,7 @@
 Mygento:
   Shipment:
+    settings:
+      php_version: 8.1
     entities:
       Point:
         gui: true

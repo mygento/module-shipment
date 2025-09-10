@@ -8,6 +8,11 @@
 
 namespace Mygento\Shipment\Api;
 
+use Magento\Framework\Api\SearchCriteriaInterface;
+
+/**
+ * @api
+ */
 interface PointRepositoryInterface
 {
     /**
@@ -16,15 +21,14 @@ interface PointRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return \Mygento\Shipment\Api\Data\PointInterface
      */
-    public function save(Data\PointInterface $entity);
+    public function save(Data\PointInterface $entity): Data\PointInterface;
 
     /**
      * Retrieve Point
-     * @param int $entityId
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return \Mygento\Shipment\Api\Data\PointInterface
      */
-    public function getById($entityId);
+    public function getById(int $entityId): Data\PointInterface;
 
     /**
      * Retrieve Point entities matching the specified criteria
@@ -32,7 +36,7 @@ interface PointRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return \Mygento\Shipment\Api\Data\PointSearchResultsInterface
      */
-    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
+    public function getList(SearchCriteriaInterface $searchCriteria): Data\PointSearchResultsInterface;
 
     /**
      * Delete Point
@@ -40,14 +44,13 @@ interface PointRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return bool true on success
      */
-    public function delete(Data\PointInterface $entity);
+    public function delete(Data\PointInterface $entity): bool;
 
     /**
      * Delete Point
-     * @param int $entityId
      * @throws \Magento\Framework\Exception\NoSuchEntityException
      * @throws \Magento\Framework\Exception\LocalizedException
      * @return bool true on success
      */
-    public function deleteById($entityId);
+    public function deleteById(int $entityId): bool;
 }

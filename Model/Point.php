@@ -21,6 +21,10 @@ class Point extends AbstractModel implements \Mygento\Shipment\Api\Data\PointInt
      */
     public function __toString()
     {
+        if (!$this->getProvider() && !$this->getProviderUid()) {
+            return '';
+        }
+
         return $this->getProvider() . '_' . $this->getProviderUid();
     }
 

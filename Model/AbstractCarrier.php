@@ -72,6 +72,10 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
      */
     public function createRateMethod(CalculateResultInterface $method)
     {
+        if ($method->getInfo()) {
+            return $this->returnInfo($method->getInfoMessage());
+        }
+
         if ($method->getError()) {
             return $this->returnError($method->getErrorMessage());
         }
@@ -224,5 +228,19 @@ abstract class AbstractCarrier extends BaseCarrier implements AbstractCarrierInt
         }
 
         return null;
+    }
+
+    /**
+     * @param string $message
+     * @return bool|\Magento\Quote\Model\Quote\Address\RateResult\Error
+     */
+    private function returnInfo(string $message)
+    {
+        $error = $this->_rateErrorFactory->create();
+        $error->setCarrier($this->_code);
+        $error->setCarrierTitle($this->getConfigData('title'));
+        $error->setErrorMessage(__($message));
+
+        return $error;
     }
 }

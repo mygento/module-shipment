@@ -241,7 +241,11 @@ Mygento:
             type: varchar
           error:
             type: boolean
+          info:
+            type: boolean
           error_message:
+            type: varchar
+          info_message:
             type: varchar
           longitude:
             type: varchar

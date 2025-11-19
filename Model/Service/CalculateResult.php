@@ -278,6 +278,25 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     }
 
     /**
+     * Get info
+     * @return bool|null
+     */
+    public function getInfo()
+    {
+        return $this->getData(self::INFO);
+    }
+
+    /**
+     * Set info
+     * @param bool $info
+     * @return $this
+     */
+    public function setInfo($info)
+    {
+        return $this->setData(self::INFO, $info);
+    }
+
+    /**
      * Get error message
      * @return string|null
      */
@@ -294,6 +313,25 @@ class CalculateResult extends DataObject implements \Mygento\Shipment\Api\Data\C
     public function setErrorMessage($errorMessage)
     {
         return $this->setData(self::ERROR_MESSAGE, $errorMessage);
+    }
+
+    /**
+     * Get info message
+     * @return string|null
+     */
+    public function getInfoMessage()
+    {
+        return $this->getData(self::INFO_MESSAGE);
+    }
+
+    /**
+     * Set info message
+     * @param string $infoMessage
+     * @return $this
+     */
+    public function setInfoMessage($infoMessage)
+    {
+        return $this->setData(self::INFO_MESSAGE, $infoMessage);
     }
 
     /**

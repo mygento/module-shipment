@@ -25,7 +25,9 @@ interface CalculateResultInterface extends ExtensibleDataInterface
     public const PICKUP_POINTS = 'pickup_points';
     public const LATITUDE = 'latitude';
     public const ERROR = 'error';
+    public const INFO = 'info';
     public const ERROR_MESSAGE = 'error_message';
+    public const INFO_MESSAGE = 'info_message';
     public const LONGITUDE = 'longitude';
 
     /**
@@ -198,6 +200,19 @@ interface CalculateResultInterface extends ExtensibleDataInterface
     public function setError($error);
 
     /**
+     * Get info
+     * @return bool|null
+     */
+    public function getInfo();
+
+    /**
+     * Set info
+     * @param bool $info
+     * @return $this
+     */
+    public function setInfo($info);
+
+    /**
      * Get error message
      * @return string|null
      */
@@ -209,6 +224,19 @@ interface CalculateResultInterface extends ExtensibleDataInterface
      * @return $this
      */
     public function setErrorMessage($errorMessage);
+
+    /**
+     * Get info message
+     * @return string|null
+     */
+    public function getInfoMessage();
+
+    /**
+     * Set info message
+     * @param string $infoMessage
+     * @return $this
+     */
+    public function setInfoMessage($infoMessage);
 
     /**
      * Get longitude
